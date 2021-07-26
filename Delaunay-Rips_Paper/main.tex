@@ -74,6 +74,7 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq X\ |\ d(x,x') \leq 2\varepsilon,\ \fo
     \item How does this scale as points are added?
 \end{enumerate}
 
+
 \subsection{Persistence Diagram Instability}
 The Delaunay-Rips construction gains computational efficiency at the cost of stability. We demonstrate a simple, yet clear example of how this instability can arise.
 
@@ -82,17 +83,84 @@ $$\varphi: \mathcal{P} \to \mathcal{D}$$
 $$\varphi(P):= Pers(P)$$
 where $Pers(P)$ is the persistence diagram of the point cloud $P$ constructed using the Delaunay-Rips complex. Our example comes from 4 points taken in $\R^2$ where the instability is demonstrated as the discontinuity of $\varphi$.
 
-Let $P \in \mathcal{P}$ as $P = \{(-1,0),(\frac{1}{2},\frac{\sqrt{3}}{2}),(\frac{1}{2},-\frac{\sqrt{3}}{2}),(1,0)\}.$ Note that the points all lie on the unit circle, so the Delaunay 1-skeleton has an edge between every pair of points (See figure). Thus, $\varphi(P)$ has no $H_1$ class as can be verified by the reader.
+Let $P \in \mathcal{P}$ as $P = \{(-1,0),(\frac{1}{2},\frac{\sqrt{3}}{2}),(\frac{1}{2},-\frac{\sqrt{3}}{2}),(1,0)\}.$ Note that the points all lie on the unit circle, so the Delaunay 1-skeleton has an edge between every pair of points (See figure). Thus, $\varphi(P)$ has no $H_1$ class with non-zero persistence using the Delaunay-Rips filtration, as can be verified by the reader.
 
-Fix $\varepsilon=0.1$. We now show that for any $\delta > 0$, there exists $P' \in \mathcal{P}$ such that $d_{GH}(P,P')< \delta$, but $W_\infty(\varphi(P), \varphi(P')) \geq \varepsilon.$ Take $P' = \{(-1,0),(\frac{1}{2},\frac{\sqrt{3}}{2}),(\frac{1}{2},-\frac{\sqrt{3}}{2}),(1-x,0)\}$ with $0<x < \delta < \frac{2-\sqrt{3}}{2}$. This is a small perturbation of $P$ by pushing the point $(1,0)$ inside the unit circle thereby putting the points in general position. We only work with $\delta<2-\sqrt{3}$ so that $\varphi(P')$ maintains an $H_1$ class; for this example to work, we further need $\delta < \frac{2-\sqrt{3}}{2}$. We just compute the Hausdorff distance $d_H$ between $P$ and $P'$ in the plane taking the isometric embedding of $P$ to be the map that sends each of its points to itself in $\R^2$ and the same embedding for $P'$. Since the Gromov-Hausdorff distance is the infimum of $d_H(f(P),g(P'))$ over all isometric embeddings $f:P \to X$ and $g: P' \to X$ into any metric space $X$, $d_H(P,P')$ serves as an upper bound for $d_{GH}(P,P').$ We find that
+Fix $\varepsilon=0.1$. We now show that for any $\delta > 0$, there exists $P' \in \mathcal{P}$ such that $d_{GH}(P,P')< \delta$, but $W_\infty(\varphi(P), \varphi(P')) \geq \varepsilon.$ Take $P' = \{(-1,0),(\frac{1}{2},\frac{\sqrt{3}}{2}),(\frac{1}{2},-\frac{\sqrt{3}}{2}),(1-x,0)\}$ with $0<x < \delta < \frac{2-\sqrt{3}}{2}$. This is a small perturbation of $P$ by pushing the point $(1,0)$ inside the unit circle thereby putting the points in general position. We only work with $\delta<2-\sqrt{3}$ so that $\varphi(P')$ maintains an $H_1$ class with non-zero persistence; for this example to work, we further need $\delta < \frac{2-\sqrt{3}}{2}$. We just compute the Hausdorff distance $d_H$ between $P$ and $P'$ in the plane taking the isometric embedding of $P$ to be the map that sends each of its points to itself in $\R^2$ and the same embedding for $P'$. Since the Gromov-Hausdorff distance is the infimum of $d_H(f(P),g(P'))$ over all isometric embeddings $f:P \to X$ and $g: P' \to X$ into any metric space $X$, $d_H(P,P')$ serves as an upper bound for $d_{GH}(P,P').$ We find that
 $$d_{GH}(P,P')\leq d_H(P,P')=x<\delta.$$
-Recall that $\varphi(P)$ has no $H_1$ class. Thus, to compute $W_\infty(\varphi(P),\varphi(P'))$, we must match the $H_1$ class of $\varphi(P')$ with the diagonal. The $H_1$ class of $\varphi(P')$ has birth $\sqrt{3}$ and death $2-x$ as calculated in the Appendix, section \ref{boundary_mat}. Using the max norm, we find
+Recall that $\varphi(P)$ has no $H_1$ class with non-zero persistence. Thus, to compute $W_\infty(\varphi(P),\varphi(P'))$, we must match the $H_1$ class of $\varphi(P')$ with the diagonal. The $H_1$ class of $\varphi(P')$ has birth $\sqrt{3}$ and death $2-x$ as calculated in the Appendix, section \ref{boundary_mat}. Using the max norm, we find
 $$d: = W_\infty(\varphi(P),\varphi(P')) = 2-x-\sqrt{3} \geq 2-\frac{2-\sqrt{3}}{2} -\sqrt{3} \geq 0.1 = \varepsilon.$$
 Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into when the Delaunay-Rips construction of the Persistence Diagram experiences instability--namely when points are not in general position. We now have motivation to ask if we have stability of the PD when the underlying Delauany-Rips complex does not change under a perturbation of the point cloud.
+
 
 \subsection{Stability in a Neighborhood}
 \begin{enumerate}
     \item What is the best our method can do? Use knowledge on stability of Delaunay Triangulation.
+    Let $P$ denote our point cloud and $P'$ denote the perturbed point cloud. We use $|xy|$ notation to denote the Euclidean distance between points $x,y \in \R^n$. Let $V_x$ denote the closed Voronoi region for the point $x \in P$. Here is a lemma that should work in $\R^n$:
+    \begin{lem}\label{paperlemma}
+    Two points $p_i,p_j \in P$ are strong Voronoi neighbors if and only if there exists an $m$ such that
+    $$\max\{|mp_i|,|mp_j|\} < \min_{k \neq i,j}|mp_k|.$$
+    \end{lem}
+    
+    We claim
+    \begin{thm}
+    Let $p_i,p_j \in P$ be strong Voronoi neighbors and $m \in V_{p_i} \cap V_{p_j}$. For $\varepsilon = \min\{\frac{1}{4}(\min_{k \neq i,j}|mp_k|-|mp_j|), \frac{1}{2}\min_{i \neq j} |p_i p_j|\}$, an $\varepsilon$-perturbation of $P$ leaves strong Voronoi neighbors as strong Voronoi neighbors.
+    \end{thm}
+    \begin{proof}
+        Let $p_i,p_j \in P$ satisfy Lemma \ref{paperlemma} with $m \in V_{p_i} \cap V_{p_j}$. Note that $0<\varepsilon<\frac{1}{2}\min_{i \neq j} |p_i p_j|$ to ensure a unique correspondence between the points of $P$ and the points of $P'$. We begin with the conclusion of Lemma \ref{paperlemma}:
+        $$\max\{|mp_i|,|mp_j|\} < \min_{k \neq i,j}|mp_k|$$
+        $$2\max\{|mp_i|,|mp_j|\} < 2\min_{k \neq i,j}|mp_k|$$
+        $$\min_{k \neq i,j}|mp_k|+3\max\{|mp_i|,|mp_j|\} < 3\min_{k \neq i,j}|mp_k|+\max\{|mp_i|,|mp_j|\}$$
+        $$\frac{1}{4}\min_{k \neq i,j}|mp_k| +\frac{3}{4}\max\{|mp_i|,|mp_j|\} < \frac{3}{4}\min_{k \neq i,j}|mp_k| + \frac{1}{4}\max\{|mp_i|,|mp_j|\}$$
+        % $$\max\{|mp_i|,|mp_j|\}+\frac{1}{4}\min_{k \neq i,j}|mp_k|-\frac{1}{4}\max\{|mp_i|,|mp_j|\} < \min_{k \neq i,j}|mp_k| -\frac{1}{4}\min_{k \neq i,j}|mp_k|+\frac{1}{4}\max\{|mp_i|,|mp_j|\}$$
+        $$\max\{|mp_i|,|mp_j|\}+\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\}) < \min_{k \neq i,j}|mp_k| -\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\})$$
+        \begin{equation} \label{sandwich_eq}
+        \begin{aligned}
+            \max\{|mp_i|,|mp_j|\}+\varepsilon \leq \max\{|mp_i|,|mp_j|\}+\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\}) \\ < \min_{k \neq i,j}|mp_k| -\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\})\leq \min_{k \neq i,j}|mp_k| - \varepsilon.
+        \end{aligned}
+        \end{equation}
+        
+        Now, without loss of generality, let
+        $$|mp_i'| = \max\{|mp_i'|,|mp_j'|\}.$$
+        We note by the triangle inequality that
+        \begin{equation}\label{lower_side}
+            \max\{|mp_i'|,|mp_j'|\} \leq |mp_i| + |p_ip_i'| \leq \max\{|mp_i|,|mp_j|\} + \varepsilon.
+        \end{equation}
+        Similarly, we have by the triangle inequality
+        \begin{equation}\label{upper_side}
+            \min_{k\neq i,j}|mp_k| - \varepsilon = \min_{k\neq i,j}(|mp_k| - \varepsilon) \leq \min_{k\neq i,j}(|mp_k|-|p_kp_k'|) \leq \min_{k \neq i,j} |mp_k'|.
+        \end{equation}
+        Putting together equations \ref{sandwich_eq}, \ref{lower_side}, \ref{upper_side}, we have
+        $$\max\{|mp_i'|,|mp_j'|\} \leq \max\{|mp_i|,|mp_j|\}+\varepsilon < \min_{k \neq i,j}|mp_k| - \varepsilon \leq \min_{k \neq i,j} |mp_k'|.$$
+        Thus, we now apply Lemma \ref{paperlemma} and have that $p_i'$ and $p_j'$ remain strong Voronoi neighbors.
+    \end{proof}
+%%%% Proof with the max and mins written out
+    % \begin{proof}
+    %     Let $p_i,p_j \in P$ satisfy Lemma \ref{paperlemma} with $m \in V_{p_i} \cap V_{p_j}$. Note that $0<\varepsilon<\frac{1}{2}\min_{i \neq j} |p_i p_j|$ to ensure a unique correspondence between the points of $P$ and the points of $P'$. We define the following to make reading the proof easier
+    %     $$|mp| := \max\{|mp_i|,|mp_j|\}$$
+    %     $$|mp_k|:= \min_{k \neq i,j}|mp_k|$$
+    %     We begin with the conclusion of Lemma \ref{paperlemma}:
+    %     $$\max\{|mp_i|,|mp_j|\} < \min_{k \neq i,j}|mp_k|$$
+    %     $$2\max\{|mp_i|,|mp_j|\} < 2\min_{k \neq i,j}|mp_k|$$
+    %     $$\min_{k \neq i,j}|mp_k|+3\max\{|mp_i|,|mp_j|\} < 3\min_{k \neq i,j}|mp_k|+\max\{|mp_i|,|mp_j|\}$$
+    %     $$\frac{1}{4}\min_{k \neq i,j}|mp_k| +\frac{3}{4}\max\{|mp_i|,|mp_j|\} < \frac{3}{4}\min_{k \neq i,j}|mp_k| + \frac{1}{4}\max\{|mp_i|,|mp_j|\}$$
+    %     $$\max\{|mp_i|,|mp_j|\}+\frac{1}{4}\min_{k \neq i,j}|mp_k|-\frac{1}{4}\max\{|mp_i|,|mp_j|\} < \min_{k \neq i,j}|mp_k| -\frac{1}{4}\min_{k \neq i,j}|mp_k|+\frac{1}{4}\max\{|mp_i|,|mp_j|\}$$
+    %     $$\max\{|mp_i|,|mp_j|\}+\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\}) < \min_{k \neq i,j}|mp_k| -\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\})$$
+    %     \begin{equation} \label{sandwich_eq}
+    %         \max\{|mp_i|,|mp_j|\}+\varepsilon \leq \max\{|mp_i|,|mp_j|\}+\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\}) < \min_{k \neq i,j}|mp_k| -\frac{1}{4}(\min_{k \neq i,j}|mp_k|-\max\{|mp_i|,|mp_j|\})\leq \min_{k \neq i,j}|mp_k| - \varepsilon.
+    %     \end{equation}
+    %     Now, without loss of generality, let
+    %     $$|mp_i'| = \max\{|mp_i'|,|mp_j'|\}.$$
+    %     We note by the triangle inequality that
+    %     \begin{equation}\label{lower_side}
+    %         \max\{|mp_i'|,|mp_j'|\} \leq |mp_i| + |p_ip_i'| \leq \max\{|mp_i|,|mp_j|\} + \varepsilon.
+    %     \end{equation}
+    %     Similarly, we have by the triangle inequality
+    %     \begin{equation}\label{upper_side}
+    %         \min_{k\neq i,j}|mp_k| - \varepsilon = \min_{k\neq i,j}|mp_k - \varepsilon| \leq \min_{k\neq i,j}(|mp_k|-|p_kp_k'|) \leq \min_{k \neq i,j} |mp_k'|.
+    %     \end{equation}
+    %     Putting together equations \ref{sandwich_eq}, \ref{lower_side}, \ref{upper_side}, we have the theorem as desired.
+    %     $$\max\{|mp_i'|,|mp_j'|\} \leq \max\{|mp_i|,|mp_j|\}+\varepsilon < |mp_k| - \varepsilon \leq \min_{k \neq i,j} |mp_k'|.$$
+    % \end{proof}
 \end{enumerate}
 
 \section{Application of Delaunay-Rips}
