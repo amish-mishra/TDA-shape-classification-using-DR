@@ -1,0 +1,87 @@
+%% Creator: Inkscape 1.1 (c68e22c387, 2021-05-23), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file '4pt_filtration.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{561.19495843bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.19688126)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{4pt_filtration.pdf}}%
+    \put(0.02486678,0.11798107){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$a$\\\end{tabular}}}}%
+    \put(0.11067102,0.18156671){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$b$\\\end{tabular}}}}%
+    \put(0.16087703,0.11782781){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$d$\\\end{tabular}}}}%
+    \put(0.10999427,0.06702146){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$c$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{4pt_filtration.pdf}}%
+    \put(0.29316545,0.11382415){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$a$\\\end{tabular}}}}%
+    \put(0.37896972,0.17740982){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$b$\\\end{tabular}}}}%
+    \put(0.42917575,0.11367089){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$d$\\\end{tabular}}}}%
+    \put(0.37829298,0.06286458){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$c$\\\end{tabular}}}}%
+    \put(0.22855257,0.11714812){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\subseteq$\end{tabular}}}}%
+    \put(0.49823692,0.11414591){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\subseteq$\end{tabular}}}}%
+    \put(0.76792122,0.1201503){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\subseteq$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{4pt_filtration.pdf}}%
+    \put(0.5614642,0.11590261){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$a$\\\end{tabular}}}}%
+    \put(0.64726851,0.17948827){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$b$\\\end{tabular}}}}%
+    \put(0.6974745,0.11574935){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$d$\\\end{tabular}}}}%
+    \put(0.64659173,0.064943){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$c$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{4pt_filtration.pdf}}%
+    \put(0.83068664,0.11821198){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$a$\\\end{tabular}}}}%
+    \put(0.91649088,0.18179764){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$b$\\\end{tabular}}}}%
+    \put(0.96669686,0.11805872){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$d$\\\end{tabular}}}}%
+    \put(0.9158141,0.06725237){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$c$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{4pt_filtration.pdf}}%
+    \put(0.10951618,0.00345507){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t=0$\end{tabular}}}}%
+    \put(0.37666823,0.00403406){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t=\sqrt{1-x+x^2}$\end{tabular}}}}%
+    \put(0.64244333,0.00417409){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t=\sqrt{3}$\end{tabular}}}}%
+    \put(0.90969207,0.00378356){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t=2-\delta$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{4pt_filtration.pdf}}%
+    \put(0.01483957,0.03589057){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t$\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
