@@ -194,7 +194,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
 \end{figure}
 
 We have $P' = \{(-1,0),(\frac{1}{2},\frac{\sqrt{3}}{2}),(\frac{1}{2},-\frac{\sqrt{3}}{2}),(1-x,0)\}$ with $0< x < \delta < 2-\sqrt{3}$.
-Our filtration has 4 key scale values, $t = 0<\sqrt{1-x+x^2}< \sqrt{3}< 2-\delta$ as shown in the figure. We construct our boundary matrix and reduce it using the standard algorithm:
+Our filtration has 4 key scale values, $t = 0<\sqrt{1-x+x^2}< \sqrt{3}< 2-\delta$ as shown in Figure \ref{fig:4pt_filtration}. We construct our boundary matrix $B$ and reduce it to $\overline{B}$ using the standard algorithm:
 $$B=\bordermatrix{ 
     &   a & b & c & d & bd & cd & ab & ac & ad & abd & acd\cr
     a & 0 & 0 & 0 & 0 &  0 &  0 &  1 &  1 &  1 &   0 &   0 \cr
@@ -223,7 +223,7 @@ $$\overline{B}=\bordermatrix{
   abd & 0 & 0 & 0 & 0 &  0 &  0 &  0 &  0 &  0 &   0 &   0\cr
   acd & 0 & 0 & 0 & 0 &  0 &  0 &  0 &  0 &  0 &   0 &   0\cr
     }. \qquad$$
-The persistence pairs for the $H_0$ class with their persistence diagram coordinate (birth/death) come out as follows:
+The persistence pairs for the $H_0$ class with their persistence diagram coordinate (birth/death pair) come out as follows:
 $$(a,N/A): (0,\infty)$$
 $$(b,ab): (0,\sqrt{3})$$
 $$(c, cd): (0,\sqrt{1-x+x^2})$$
@@ -231,7 +231,7 @@ $$(d, bd): (0,\sqrt{1-x+x^2}).$$
 The $H_1$ classes come out as
 $$(ad, abd): (2-x, 2-x)$$
 $$(ac, acd): (\sqrt{3}, 2-x).$$
-The only point that appears in the diagram off of the diagonal is $(\sqrt{3}, 2-x).$
+The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 
 
 \subsection{Pseudo-code Implementation}
