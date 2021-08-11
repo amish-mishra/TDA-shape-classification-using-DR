@@ -1,14 +1,14 @@
-% Write this paper as if it is my dissertation and then if I want to publish it, then prune it to be a succint paper
-
 \documentclass[letterpaper,titlepage]{article}
 \usepackage{Amish_Style}
+
 \newcommand{\incfig}[1]{%
     \def\svgwidth{\columnwidth}
-    \import{./figures/}{4pt_filtration.pdf_tex}
+    \import{./figures/}{#1.pdf_tex}
 }
 
-\addbibresource{bibliography.bib} %Imports bibliography file
+\addbibresource{bibliography.bib} % Imports bibliography file
 
+% Write this paper as if it is my dissertation and then if I want to publish it, then prune it to be a succint paper
 \title{Delaunay-Rips Paper}
 \author{Amish Mishra and Francis Motta}
 \date{\today}
@@ -76,7 +76,15 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq X\ |\ d(x,x') \leq 2\varepsilon,\ \fo
 
 
 \subsection{Persistence Diagram Instability}
-The Delaunay-Rips construction gains computational efficiency at the cost of stability. We demonstrate a simple, yet clear example of how this instability can arise.
+The Delaunay-Rips construction gains computational efficiency at the cost of stability. We demonstrate a simple, yet clear example of how this instability can arise. In figure \ref{fig:4pt_PDs_transformation}, we can visually see a particular configuration of four points giving a radically different Persistence Diagram as we move the right-most point across the circumcircle of the other 3 points. In the figure, we have marked the Delaunay Triangulation of the points to show case the point at which an edge flip occurs (namely when all four points lie on the same circle). We now proceed to formally prove the instability of this particular configuration of points.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{4pt_PDs_transformation}
+    \caption{Persistence Diagrams of 4 point example}
+    \label{fig:4pt_PDs_transformation}
+\end{figure}
+
 
 Let ($\mathcal{P}$, $d_{GH}$) be the space of point clouds equipped with the Gromhov-Hausdorff metric and let ($\mathcal{D}$, $W_\infty$) be the space of Persistence Diagrams equipped with the bottle neck metric. Define
 $$\varphi: \mathcal{P} \to \mathcal{D}$$
@@ -188,7 +196,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
 
 \begin{figure}[ht]
     \centering
-    \incfig{Filtration}
+    \incfig{4pt_filtration}
     \caption{filtration}
     \label{fig:4pt_filtration}
 \end{figure}
