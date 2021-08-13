@@ -45,17 +45,19 @@ elif x == 0.0:
                 ([1, 2], math.sqrt(3)),
                 ([1, 3], math.sqrt(1-x+x**2)),
                 ([2, 3], math.sqrt(1-x+x**2)),
-                ([0, 3], 2-x),
                 ([0, 1, 2], math.sqrt(3)),
                 ([1, 2, 3], max(math.sqrt(3), math.sqrt(1-x+x**2))),
-                ([0, 1, 3], 2-x),               
+                ([0, 3], 2-x),
                 ([0, 3, 2], 2-x),
+                ([0, 1, 3], 2-x),     
+                ([0, 1, 2, 3], 2-x),          
                 ]
 
 #Compute persistence diagrams
 dgms = cm.phat_diagrams(filtration, show_inf = True)
 # print("H0:\n", dgms[0])
 # print("H1:\n", dgms[1])
+
 
 plt.figure()
 plt.axis('square')
