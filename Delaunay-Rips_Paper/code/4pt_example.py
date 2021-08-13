@@ -6,7 +6,7 @@ from persim import plot_diagrams
 import tadasets
 
 
-x = -0.15
+x = 0
 if x > 0:
     filtration = [([0], 0),
                 ([1], 0),
@@ -40,15 +40,15 @@ elif x == 0.0:
                 ([1], 0),
                 ([2], 0),
                 ([3], 0),
-                ([1, 3], math.sqrt(1-x+x**2)),
-                ([2, 3], math.sqrt(1-x+x**2)),
                 ([0, 1], math.sqrt(3)),
                 ([0, 2], math.sqrt(3)),
-                ([0, 3], 2-x),
                 ([1, 2], math.sqrt(3)),
-                ([0, 1, 3], 2-x),
+                ([1, 3], math.sqrt(1-x+x**2)),
+                ([2, 3], math.sqrt(1-x+x**2)),
+                ([0, 3], 2-x),
                 ([0, 1, 2], math.sqrt(3)),
                 ([1, 2, 3], max(math.sqrt(3), math.sqrt(1-x+x**2))),
+                ([0, 1, 3], 2-x),               
                 ([0, 3, 2], 2-x),
                 ]
 
