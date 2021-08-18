@@ -169,6 +169,55 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
     %     Putting together equations \ref{sandwich_eq}, \ref{lower_side}, \ref{upper_side}, we have the theorem as desired.
     %     $$\max\{|mp_i'|,|mp_j'|\} \leq \max\{|mp_i|,|mp_j|\}+\varepsilon < |mp_k| - \varepsilon \leq \min_{k \neq i,j} |mp_k'|.$$
     % \end{proof}
+
+    \textbf{Alternate attempt at proof:}
+    \newline
+    To keep things simple, we work with our point cloud $P \subset \R^2$ with the idea being
+    \begin{enumerate}
+        \item Assume that the points of $P$ are in general position and affinely independent
+        \begin{enumerate}
+            \item No 4 points lie on the same circle
+            \item No 3 points lie on the same line
+        \end{enumerate}
+        \item Look at 3 points, $p_1, p_2, p_3 \in P$ and find the circumcircle, $C_{p_1p_2p_3}$ through them.
+        \begin{enumerate}
+            \item This circle must have a finite radius and finite circumcenter by assumption of affine independence
+        \end{enumerate}
+        \item Embark on a mission to find $\varepsilon$ around each point in $P$ such that an $\varepsilon$-perturbation of $P$, call it $P'$, ensures all other points $p_k' \in P'$ stayed inside $C_{p_1'p_2'p_3'}$ if $p_k \in P$ was inside $C_{p_1p_2p_3}$ to begin with or stayed outside if $p_k \in P$ was outside of $C_{p_1p_2p_3}$ to begin with.
+        \begin{enumerate}
+            \item We must ensure that there is an $\varepsilon$ so that the points in $P'$ are affinely independent--this ensures that moving the points of $P$ within the $\varepsilon$ balls around each point of $P$ only cause continuous changes in membership of $p_k$ relative to $C_{p_1p_2p_3}$.
+            \begin{enumerate}
+                \item Let $O_1 \in R^2$ denote the circumcenter of the circle $C_{p_1p_2p_3}$. Since the points of $P$ are affinely independent, $O_1$ is not infinite in any of its coordinates. We can specifically calculate $O_1$ by finding the intersection of the perpendicular bisectors of $\overline{p_1p_2}$ and $\overline{p_1p_3}$. We proceed by linear algebra. The process is
+                \begin{itemize}
+                    \item Find midpoint of line segment ($\mathbf{r_0}$)
+                    \item Find directional vector based at the midpoint that points at one of the ends of the line segments (this acts as the normal vector $\mathbf{n}$ to the perpendicular bisector)
+                    \item Find the equation of the perpendicular bisector using
+                    $$\mathbf{n}\cdot \mathbf{r}=\mathbf{n} \cdot \mathbf{r_0}.$$
+                \end{itemize}
+                Once the equations of all necessary perpendicular bisectors are found, we can easily check if they have a solution by checking the determinant of the $2\times 2$ matrix
+                $$\begin{pmatrix}
+                    \mathbf{n}_{p_1p_2} & \mathbf{n}_{p_1p_3}
+                \end{pmatrix}$$
+                Since the normal vectors are just the directional vectors based at the midpoint pointing towards one of the ends of the line segments, we have that
+                $$\mathbf{n}_{p_ip_j} = p_j - \frac{p_j-p_i}{2} = \frac{p_j-p_i}{2}.$$
+                Coming back to our example of $C_{p_1p_2p_3}$ and letting $p_i = (p_{i1},p_{i2})$, we now construct the following sequence of maps:
+                $$\R^2\times \R^2 \times \R^2 \overset{f}\to \mathcal{M}_{2\times 2}(\R) \cong \R^4 \overset{\det}\to \R$$
+                where 
+                $$f(p_1,p_2,p_3):=((p_{21}-p_{11})/2,(p_{22}-p_{12})/2,(p_{31}-p_{11})/2,(p_{32}-p_{12})/2)$$
+                and $\det$ is the standard determinant function. Let $A=((p_{21}-p_{11})/2,(p_{22}-p_{12})/2,(p_{31}-p_{11})/2,(p_{32}-p_{12})/2)$. Since the determinant is a continuous map, we have that for $\varepsilon = \det(A)/2$, there exists a $\delta_1$ around $A$ such that $\det(A) < \varepsilon$ when $||A|| < \delta_1$ for each $f_i \in \R^4$. Since $f$ is continuous in each of it's components, $f$ itself is continuous. Thus, there exists $\delta_2$ around each $p_1,p_2,p_3$ such that $f(p_1,p_2,p_3) < \delta_1$ whenever $|p_i| < \delta_2$.
+                \newline
+                We have found a neighborhood $\delta_2$ around each point $p_1,p_2,p_3$ that ensures the points do not become collinear.
+                
+
+
+
+            \end{enumerate}
+            \item We must ensure that there is an $\varepsilon$ so that the points in $P'$ are in general position--this ensures that no $p_k$ change membership relative to $C_{p_1p_2p_3}$.
+            % \begin{enumerate}
+            %     \item Let $C_{p_kp_2p_3}$ denote the circle through $p_k, p_2, p_3$ for some $k \neq 1,2,3$. Let $O_1 \in R^2$ denote the circumcenter of the circle $C_{p_1p_2p_3}$ and $O_k \in R^2$ denote the circumcenter of $C_{p_k,p_2,p_3}$. Since the points of $P$ are in general position, $O_1 \neq O_k.$ Thus
+            %     $$d(O_1,O_k) > 0.$$ 
+        \end{enumerate}
+    \end{enumerate}
 \end{enumerate}
 
 \section{Application of Delaunay-Rips}
