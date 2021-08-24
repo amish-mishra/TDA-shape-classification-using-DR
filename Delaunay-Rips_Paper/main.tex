@@ -235,12 +235,23 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
     \begin{lem}
         For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
     \end{lem}
+    \begin{proof}
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, there does not exist a $p_k \in \interior(\Sph)$ for any $k \neq 1,2,\dots,d+1$. Let $t(p_k):=d(O,p_1)-d(O,p_k)$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. Since $P$ is in general position and finite, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+        $$d(O',p_1') \leq d(O',O)+d(O,p_1)+d(p_1,p_1') \leq \varepsilon_1 + d(O,p_1)+\delta \leq \frac{t}{8}+d(O,p_1)+\frac{t}{8}=d(O,p_1)+\frac{1}{4}t$$
+        $$< d(O,p_1)+\frac{3}{4}t = d(O,p_1)+t-\frac{1}{4}t = d(O,p_{\min})-\frac{1}{4}t = d(O,p_{\min})-\frac{t}{8}-\frac{t}{8}$$
+        $$\leq d(O,p_{\min})-\varepsilon_1-\delta \leq d(O,p_{\min})-d(O,O')-d(p_{\min},p_{\min}') \leq d(O',p_{\min}').$$
+        Since $d(O',p_1')$ is the radius of $\Sph'$, we have that $p_{\min}' \not\in \interior(\Sph')$. Hence, $D'$ is a Delaunay simplex.
+    \end{proof}
 
     \begin{lem}
         For a non-Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a non-Delaunay simplex.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in \interior(\Sph)$ where $k \neq 1,2,\dots,d+1$. Let $t:=d(O,p_1)-d(O_{p_k})$. Since $P$ is in general position, $t>0$. Let $\varepsilon = t/3$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $||p_i||<\delta$ for $i=1,2,\dots,d+1$ implies $||O||<\varepsilon$.
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in \interior(\Sph)$ where $k \neq 1,2,\dots,d+1$. Let $t:=d(O,p_1)-d(O,p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+        $$d(O',p_k') \leq d(O',O)+d(O,p_k)+d(p_k,p_k') \leq \varepsilon_1 + d(O,p_k)+\delta \leq \frac{t}{8}+d(O,p_k)+\frac{t}{8}=d(O,p_k)+\frac{1}{4}t$$
+        $$< d(O,p_k)+\frac{3}{4}t = d(O,p_k)+t-\frac{1}{4}t = d(O,p_1)-\frac{1}{4}t = d(O,p_1)-\frac{t}{8}-\frac{t}{8}$$
+        $$\leq d(O,p_1)-\varepsilon_1-\delta \leq d(O,p_1)-d(O,O')-d(p_1,p_1') \leq d(O',p_1').$$
+        Since $d(O',p_1')$ is the radius of $\Sph'$, we have that $p_k' \in \interior(\Sph')$. Hence, $D'$ is a non-Delaunay simplex.
     \end{proof}
 
 
