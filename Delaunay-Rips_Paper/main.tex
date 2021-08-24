@@ -97,7 +97,7 @@ Fix $\varepsilon=0.1$. We now show that for any $\delta > 0$, there exists $P' \
 $$d_{GH}(P,P')\leq d_H(P,P')=x<\delta.$$
 Recall that $\varphi(P)$ has no $H_1$ class with non-zero persistence. Thus, to compute $W_\infty(\varphi(P),\varphi(P'))$, we must match the $H_1$ class of $\varphi(P')$ with the diagonal. The $H_1$ class of $\varphi(P')$ has birth $\sqrt{3}$ and death $2-x$ as calculated in the Appendix, section \ref{boundary_mat}. Using the max norm, we find
 $$d: = W_\infty(\varphi(P),\varphi(P')) = 2-x-\sqrt{3} \geq 2-\frac{2-\sqrt{3}}{2} -\sqrt{3} \geq 0.1 = \varepsilon.$$
-Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into when the Delaunay-Rips construction of the Persistence Diagram experiences instability--namely when points are not in general position. We now have motivation to ask if we have stability of the PD when the underlying Delauany-Rips complex does not change under a perturbation of the point cloud.
+Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into when the Delaunay-Rips construction of the Persistence Diagram experiences instability--namely when points are not in general position. We now have motivation to ask if we have stability of the PD when the underlying Delaunay-Rips complex does not change under a perturbation of the point cloud.
 
 
 \subsection{Stability in a Neighborhood}
@@ -223,8 +223,29 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         \item Repeat this for $n$ choose $3$ points and find the $\varepsilon$s associated with each circle formed by them to keep points from changing membership relative to them. Take the final $\varepsilon$ to be the minimum of all of these $\varepsilon$s. This ensures that $P'$ has the same Delaunay triangulation as $P$.
     \end{enumerate}
 
-    
+    \begin{theorem}
+        Let $P \subset \R^d$ be in general position, that is no $d+2$ points lie on the same $(d-1)$-sphere and no $d+1$ points are affinely dependent. Then, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $P'$ of $P$ has the same Delaunay Triangulation as $P$. That is,
+        $$\Del(P) = \Del(P').$$
+    \end{theorem}
 
+    \begin{lemma}\label{affine_indep_lemma}
+        Given a subset $S= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $S'$ of $S$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as affinely independent.
+    \end{lemma}
+
+    \begin{lemma}
+        For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
+    \end{lemma}
+
+    \begin{lemma}
+        For a non-Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a non-Delaunay simplex.
+    \end{lemma}
+    \begin{proof}
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in \interior(\Sph)$ where $k \neq 1,2,\dots,d+1$. Let $t:=d(O,p_1)-d(O_p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon = t/3$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $||p_i||<\delta$ for $i=1,2,\dots,d+1$ implies $||O||<\varepsilon$.
+    \end{proof}
+
+
+
+    
 \section{Application of Delaunay-Rips}
 \begin{enumerate}
     \item Demonstrate value by talking about as dimensions change and number of points change.
