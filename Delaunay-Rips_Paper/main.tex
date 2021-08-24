@@ -223,24 +223,24 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         \item Repeat this for $n$ choose $3$ points and find the $\varepsilon$s associated with each circle formed by them to keep points from changing membership relative to them. Take the final $\varepsilon$ to be the minimum of all of these $\varepsilon$s. This ensures that $P'$ has the same Delaunay triangulation as $P$.
     \end{enumerate}
 
-    \begin{theorem}
+    \begin{thm}
         Let $P \subset \R^d$ be in general position, that is no $d+2$ points lie on the same $(d-1)$-sphere and no $d+1$ points are affinely dependent. Then, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $P'$ of $P$ has the same Delaunay Triangulation as $P$. That is,
         $$\Del(P) = \Del(P').$$
-    \end{theorem}
+    \end{thm}
 
-    \begin{lemma}\label{affine_indep_lemma}
+    \begin{lem}\label{affine_indep_lemma}
         Given a subset $S= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $S'$ of $S$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as affinely independent.
-    \end{lemma}
+    \end{lem}
 
-    \begin{lemma}
+    \begin{lem}
         For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
-    \end{lemma}
+    \end{lem}
 
-    \begin{lemma}
+    \begin{lem}
         For a non-Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a non-Delaunay simplex.
-    \end{lemma}
+    \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in \interior(\Sph)$ where $k \neq 1,2,\dots,d+1$. Let $t:=d(O,p_1)-d(O_p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon = t/3$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $||p_i||<\delta$ for $i=1,2,\dots,d+1$ implies $||O||<\varepsilon$.
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in \interior(\Sph)$ where $k \neq 1,2,\dots,d+1$. Let $t:=d(O,p_1)-d(O_{p_k})$. Since $P$ is in general position, $t>0$. Let $\varepsilon = t/3$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $||p_i||<\delta$ for $i=1,2,\dots,d+1$ implies $||O||<\varepsilon$.
     \end{proof}
 
 
