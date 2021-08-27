@@ -227,28 +227,40 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         Given a subset $S= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $S'$ of $S$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as affinely independent.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $S$ with center $O$. We now construct the following sequence of maps:
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $S$ with center $O$. We proceed by linear algebra, treating each $p_i$ as a vector $\mathbf{p_i} \in \R^d$. We locate the center $O \in \R^d$ by finding the intersection of the perpendicular bisecting planes to the line segments $\overline{\mathbf{p_2}\mathbf{p_1}}, \overline{\mathbf{p_3}\mathbf{p_1}}, \dots, \overline{\mathbf{p_{d+1}}\mathbf{p_1}}$. Thus, we will have $d$ hyperplanes each in $d$ variables: this is a system of linear equations that has a solution since our subset $S$ is in general position (that is, no two perpendicular bisecting hyperplanes are parallel). The vector equation for the perpendicular bisecting hyperplane of $\overline{\mathbf{p_i}\mathbf{p_1}}$ can be found by determining the normal vector and a point on the hyperplane. A point on the plane we can use is simply the midpoint of $\overline{\mathbf{p_i}\mathbf{p_1}}$:
+        $$\mathbf{b_i} := \frac{\mathbf{p_i}+\mathbf{p_1}}{2}.$$
+        The normal vector to the plane is the directional vector based at the midpoint and pointing in the direction of one end of the line segment $\overline{\mathbf{p_i}\mathbf{p_1}}$. We find the normal vector to be
+        $$\mathbf{n_i} := \mathbf{p_i}-\mathbf{b_i} = \frac{\mathbf{p_i}-\mathbf{p_1}}{2}.$$
+        Thus, the vector equation of the perpendicular bisecting hyperplane of $\overline{\mathbf{p_i}\mathbf{p_1}}$ is
+        $$\mathbf{n_i}\cdot \mathbf{r}=\mathbf{n_i}\cdot\mathbf{b_i}$$
+        where $\mathbf{r}$ is the position vector for an arbitrary point on the hyperplane.
+        \newline
+        We are now ready to construct the following sequence of maps that will output the circumcenter $O \in \R^d$ as a function of the $d+1$ defining the sphere $\Sph$.
         $$\underbrace{\R^d \times \dots \times \R^d}_{d+1} \xrightarrow{f} \mathcal{M}_{d\times d}\times \R^d \xrightarrow{g} \R^d$$
-        $$f:(p_1,p_2,\dots,p_{d+1}) \mapsto \left(\frac{\mathbf{p_2}-\mathbf{p_1}}{2}\ \frac{\mathbf{p_3}-\mathbf{p_1}}{2}\dots \frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right),\left(\left|\frac{\mathbf{p_2}+\mathbf{p_1}}{2}\right|^2, \left|\frac{\mathbf{p_3}+\mathbf{p_1}}{2}\right|^2,\dots,\left|\frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right|^2\right)$$
+        $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right],\left(\left|\mathbf{b_2}\right|^2, \left|\mathbf{b_3}\right|^2,\dots,\left|\mathbf{b_{d+1}}\right|^2\right)\right)$$
         $$g:(A,b) \mapsto \frac{1}{\det(A)}adj(A^T)b$$
+
+        % $$\underbrace{\R^d \times \dots \times \R^d}_{d+1} \xrightarrow{f} \mathcal{M}_{d\times d}\times \R^d \xrightarrow{g} \R^d$$
+        % $$f:(p_1,p_2,\dots,p_{d+1}) \mapsto \left(\frac{\mathbf{p_2}-\mathbf{p_1}}{2}\ \frac{\mathbf{p_3}-\mathbf{p_1}}{2}\dots \frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right),\left(\left|\frac{\mathbf{p_2}+\mathbf{p_1}}{2}\right|^2, \left|\frac{\mathbf{p_3}+\mathbf{p_1}}{2}\right|^2,\dots,\left|\frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right|^2\right)$$
+        % $$g:(A,b) \mapsto \frac{1}{\det(A)}adj(A^T)b$$
     \end{proof}
     
 \begin{lem}
         For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, there does not exist a $p_k \in \interior(\Sph)$ for any $k \neq 1,2,\dots,d+1$. Let $t(p_k):=d(O,p_1)-d(O,p_k)$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. Since $P$ is in general position and finite, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, for all $p_k \in P\backslash D$, $d(O,p_1) < d(O,p_k$). Let $t(p_k):=d(O,p_k)-d(O,p_1)$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. Since $P$ is in general position and finite, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
         $$d(O',p_1') \leq d(O',O)+d(O,p_1)+d(p_1,p_1') \leq \varepsilon_1 + d(O,p_1)+\delta \leq \frac{t}{8}+d(O,p_1)+\frac{t}{8}=d(O,p_1)+\frac{1}{4}t$$
-        $$< d(O,p_1)+\frac{3}{4}t = d(O,p_1)+t-\frac{1}{4}t = d(O,p_{\min})-\frac{1}{4}t = d(O,p_{\min})-\frac{t}{8}-\frac{t}{8}$$
-        $$\leq d(O,p_{\min})-\varepsilon_1-\delta \leq d(O,p_{\min})-d(O,O')-d(p_{\min},p_{\min}') \leq d(O',p_{\min}').$$
-        Since $d(O',p_1')$ is the radius of $\Sph'$, we have that $p_{\min}' \not\in \interior(\Sph')$. Hence, $D'$ is a Delaunay simplex.
+        $$< d(O,p_1)+\frac{3}{4}t = d(O,p_1)+t-\frac{1}{4}t = d(O,p_{\min})-\frac{1}{4}t \leq d(O,p_k)-\frac{1}{4}=d(O,p_{k})-\frac{t}{8}-\frac{t}{8}$$
+        $$\leq d(O,p_{k})-\varepsilon_1-\delta \leq d(O,p_{k})-d(O,O')-d(p_{k},p_{k}') \leq d(O',p_{k}').$$
+        This inequality is true for any $p_k' \in P'\backslash D'$. Hence, $D'$ is a Delaunay simplex.
     \end{proof}
 
     \begin{lem}
         For a non-Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a non-Delaunay simplex.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in \interior(\Sph)$ where $k \neq 1,2,\dots,d+1$. Let $t:=d(O,p_1)-d(O,p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in P\backslash D$ such that $d(O,p_k) < d(O,p_1)$. Let $t:=d(O,p_1)-d(O,p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
         $$d(O',p_k') \leq d(O',O)+d(O,p_k)+d(p_k,p_k') \leq \varepsilon_1 + d(O,p_k)+\delta \leq \frac{t}{8}+d(O,p_k)+\frac{t}{8}=d(O,p_k)+\frac{1}{4}t$$
         $$< d(O,p_k)+\frac{3}{4}t = d(O,p_k)+t-\frac{1}{4}t = d(O,p_1)-\frac{1}{4}t = d(O,p_1)-\frac{t}{8}-\frac{t}{8}$$
         $$\leq d(O,p_1)-\varepsilon_1-\delta \leq d(O,p_1)-d(O,O')-d(p_1,p_1') \leq d(O',p_1').$$
