@@ -226,6 +226,12 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
     \begin{lem}\label{affine_indep_lemma}
         Given a subset $S= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $S'$ of $S$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as affinely independent.
     \end{lem}
+    \begin{proof}
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $S$ with center $O$. We now construct the following sequence of maps:
+        $$\underbrace{\R^d \times \dots \times \R^d}_{d+1} \xrightarrow{f} \mathcal{M}_{d\times d}\times \R^d \xrightarrow{g} \R^d$$
+        $$f:(p_1,p_2,\dots,p_{d+1}) \mapsto \left(\frac{\mathbf{p_2}-\mathbf{p_1}}{2}\ \frac{\mathbf{p_3}-\mathbf{p_1}}{2}\dots \frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right),\left(\left|\frac{\mathbf{p_2}+\mathbf{p_1}}{2}\right|^2, \left|\frac{\mathbf{p_3}+\mathbf{p_1}}{2}\right|^2,\dots,\left|\frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right|^2\right)$$
+        $$g:(A,b) \mapsto \frac{1}{\det(A)}adj(A^T)b$$
+    \end{proof}
     
 \begin{lem}
         For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
