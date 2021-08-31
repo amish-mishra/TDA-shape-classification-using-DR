@@ -235,10 +235,11 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         $$\mathbf{n_i}\cdot \mathbf{r}=\mathbf{n_i}\cdot\mathbf{b_i}$$
         where $\mathbf{r}$ is the position vector for an arbitrary point on the hyperplane.
         \newline
-        We are now ready to construct the following sequence of maps that will output the circumcenter $O \in \R^d$ as a function of the $d+1$ defining the sphere $\Sph$.
+        We are now ready to construct the following sequence of maps that will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$.
         $$\underbrace{\R^d \times \dots \times \R^d}_{d+1} \xrightarrow{f} \mathcal{M}_{d\times d}\times \R^d \xrightarrow{g} \R^d$$
         $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right],\left(\left|\mathbf{b_2}\right|^2, \left|\mathbf{b_3}\right|^2,\dots,\left|\mathbf{b_{d+1}}\right|^2\right)\right)$$
-        $$g:(A,b) \mapsto \frac{1}{\det(A)}adj(A^T)b$$
+        $$g:(A,b) \mapsto (A^T)\inv b.$$
+        
 
         % $$\underbrace{\R^d \times \dots \times \R^d}_{d+1} \xrightarrow{f} \mathcal{M}_{d\times d}\times \R^d \xrightarrow{g} \R^d$$
         % $$f:(p_1,p_2,\dots,p_{d+1}) \mapsto \left(\frac{\mathbf{p_2}-\mathbf{p_1}}{2}\ \frac{\mathbf{p_3}-\mathbf{p_1}}{2}\dots \frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right),\left(\left|\frac{\mathbf{p_2}+\mathbf{p_1}}{2}\right|^2, \left|\frac{\mathbf{p_3}+\mathbf{p_1}}{2}\right|^2,\dots,\left|\frac{\mathbf{p_{d+1}}-\mathbf{p_1}}{2}\right|^2\right)$$
