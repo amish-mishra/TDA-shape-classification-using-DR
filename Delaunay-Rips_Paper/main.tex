@@ -257,7 +257,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         % $$g:(A,b) \mapsto \frac{1}{\det(A)}adj(A^T)b$$
     \end{proof}
     
-\begin{lem}
+\begin{lem}\label{stay-delaunay}
         For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
     \end{lem}
     \begin{proof}
@@ -268,7 +268,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         This inequality is true for any $p_k' \in P'\backslash D'$. Hence, $D'$ is a Delaunay simplex.
     \end{proof}
 
-    \begin{lem}
+    \begin{lem}\label{stay-non-delaunay}
         For a non-Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a non-Delaunay simplex.
     \end{lem}
     \begin{proof}
@@ -284,9 +284,11 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         Let $P \subset \R^d$ be in general position, that is no $d+2$ points lie on the same $(d-1)$-sphere and no $d+1$ points are affinely dependent. Then, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $P'$ of $P$ has the same Delaunay Triangulation as $P$. That is,
         $$\Del(P) = \Del(P').$$
     \end{thm}
-
-
-
+    \begin{proof}
+        Let $D$ be a subset of $P$ of size $d+1$. Depending if $D$ is a Delaunay simplex in $P$, obtain $\varepsilon_D$ from Lemma \ref{stay-delaunay} or from Lemma \ref{stay-non-delaunay}. For any $\varepsilon_D$-perturbation $D'$ of $D$, we have $Del(D)=Del(D')$. Now, find
+        $$\varepsilon = min \{\varepsilon_D\ |\ \text{for every}\ D \subset P\}.$$
+        Hence, for any $\varepsilon$-perturbation $P'$ of $P$ has the same Delaunay Triangulation as $P$.
+    \end{proof}
     
 
 
