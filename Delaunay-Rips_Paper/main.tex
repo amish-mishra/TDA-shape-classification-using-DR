@@ -302,6 +302,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
 \end{enumerate}
 
 \subsection{Synthetic Data}
+Compute homology of noisy circle, noisy 4-sphere. Table of run-time and memory used vs. ripser, alpha, etc.
 
 \subsection{Real Data}
 
@@ -366,6 +367,33 @@ The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 
 
 \subsection{Pseudo-code Implementation}
+
+%% This declares a command \Comment
+%% The argument will be surrounded by /* ... */
+\SetKwComment{Comment}{/* }{ */}
+
+\begin{algorithm}
+\caption{An algorithm to compute Delaunay-Rips Filtration}\label{alg:one}
+\KwData{$P = (\mathbf{p_1},\dots,\mathbf{p_n})$ }
+\KwResult{Del-Rips}
+triangulation $\gets$ Delauany($P$)
+
+
+% $y \gets 1$\;
+% $X \gets x$\;
+% $N \gets n$\;
+% \While{$N \neq 0$}{
+%   \eIf{$N$ is even}{
+%     $X \gets X \times X$\;
+%     $N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
+%   }{\If{$N$ is odd}{
+%       $y \gets y \times X$\;
+%       $N \gets N - 1$\;
+%     }
+%   }
+% }
+\end{algorithm}
+
 
 \subsection{Github Repo of Actual, Clean Code}
 \begin{enumerate}
