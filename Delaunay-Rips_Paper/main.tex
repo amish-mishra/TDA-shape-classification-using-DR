@@ -290,6 +290,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         Hence, for any $\varepsilon$-perturbation $P'$ of $P$ has the same Delaunay Triangulation as $P$.
     \end{proof}
     
+    Now, we need a theorem that gives us stability of PDs in PD space equipped with the bottle-neck distance. So,
 
 
 
@@ -302,7 +303,22 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
 \end{enumerate}
 
 \subsection{Synthetic Data}
-Compute homology of noisy circle, noisy 4-sphere. Table of run-time and memory used vs. ripser, alpha, etc.
+    Focus is two things: Accuracy and Speed. Demonstrating accuracy (by comparing with Rips and Alpha) builds trust in Del-Rips. Demonstrating speed encourages using Del-Rips over Rips or Alpha.
+
+    Comparing Ripser, Cechmate's Alpha, and our Del-Rips implementation.
+    \begin{enumerate}
+        \item Data 1: Noisy 1000 pt 1-sphere
+        \item Data 2: Noisy 100 pt. 2-sphere
+        \item Data 3: Noisy 100 pt. Torus in 3 dimensions
+        \item Data 4: Noisy 100 pt. Klein bottle in 4 dimensions
+    \end{enumerate}
+
+    Section with tables. Make a table with a column labeled ``Rips" and the other column labeled ``Alpha". Each row of the table is a data set. In each cell of the table, put the PD for the corresponding column method alongside the PD made by using Del-Rips. Place underneath the bottleneck distance between the two PDs. Do this for each data set (row).
+
+    Next table will have 3 colums (Rips, Alpha, Del-Rips). Each row is (again) a data set. Each cell will be the corresponding run-time (in seconds).
+
+    Section with graphs. First graph will be of a 2-sphere with points increasing from 100-10,000 with runtime on the y-axis. Second graph will be a $d$-sphere of 50 points with dimension increasing from 2-7 with the runtime on the y-axis. Each graph will compare Rips, Alpha, and Del-Rips.
+
 
 \subsection{Real Data}
 
@@ -376,7 +392,7 @@ The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 \caption{An algorithm to compute Delaunay-Rips Filtration}\label{alg:one}
 \KwData{$P = (\mathbf{p_1},\dots,\mathbf{p_n})$ }
 \KwResult{Del-Rips}
-triangulation $\gets$ Delauany($P$)
+triangulation $\gets$ Delaunay($P$)
 
 
 % $y \gets 1$\;
