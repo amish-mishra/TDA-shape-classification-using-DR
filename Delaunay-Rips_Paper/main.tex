@@ -394,9 +394,26 @@ The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 
 \begin{algorithm}
 \caption{An algorithm to compute Delaunay-Rips Filtration}\label{alg:one}
-\KwData{$P = (\mathbf{p_1},\dots,\mathbf{p_n})$ }
-\KwResult{Del-Rips}
-triangulation $\gets$ Delaunay($P$)
+\KwIn{$P = (\mathbf{p_1},\dots,\mathbf{p_n})$, $d$ = maximum homology dimension to compute}
+\KwOut{Delaunay Rips Filtration}
+triangulation $\leftarrow$ Delaunay($P$)\\
+filtration $\leftarrow [([i], 0)]$ 
+for $1\leq i\leq n$ \tcc{Add the 0-simplices into the filtration}
+\For{each simplex $\in$ triangulation}{
+    \For{$dim \leftarrow 2$ \KwTo $d+2$}{
+        $faces \leftarrow$ all subsets of current simplex of size $dim$\\
+        \For{each face $\in$ faces}{
+            \If{face $\notin$ filtration and $dim == 2$}{
+                $value \leftarrow$ distance($face[0]$, $face[1]$) \tcc{Calculate the euclidean distance between the two points}
+                filtration.append(($face$, $value$)) \tcc{Append 1-simplices}
+            }
+            \If{face $\notin$ filtration and $dim > 2$}{
+                find $subface$ of $face$ with greatest $value$\\
+                filtration.append(($subface$, $value$)) \tcc{Add higher order simplices}
+            }
+        }
+    }
+}
 
 
 % $y \gets 1$\;
