@@ -257,16 +257,15 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
 
         $$f:\underbrace{\R^d \times \dots \times \R^d}_{d+1} \to \mathcal{M}_{d\times d}(\R)\times \R^d$$
         $$g:\text{GL}_d(\R)\times \R^d \to \R^d$$
-        $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right],\left(\mathbf{n_2}\cdot\mathbf{b_2},\mathbf{n_3}\cdot\mathbf{b_3},\dots, \mathbf{n_{d+1}}\cdot\mathbf{b_{d+1}}\right)\right)$$
-        $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \begin{bmatrix}
+        % $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right],\left(\mathbf{n_2}\cdot\mathbf{b_2},\mathbf{n_3}\cdot\mathbf{b_3},\dots, \mathbf{n_{d+1}}\cdot\mathbf{b_{d+1}}\right)\right)$$
+        $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\begin{bmatrix}
             \mathbf{n_2}\\ \mathbf{n_3}\\ \vdots\\ \mathbf{n_{d+1}}
         \end{bmatrix},
         \begin{bmatrix}
             \mathbf{n_2}\cdot\mathbf{b_2} \\ \mathbf{n_3}\cdot\mathbf{b_3}\\ \vdots \\ \mathbf{n_{d+1}}\cdot\mathbf{b_{d+1}}
-        \end{bmatrix}$$
+        \end{bmatrix}\right)$$
             
-        % \left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right],\left(\mathbf{n_2}\cdot\mathbf{b_2},\mathbf{n_3}\cdot\mathbf{b_3},\dots, \mathbf{n_{d+1}}\cdot\mathbf{b_{d+1}}\right)\right)$$
-        % $$g:(A,b) \mapsto (A^T)\inv b.$$
+        $$g:(A,b) \mapsto A\inv b.$$
     
         We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d\times d} \cong \R^{d^2}$, we have $\mathcal{M}_{d\times d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each entry of the matrix $\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right]$, and $f$ is a polynomial in each entry of the vector $(\left|\mathbf{b_2}\right|^2, \left|\mathbf{b_3}\right|^2,\dots,\left|\mathbf{b_{d+1}}\right|^2)$ Thus, $f$ itself is continuous.
 
@@ -424,20 +423,20 @@ The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 
 \begin{algorithm}
 \caption{An algorithm to compute Delaunay-Rips Filtration}\label{alg:one}
-\KwIn{$P = (\mathbf{p_1},\dots,\mathbf{p_n})$, $d$ = maximum homology dimension to compute}
+\KwIn{$P = (\mathbf{p_1},\dots,\mathbf{p_n})$, $dim$ = maximum homology dimension to compute}
 \KwOut{Delaunay Rips Filtration}
 triangulation $\leftarrow$ Delaunay($P$)\\
 filtration $\leftarrow [([i], 0)]$ 
 for $1\leq i\leq n$ \tcc{Add the 0-simplices into the filtration}
 \For{each simplex $\in$ triangulation}{
-    \For{$dim \leftarrow 2$ \KwTo $d+2$}{
-        $faces \leftarrow$ all subsets of current simplex of size $dim$\\
+    \For{$d \leftarrow 1$ \KwTo $dim+1$}{
+        $faces \leftarrow$ all $d$-simplex subsets of current simplex\\
         \For{each face $\in$ faces}{
-            \If{face $\notin$ filtration and $dim == 2$}{
+            \If{face $\notin$ filtration and $d == 1$}{
                 $value \leftarrow$ distance($face[0]$, $face[1]$) \tcc{Calculate the euclidean distance between the two points}
                 filtration.append(($face$, $value$)) \tcc{Append 1-simplices}
             }
-            \If{face $\notin$ filtration and $dim > 2$}{
+            \If{face $\notin$ filtration and $dim > 1$}{
                 find $subface$ of $face$ with greatest $value$\\
                 filtration.append(($subface$, $value$)) \tcc{Add higher order simplices}
             }
