@@ -253,7 +253,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         $$\mathbf{n_i}\cdot \mathbf{r}=\mathbf{n_i}\cdot\mathbf{b_i}$$
         where $\mathbf{r}$ is the position vector for an arbitrary point on the hyperplane.
         \newline
-        We are now ready to construct the following maps whose composition will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$.
+        We are now ready to construct the following maps whose composition will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$. This construction is instrumental to obtaining $\varepsilon$ balls around each point that ensures the circumcenter $O$ remains bounded.
 
         $$f:\underbrace{\R^d \times \dots \times \R^d}_{d+1} \to \mathcal{M}_{d\times d}(\R)\times \R^d$$
         $$g:\text{GL}_d(\R)\times \R^d \to \R^d$$
@@ -267,13 +267,14 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
             
         $$g:(A,b) \mapsto A\inv b.$$
     
-        We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d\times d} \cong \R^{d^2}$, we have $\mathcal{M}_{d\times d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each entry of the matrix $\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right]$, and $f$ is a polynomial in each entry of the vector $(\left|\mathbf{b_2}\right|^2, \left|\mathbf{b_3}\right|^2,\dots,\left|\mathbf{b_{d+1}}\right|^2)$ Thus, $f$ itself is continuous.
+        We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d\times d} \cong \R^{d^2}$, we have $\mathcal{M}_{d\times d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each component of it's output. Thus, $f$ itself is continuous.
 
-        We prove that the map $g$ is continuous. Let $\R^d$ have the standard topology and $\text{GL}_d(\R)\times \R^d$ have the subspace topology of $\mathcal{M}_{d\times d}(\R)\times \R^d$. Note that $(A^T)\inv=\frac{1}{\det(A^T)}\text{adj}(A^T)$ where $\det$ is the determinant and $\text{adj}$ is the classical adjoint. The $\det$ and $\text{adj}$ are continuous maps since they involve polynomials. The product of matrices results in polynomials in each entry of the output. Since $g$ is continuous in each component in the output vector, $g$ is continuous.
-        % reference why determinant and classical adjoint are continuous (from some textbook)
+        We prove that the map $g$ is continuous. Let $\R^d$ have the standard topology and $\text{GL}_d(\R)\times \R^d$ have the subspace topology of $\mathcal{M}_{d\times d}(\R)\times \R^d$. Note that taking the inverse of a matrix is a continuous function. Multiplication of a matrix and a vector is a continuous function. Hence, $g(A,b)=A\inv b$ is a continuous function.
+        % reference why A\inv and multiplication of vectors is continuous.
         
-        Observe that $g \circ f$ is the circumcenter of the sphere through the input points. This composition is continous since $g$ and $f$ are continous. Let $p = (\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \in \R^{d(d+1)}$ and let $O=g \circ f(p)$. Thus, for any $\varepsilon_1>0$, there exists a $\delta>0$ such that when $p'$ satisfies $$||p-p'|| < \delta \text{, then}\ ||O-O'|| < \varepsilon_1$$
-        where $O'=g \circ f(p').$ Thus, we have that $B_\delta(p) \subset \R^{d(d+1)}$ is an open ball of radius $\delta$ centered at $p$. Let $\pi_i$ be the projection map
+        Observe that $g \circ f$ is the circumcenter of the sphere through the input points. This composition is continous since $g$ and $f$ are continous. Let $p = (\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \in \R^{d(d+1)}$ and let $O=g \circ f(p)$. Thus, for any $\varepsilon_1>0$, there exists a $\delta>0$ such that when $p'=(\mathbf{p_1}',\mathbf{p_2}',\dots,\mathbf{p_{d+1}}')$ satisfies $||p-p'|| < \delta$, then
+        $$||O-O'|| < \varepsilon_1$$
+        where $O'=g \circ f(p').$ Thus, we have that $B_\delta(p) \subset \R^{d(d+1)}$ is an open ball of radius $\delta$ centered at $p$. Let $\pi_i$ be the projection map that projects $p$ into its $i$th coordinate:
         $$\pi_i: \underbrace{\R^d \times \dots \times \R^d}_{d+1} \to \R^d$$
         $$\pi_i: (\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \mathbf{p_i}.$$
         This map is an open map, thus $\pi_i(B_\delta(p))$ is an open set in $\R^d$. Since we have $\mathbf{p_i} \in \pi_i(B_\delta(p))$ by definition, we can find an open ball $B_{\delta_i}(\mathbf{p_i}) \subset \R^d$ for each $1\leq i \leq d+1$. Letting $\varepsilon = \min\{\delta_i\}_{i=1}^{d+1}$, we have an $\varepsilon$ neighborhood around each point $\mathbf{p_i}$ defining $\mathcal{S}$ that ensures the circumcenter $O$ stays in an $\varepsilon_1$ ball.
