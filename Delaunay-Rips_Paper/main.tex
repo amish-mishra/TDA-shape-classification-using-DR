@@ -462,6 +462,13 @@ where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
     Since $||F||=||A\inv E|| <1$, we have
     $$||G|| \leq \frac{\sqrt{n}}{1-||F||}.$$
 
+    Now we have
+    $$h = -(I+F)\inv A\inv Ex= -GA\inv Ex$$
+    $$||h|| \leq ||G||\ ||A\inv E||\ ||x|| \leq \frac{||A\inv E||\ ||x||}{1-||F||} = \frac{||A\inv E||\ ||x||}{1-||A\inv E||} \leq \frac{||A\inv||\ ||E||\ ||x||}{1-||A\inv||\ ||E||}$$
+    provided that $||A\inv|| ||E|| < 1$.
+    Division by $||x||$ gives
+    $$\frac{||h||}{||x||}\leq \frac{||A\inv||\ ||E||}{1-||A\inv||\ ||E||}$$
+
 \end{proof}
 
 
