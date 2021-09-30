@@ -429,29 +429,30 @@ where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
     \begin{equation}\label{rewrite_AplusE}
         A+E = A(I+A\inv E)
     \end{equation}
-    to see that $A+E$ is invertible if $I+A\inv E$ is invertible. From \cite{Wilkinson} page 82, if $\lambda_i$ is an eigenvalue of $A$, then
-    $$||A||\geq|\lambda_i|.$$
+    to see that $A+E$ is invertible if $I+A\inv E$ is invertible. From \cite{Wilkinson} page 82, if $\lambda$ is an eigenvalue of $M$, then
+    $$||M||\geq|\lambda|.$$
     Thus, if $\lambda_i$ is an eigenvalue of $A\inv E$, then we have
     $$||A\inv E|| \geq |\lambda_i|.$$
-    Since the eigenvalues of $I+A\inv E$ are of the form $1+\lambda_i$, to ensure $I+A\inv E$ is invertible, we need $\lambda_i \neq -1$ for any $i$. Once way to ensure this is to require $||A\inv E||<1$ so that
-    $$|\lambda_i|<||A\inv E||< 1.$$
+    Since the eigenvalues of $I+A\inv E$ are of the form $1+\lambda_i$, to ensure $I+A\inv E$ is invertible, we need $\lambda_i \neq -1$ for any $i$. One way to ensure this is to require $||A\inv E||<1$ so that
+    $$|\lambda_i|\leq||A\inv E||< 1.$$
     This condition on $||A\inv E||$ guarantees the invertibility of $A+E$.
 \end{proof}
 
 \begin{lem}
-    Given $A,E \in V$ and $x,h,b \in \R^n$, let $(A+E)(x+h)=b$. If $||I||=\sqrt{n}$ and $||A\inv||\ ||E||<1/2$, then
+    Given $A,E \in V$ and $x,h,b \in \R^n$, let $(A+E)(x+h)=b$. If $||A\inv||\ ||E||<1$, then
     $$\frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}\kappa(A)||E||/||A||}{1-\kappa(A)||E||/||A||}$$   
     where $\kappa(A) = ||A||\ ||A\inv||$.
 \end{lem}
-\begin{proof}
-    We mimic the proof found in \cite{Wilkinson} pages 92-93. Since $||A\inv E||=1/2<1$, we have that $A+E$ is invertible by Lemma \ref{AplusE_invertible}. Now we define,
+\begin{proof}%don't need ||A\inv||||E||<1/2, just need less 1, also take out \kappa(A)
+    We mimic the proof found in \cite{Wilkinson} pages 92-93. Since $||A\inv E|| \leq ||A\inv||\ ||E||<1$, we have that $A+E$ is invertible by Lemma \ref{AplusE_invertible}. Now we define,
     $$F:=A\inv E$$
     and we rewrite $(A+E)(x+h)=b$ as
     $$(A+E)h=-Ex.$$
     From here, using equation \ref{rewrite_AplusE} we have
     $$h = -(A+E)\inv Ex = -(I+F)\inv A\inv Ex.$$
     We now define
-    $$G:=(I+F)\inv.$$
+    $$G:=(I+F)\inv,$$
+    which is invertible by Lemma \ref{AplusE_invertible}.
     Multiplying each side by $(I+F)$ results in
     $$I = G+FG$$
     and
