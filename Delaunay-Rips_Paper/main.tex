@@ -52,19 +52,19 @@ Welcome to our paper!
     The idea behind extracting topological features from a given point-cloud requires there to be a method of assigning some sort of ``shape" to the data. Only then are we able to study its associated topological properties. The scenario we face is that we have a finite dimensional metric space out of the point-cloud that we need to assign a shape to. With the human eye, we may be able to make out some appropriate surface our data set can live on. However, this situation pokes at a fundamental question that arises when computing: how can we get a computer to do what a human can do? We need to introduce the idea of a \textit{simplicial complex}, a computational efficient way for a computer to build a surface onto a data set.
     
     \begin{defn}
-        A simplicial complex is a collection $K$ of non-empty subsets of a set $K_0$ such that $\{v\} \in K$ for all $v \in K_0$, and $\tau \subset \sigma$ and $\sigma \in K$ guarantees that $\tau \in K$. The elements of $K_0$ are called vertices of $K$, and the elements of $K$ are called simplices. Additionally, we say that a simplex has dimension $p$ or is a $p$-simplex if it has cardinality of $p+1$. We use $K_p$ to denote the collection of $p$-simplices. The $k$-skeleton of $K$ is the union of the sets $K_p$ for all $p \in \{0,1,\dots,k\}$. If $\tau$ and $\sigma$ are simplices such that $\tau \subset \sigma$, then we call $\tau$ a face of $\sigma$, and we say that $\tau$ is a face of $\sigma$ of codimension $k'$ if the dimensions of $\tau$ and $\sigma$ differ by $k'$. The dimension of $K$ is defined as the maximum of the dimensions of its simplices. A map of simplicial complexes, $f: K \to L$, is a map $f: K_0 \to L_0$ such that $f(\sigma) \in L$ for all $\sigma \in K$. \cite{edelsbrunner}
+        A simplicial complex is a collection $K$ of non-empty subsets of a set $K_0$ such that $\{v\} \in K$ for all $v \in K_0$, and $\tau \subset \sigma$ and $\sigma \in K$ guarantees that $\tau \in K$. The elements of $K_0$ are called vertices of $K$, and the elements of $K$ are called simplices. Additionally, we say that a simplex has dimension $p$ or is a $p$-simplex if it has cardinality of $p+1$. We use $K_p$ to denote the collection of $p$-simplices. The $k$-skeleton of $K$ is the union of the sets $K_p$ for all $p \in \{0,1,\dots,k\}$. If $\tau$ and $\sigma$ are simplices such that $\tau \subset \sigma$, then we call $\tau$ a face of $\sigma$, and we say that $\tau$ is a face of $\sigma$ of codimension $k'$ if the dimensions of $\tau$ and $\sigma$ differ by $k'$. The dimension of $K$ is defined as the maximum of the dimensions of its simplices. A map of simplicial complexes, $f: K \to L$, is a map $f: K_0 \to L_0$ such that $f(\sigma) \in L$ for all $\sigma \in K$. \cite{Edelsbrunner}
     \end{defn}
     
 \subsection{Simplicial Homology}
 
 \subsection{Vietoris-Rips Complex} \label{rips}
-One of the simplest ways to build a complex on a data set $X$ is by considering the pairwise distance between the points. The approach described here is an algorithmic, bottom-up approach that adds higher and higher dimensional simplices to the complex for a fixed scale. For a given scale $\varepsilon>0$, if $d(x,x')\leq 2\varepsilon$ for $x,x' \in X$, then we add the edge between $x$ and $x'$ into our complex. Once all of the edges are added, we add the higher dimensional simplices if their faces are already in the complex. That is, we add the $k$-simplex $\sigma = \{x_0,x_1,\dots,x_k\}$ to the complex if every subset $u \subset \sigma$ is already in the complex. Formally, we define the Vietoris-Rips complex \cite{roadmap} for scale $\varepsilon>0$ 
+One of the simplest ways to build a complex on a data set $X$ is by considering the pairwise distance between the points. The approach described here is an algorithmic, bottom-up approach that adds higher and higher dimensional simplices to the complex for a fixed scale. For a given scale $\varepsilon>0$, if $d(x,x')\leq 2\varepsilon$ for $x,x' \in X$, then we add the edge between $x$ and $x'$ into our complex. Once all of the edges are added, we add the higher dimensional simplices if their faces are already in the complex. That is, we add the $k$-simplex $\sigma = \{x_0,x_1,\dots,x_k\}$ to the complex if every subset $u \subset \sigma$ is already in the complex. Formally, we define the Vietoris-Rips complex \cite{Roadmap} for scale $\varepsilon>0$ 
 $$VR_{\varepsilon}(X) = \{\sigma \subseteq X\ |\ d(x,x') \leq 2\varepsilon,\ \forall x,x' \in \sigma\}.$$
 
 \subsection{Delaunay Triangulation}
-Although the Vietoris-Rips complex is simple to implement, constructing it on data sets with large numbers of points results in computation drawback. As the scale increases, we see that adding certain simplices does not affect the homology of the point cloud. We need some way to ``weed" out these extraneous simplices as we construct our complex to increase computational efficiency. Turning to a tool of Computational Geometry, we incorporate the Delaunay Triangulation in our construction. Our definition is adapted from ``A roadmap for the computation of persistent homology"\cite{roadmap}. Assume our data $X$ lives in the space $\R^n$. Let $x \in X$. We define
+Although the Vietoris-Rips complex is simple to implement, constructing it on data sets with large numbers of points results in computation drawback. As the scale increases, we see that adding certain simplices does not affect the homology of the point cloud. We need some way to ``weed" out these extraneous simplices as we construct our complex to increase computational efficiency. Turning to a tool of Computational Geometry, we incorporate the Delaunay Triangulation in our construction. Our definition is adapted from ``A roadmap for the computation of persistent homology"\cite{Roadmap}. Assume our data $X$ lives in the space $\R^n$. Let $x \in X$. We define
 $$V_x = \{p \in \R^d\ |\ d(p,x) \leq d(p, x')\ \forall x' \in X\}.$$
-Each $V_x$ is called a Voronoi cell. Note that $\{V_x\}_{x \in X}$ forms a cover of $\R^n$. This cover is known as the Voronoi decomposition of $\R^n$ with respect to $X$. To construct the Delaunay triangulation from this cover, we connect $x,x' \in X$ with an edge if $V_x$ and $V_{x'}$ are neighbors (that is, the Vornoi cells share a wall). When the points in $X$ are in general position, this gives us a graph (1-skeleton) on $X$ that is known as the Delaunay Triangulation. Formally, we define \cite{edelsbrunner}
+Each $V_x$ is called a Voronoi cell. Note that $\{V_x\}_{x \in X}$ forms a cover of $\R^n$. This cover is known as the Voronoi decomposition of $\R^n$ with respect to $X$. To construct the Delaunay triangulation from this cover, we connect $x,x' \in X$ with an edge if $V_x$ and $V_{x'}$ are neighbors (that is, the Vornoi cells share a wall). When the points in $X$ are in general position, this gives us a graph (1-skeleton) on $X$ that is known as the Delaunay Triangulation. Formally, we define \cite{Edelsbrunner}
 $$Del(X) = \{\sigma \subset X\ |\ \bigcap_{u \in \sigma} V_u \neq \emptyset\}.$$
 In this paper, we will be only be using the edges of the Delaunay Triangulation. We call it the Delaunay 1-skeleton and define it as
 $$Del_{1}(X) = \{\sigma \in Del(X)\ |\ dim(\sigma) = 1\}.$$
@@ -255,7 +255,7 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         \newline
         We are now ready to construct the following maps whose composition will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$. This construction is instrumental to obtaining $\varepsilon$ balls around each point that ensures the circumcenter $O$ remains bounded.
 
-        $$f:\underbrace{\R^d \times \dots \times \R^d}_{d+1} \to \mathcal{M}_{d\times d}(\R)\times \R^d$$
+        $$f:\underbrace{\R^d \times \dots \times \R^d}_{d+1} \to \mathcal{M}_{d}(\R)\times \R^d$$
         $$g:\text{GL}_d(\R)\times \R^d \to \R^d$$
         % $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right],\left(\mathbf{n_2}\cdot\mathbf{b_2},\mathbf{n_3}\cdot\mathbf{b_3},\dots, \mathbf{n_{d+1}}\cdot\mathbf{b_{d+1}}\right)\right)$$
         $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\begin{bmatrix}
@@ -267,9 +267,9 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
             
         $$g:(A,b) \mapsto A\inv b.$$
     
-        We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d\times d} \cong \R^{d^2}$, we have $\mathcal{M}_{d\times d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each component of it's output. Thus, $f$ itself is continuous.
+        We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d} \cong \R^{d^2}$, we have $\mathcal{M}_{d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each component of it's output. Thus, $f$ itself is continuous.
 
-        We prove that the map $g$ is continuous. Let $\R^d$ have the standard topology and $\text{GL}_d(\R)\times \R^d$ have the subspace topology of $\mathcal{M}_{d\times d}(\R)\times \R^d$. Note that taking the inverse of a matrix is a continuous function. Multiplication of a matrix and a vector is a continuous function. Hence, $g(A,b)=A\inv b$ is a continuous function.
+        We prove that the map $g$ is continuous. Let $\R^d$ have the standard topology and $\text{GL}_d(\R)\times \R^d$ have the subspace topology of $\mathcal{M}_{d}(\R)\times \R^d$. Note that taking the inverse of a matrix is a continuous function. Multiplication of a matrix and a vector is a continuous function. Hence, $g(A,b)=A\inv b$ is a continuous function.
         % reference why A\inv and multiplication of vectors is continuous.
         
         Observe that $g \circ f$ is the circumcenter of the sphere through the input points. This composition is continous since $g$ and $f$ are continous. Let $p = (\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \in \R^{d(d+1)}$ and let $O=g \circ f(p)$. Thus, for any $\varepsilon_1>0$, there exists a $\delta>0$ such that when $p'=(\mathbf{p_1}',\mathbf{p_2}',\dots,\mathbf{p_{d+1}}')$ satisfies $||p-p'|| < \delta$, then
@@ -415,6 +415,76 @@ $$(ad, abd): (2-x, 2-x)$$
 $$(ac, acd): (\sqrt{3}, 2-x).$$
 The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 
+
+\subsection{Continuity of Matrix Inverse}
+Let $V=(\mathcal{M}_n(\R), ||\cdot||)$ be the normed vector space of $n\times n$ matrices over $\R$ with the Euclidean norm defined as
+$$||A|| = \sqrt{\sum_{i=1}^n\sum_{j=1}^na_{ij}^2}$$
+where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
+\begin{lem}\label{AplusE_invertible}
+    Given $A,E \in V$ with $A$ invertible, the matrix $A+E$ is invertible if
+    $$||A\inv E|| < 1.$$
+\end{lem}
+\begin{proof}
+    We mimic the proof found in \cite{Wilkinson} pages 92. We write
+    \begin{equation}\label{rewrite_AplusE}
+        A+E = A(I+A\inv E)
+    \end{equation}
+    to see that $A+E$ is invertible if $I+A\inv E$ is invertible. From \cite{Wilkinson} page 82, if $\lambda_i$ is an eigenvalue of $A$, then
+    $$||A||\geq|\lambda_i|.$$
+    Thus, if $\lambda_i$ is an eigenvalue of $A\inv E$, then we have
+    $$||A\inv E|| \geq |\lambda_i|.$$
+    Since the eigenvalues of $I+A\inv E$ are of the form $1+\lambda_i$, to ensure $I+A\inv E$ is invertible, we need $\lambda_i \neq -1$ for any $i$. Once way to ensure this is to require $||A\inv E||<1$ so that
+    $$|\lambda_i|<||A\inv E||< 1.$$
+    This condition on $||A\inv E||$ guarantees the invertibility of $A+E$.
+\end{proof}
+
+\begin{lem}
+    Given $A,E \in V$ and $x,h,b \in \R^n$, let $(A+E)(x+h)=b$. If $||I||=\sqrt{n}$ and $||A\inv||\ ||E||<1/2$, then
+    $$\frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}\kappa(A)||E||/||A||}{1-\kappa(A)||E||/||A||}$$   
+    where $\kappa(A) = ||A||\ ||A\inv||$.
+\end{lem}
+\begin{proof}
+    We mimic the proof found in \cite{Wilkinson} pages 92-93. Since $||A\inv E||=1/2<1$, we have that $A+E$ is invertible by Lemma \ref{AplusE_invertible}. Now we define,
+    $$F:=A\inv E$$
+    and we rewrite $(A+E)(x+h)=b$ as
+    $$(A+E)h=-Ex.$$
+    From here, using equation \ref{rewrite_AplusE} we have
+    $$h = -(A+E)\inv Ex = -(I+F)\inv A\inv Ex.$$
+    We now define
+    $$G:=(I+F)\inv.$$
+    Multiplying each side by $(I+F)$ results in
+    $$I = G+FG$$
+    and
+    $$||I|| \geq ||G||-||F||\ ||G||$$
+    $$\sqrt{n} \geq ||G|| -||F||\ ||G||$$
+    since $||I||=\sqrt{n}$. Multiplication by $||G||\inv$ yields
+    $$\sqrt{n}||G||\inv \geq 1-||F||.$$
+    Since $||F||=||A\inv E|| <1$, we have
+    $$||G|| \leq \frac{\sqrt{n}}{1-||F||}.$$
+
+\end{proof}
+
+
+\begin{thm}
+    Define the inverse of a matrix as the map
+    $$\iota:V \to V$$
+    $$\iota(A) = A\inv.$$
+    This map is continuous in the topology on $V$ induced by the Euclidean norm.
+\end{thm}
+\begin{proof}
+    Our proof begins with a hypothesis and inequality similar to the ones given in \cite{Stewart}. If $||I||=\sqrt{n}$ and $||A\inv||\ ||E||<1/2$, then
+    \begin{equation} \label{inverse_norm_ineq}
+        \frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}\kappa(A)||E||/||A||}{1-\kappa(A)||E||/||A||}   
+    \end{equation} 
+    where $\kappa(A) = ||A||\ ||A\inv||$.
+
+
+    Working from equation \ref{inverse_norm_ineq}, let $\varepsilon>0$ and $A \in V$ be arbitrary and choose $\delta=\varepsilon/(2\sqrt{n}||A\inv||^2)$ so that $$||(A+E)-A|| < \delta$$ for some $E \in V$. Then,
+    $$||\iota(A+E)-\iota(A)||=||(A+E)\inv-A\inv||\leq\frac{\sqrt{n}\kappa(A)||E||/||A||}{1-\kappa(A)||E||/||A||}||A\inv||\leq\frac{\sqrt{n}||A||\ ||A\inv||||E||/||A||}{1-||A||\ ||A\inv||||E||/||A||}||A\inv||$$
+    $$\leq \frac{\sqrt{n}||A\inv||||E||}{1-||A\inv||||E||}||A\inv||\leq 
+    \frac{\sqrt{n}||A\inv||^2}{1-1/2}||E||=2\sqrt{n}||A\inv||^2||E||< 2\sqrt{n}||A\inv||^2\delta = \varepsilon.$$
+    Hence by the $\epsilon-\delta$ definition, we have that $\iota$ (the matrix inverse) is a continuous function in the topology induced by the Euclidean norm.
+\end{proof}
 
 \subsection{Pseudo-code Implementation}
 
