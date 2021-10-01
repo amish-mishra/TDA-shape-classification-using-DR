@@ -420,12 +420,15 @@ The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 Let $V=(\mathcal{M}_n(\R), ||\cdot||)$ be the normed vector space of $n\times n$ matrices over $\R$ with the Euclidean norm defined as
 $$||A|| = \sqrt{\sum_{i=1}^n\sum_{j=1}^na_{ij}^2}$$
 where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
+
+The heavy machinery used to establish the continuity of the matrix inverse was done in \cite{Wilkinson} pages 92-93. However, their proof did not explicitly compute inequalities involving the Euclidean norm (that is, $||I|| = \sqrt{n}$ for $I \in V$ being the identity). For completeness, we provide derivations of similar results using the Euclidean norm.
+
 \begin{lem}\label{lem:AplusE_invertible}
     Given $A,E \in V$ with $A$ invertible, the matrix $A+E$ is invertible if
     $$||A\inv E|| < 1.$$
 \end{lem}
 \begin{proof}
-    We mimic the proof found in \cite{Wilkinson} pages 92. We write
+    We mimic the proof found in \cite{Wilkinson} page 92. We write
     \begin{equation}\label{eqn:rewrite_AplusE}
         A+E = A(I+A\inv E)
     \end{equation}
