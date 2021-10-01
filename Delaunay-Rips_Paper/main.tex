@@ -420,13 +420,13 @@ The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 Let $V=(\mathcal{M}_n(\R), ||\cdot||)$ be the normed vector space of $n\times n$ matrices over $\R$ with the Euclidean norm defined as
 $$||A|| = \sqrt{\sum_{i=1}^n\sum_{j=1}^na_{ij}^2}$$
 where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
-\begin{lem}\label{AplusE_invertible}
+\begin{lem}\label{lem:AplusE_invertible}
     Given $A,E \in V$ with $A$ invertible, the matrix $A+E$ is invertible if
     $$||A\inv E|| < 1.$$
 \end{lem}
 \begin{proof}
     We mimic the proof found in \cite{Wilkinson} pages 92. We write
-    \begin{equation}\label{rewrite_AplusE}
+    \begin{equation}\label{eqn:rewrite_AplusE}
         A+E = A(I+A\inv E)
     \end{equation}
     to see that $A+E$ is invertible if $I+A\inv E$ is invertible. From \cite{Wilkinson} page 82, if $\lambda$ is an eigenvalue of $M$, then
@@ -438,21 +438,22 @@ where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
     This condition on $||A\inv E||$ guarantees the invertibility of $A+E$.
 \end{proof}
 
-\begin{lem}
-    Given $A,E \in V$ and $x,h,b \in \R^n$, let $(A+E)(x+h)=b$. If $||A\inv||\ ||E||<1$, then
-    $$\frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}\kappa(A)||E||/||A||}{1-\kappa(A)||E||/||A||}$$   
-    where $\kappa(A) = ||A||\ ||A\inv||$.
+\begin{lem}\label{lem:AplusEinv_minus_Ainv_ineq}
+    Given $A,E \in V$ with $A$ invertible and $x,h,b \in \R^n$, let $(A+E)(x+h)=b$. If $||A\inv||\ ||E||<1$, then
+    $$\frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}||A\inv||\ ||E||}{1-||A\inv||\ ||E||}.$$   
 \end{lem}
 \begin{proof}%don't need ||A\inv||||E||<1/2, just need less 1, also take out \kappa(A)
-    We mimic the proof found in \cite{Wilkinson} pages 92-93. Since $||A\inv E|| \leq ||A\inv||\ ||E||<1$, we have that $A+E$ is invertible by Lemma \ref{AplusE_invertible}. Now we define,
+    We mimic the proof found in \cite{Wilkinson} pages 92-93. Since $||A\inv E|| \leq ||A\inv||\ ||E||<1$, we have that $A+E$ is invertible by Lemma \ref{lem:AplusE_invertible}. Now we define,
     $$F:=A\inv E$$
     and we rewrite $(A+E)(x+h)=b$ as
     $$(A+E)h=-Ex.$$
-    From here, using equation \ref{rewrite_AplusE} we have
-    $$h = -(A+E)\inv Ex = -(I+F)\inv A\inv Ex.$$
+    From here, using equation \ref{eqn:rewrite_AplusE} we have
+    \begin{equation}\label{eqn:solved_for_h}
+    h = -(A+E)\inv Ex = -(I+F)\inv A\inv Ex.
+    \end{equation}
     We now define
     $$G:=(I+F)\inv,$$
-    which is invertible by Lemma \ref{AplusE_invertible}.
+    which is well-defined since $I+F$ is invertible by Lemma \ref{lem:AplusE_invertible}.
     Multiplying each side by $(I+F)$ results in
     $$I = G+FG$$
     and
@@ -462,13 +463,17 @@ where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
     $$\sqrt{n}||G||\inv \geq 1-||F||.$$
     Since $||F||=||A\inv E|| <1$, we have
     $$||G|| \leq \frac{\sqrt{n}}{1-||F||}.$$
-
-    Now we have
+    From equation \ref{eqn:solved_for_h}, we now we have
     $$h = -(I+F)\inv A\inv Ex= -GA\inv Ex$$
-    $$||h|| \leq ||G||\ ||A\inv E||\ ||x|| \leq \frac{||A\inv E||\ ||x||}{1-||F||} = \frac{||A\inv E||\ ||x||}{1-||A\inv E||} \leq \frac{||A\inv||\ ||E||\ ||x||}{1-||A\inv||\ ||E||}$$
+    $$||h|| \leq ||G||\ ||A\inv E||\ ||x|| \leq \frac{\sqrt{n}||A\inv E||\ ||x||}{1-||F||} = \frac{\sqrt{n}||A\inv E||\ ||x||}{1-||A\inv E||} \leq \frac{\sqrt{n}||A\inv||\ ||E||\ ||x||}{1-||A\inv||\ ||E||}$$
     provided that $||A\inv|| ||E|| < 1$.
-    Division by $||x||$ gives
-    $$\frac{||h||}{||x||}\leq \frac{||A\inv||\ ||E||}{1-||A\inv||\ ||E||}$$
+    Division by $||x||$ results in
+    $$\frac{||h||}{||x||}\leq \frac{\sqrt{n}||A\inv||\ ||E||}{1-||A\inv||\ ||E||}.$$
+    Using the substitutions
+    $$h = (A+E)\inv b - x = (A+E)\inv b - A\inv b = ((A+E)\inv -A\inv)b$$
+    $$x = A\inv b,$$
+    we have
+    $$\frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}||A\inv||\ ||E||}{1-||A\inv||\ ||E||}.$$
 
 \end{proof}
 
@@ -480,17 +485,14 @@ where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$.
     This map is continuous in the topology on $V$ induced by the Euclidean norm.
 \end{thm}
 \begin{proof}
-    Our proof begins with a hypothesis and inequality similar to the ones given in \cite{Stewart}. If $||I||=\sqrt{n}$ and $||A\inv||\ ||E||<1/2$, then
-    \begin{equation} \label{inverse_norm_ineq}
-        \frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}\kappa(A)||E||/||A||}{1-\kappa(A)||E||/||A||}   
-    \end{equation} 
-    where $\kappa(A) = ||A||\ ||A\inv||$.
-
-
-    Working from equation \ref{inverse_norm_ineq}, let $\varepsilon>0$ and $A \in V$ be arbitrary and choose $\delta=\varepsilon/(2\sqrt{n}||A\inv||^2)$ so that $$||(A+E)-A|| < \delta$$ for some $E \in V$. Then,
-    $$||\iota(A+E)-\iota(A)||=||(A+E)\inv-A\inv||\leq\frac{\sqrt{n}\kappa(A)||E||/||A||}{1-\kappa(A)||E||/||A||}||A\inv||\leq\frac{\sqrt{n}||A||\ ||A\inv||||E||/||A||}{1-||A||\ ||A\inv||||E||/||A||}||A\inv||$$
-    $$\leq \frac{\sqrt{n}||A\inv||||E||}{1-||A\inv||||E||}||A\inv||\leq 
-    \frac{\sqrt{n}||A\inv||^2}{1-1/2}||E||=2\sqrt{n}||A\inv||^2||E||< 2\sqrt{n}||A\inv||^2\delta = \varepsilon.$$
+    Let $\varepsilon>0$ and $A \in V$ be arbitrary and choose $\delta=\min(\varepsilon/(2\sqrt{n}||A\inv||^2), 1/(2||A\inv||))$ so that $$||(A+E)-A|| < \delta$$ for some $E \in V$. Hence, we have
+    $$||(A+E)-A|| = ||E|| < \delta \leq 1/(2||A\inv||)$$
+    so that
+    $$||A\inv||\ ||E|| < 1/2 <1.$$
+    Hence, Lemma \ref{lem:AplusEinv_minus_Ainv_ineq} applies and we have
+    $$||\iota(A+E)-\iota(A)||=||(A+E)\inv-A\inv||\leq\frac{\sqrt{n}||E||\ ||A\inv||}{1-||E||\ ||A\inv||}||A\inv||\leq
+    \frac{\sqrt{n}||A\inv||^2}{1-1/2}||E||$$
+    $$=2\sqrt{n}||A\inv||^2||E||< 2\sqrt{n}||A\inv||^2\delta \leq \varepsilon.$$
     Hence by the $\epsilon-\delta$ definition, we have that $\iota$ (the matrix inverse) is a continuous function in the topology induced by the Euclidean norm.
 \end{proof}
 
