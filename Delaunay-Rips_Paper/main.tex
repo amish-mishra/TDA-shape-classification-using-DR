@@ -253,23 +253,23 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         $$\mathbf{n_i}\cdot \mathbf{r}=\mathbf{n_i}\cdot\mathbf{b_i}$$
         where $\mathbf{r}$ is the position vector for an arbitrary point on the hyperplane.
         \newline
-        We are now ready to construct the following maps whose composition will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$. This construction is instrumental to obtaining $\varepsilon$ balls around each point that ensures the circumcenter $O$ remains bounded.
+        We are now ready to construct the following maps whose composition will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$. This construction is instrumental to obtaining $\varepsilon$ balls around each point that ensures the circumcenter $O$ remains bounded. Define
 
         $$f:\underbrace{\R^d \times \dots \times \R^d}_{d+1} \to \mathcal{M}_{d}(\R)\times \R^d$$
-        $$g:\text{GL}_d(\R)\times \R^d \to \R^d$$
-        % $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\left[\mathbf{n_2}\ \mathbf{n_3}\ \dots\ \mathbf{n_{d+1}}\right],\left(\mathbf{n_2}\cdot\mathbf{b_2},\mathbf{n_3}\cdot\mathbf{b_3},\dots, \mathbf{n_{d+1}}\cdot\mathbf{b_{d+1}}\right)\right)$$
         $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\begin{bmatrix}
             \mathbf{n_2}\\ \mathbf{n_3}\\ \vdots\\ \mathbf{n_{d+1}}
         \end{bmatrix},
         \begin{bmatrix}
             \mathbf{n_2}\cdot\mathbf{b_2} \\ \mathbf{n_3}\cdot\mathbf{b_3}\\ \vdots \\ \mathbf{n_{d+1}}\cdot\mathbf{b_{d+1}}
         \end{bmatrix}\right)$$
+        $$g:\text{GL}_d(\R)\times \R^d \to \R^d$$
+       
             
         $$g:(A,b) \mapsto A\inv b.$$
     
-        We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d} \cong \R^{d^2}$, we have $\mathcal{M}_{d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each component of it's output. Thus, $f$ itself is continuous.
+        We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d} \cong \R^{d^2}$, we have $\mathcal{M}_{d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each component of it's output by how it is defined. Thus, $f$ itself is continuous.
 
-        We prove that the map $g$ is continuous. Let $\R^d$ have the standard topology and $\text{GL}_d(\R)\times \R^d$ have the subspace topology of $\mathcal{M}_{d}(\R)\times \R^d$. Note that taking the inverse of a matrix is a continuous function. Multiplication of a matrix and a vector is a continuous function. Hence, $g(A,b)=A\inv b$ is a continuous function.
+        We carefully prove that the map $g$ is continuous. Let $\R^d$ have the standard topology and $\text{GL}_d(\R)\times \R^d$ have the subspace topology of $\mathcal{M}_{d}(\R)\times \R^d$. Note that taking the inverse of a matrix is a continuous function in the topology induced by the Frobenius norm (proven in detail in Section \ref{continuity_of_inverse}). Mapping $b \mapsto b$ is a continuous function in the standard topology of $\R^d$. Since these two functions are defined on spaces with the same topology, recall that the product of two continous functions is continuous. Hence, $g(A,b)=A\inv b$ is a continuous function.
         % reference why A\inv and multiplication of vectors is continuous.
         
         Observe that $g \circ f$ is the circumcenter of the sphere through the input points. This composition is continous since $g$ and $f$ are continous. Let $p = (\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \in \R^{d(d+1)}$ and let $O=g \circ f(p)$. Thus, for any $\varepsilon_1>0$, there exists a $\delta>0$ such that when $p'=(\mathbf{p_1}',\mathbf{p_2}',\dots,\mathbf{p_{d+1}}')$ satisfies $||p-p'|| < \delta$, then
@@ -288,23 +288,48 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
         For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, for all $p_k \in P\backslash D$, $d(O,p_1) < d(O,p_k$). Let $t(p_k):=d(O,p_k)-d(O,p_1)$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. Since $P$ is in general position and finite, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
-        $$d(O',p_1') \leq d(O',O)+d(O,p_1)+d(p_1,p_1') \leq \varepsilon_1 + d(O,p_1)+\delta \leq \frac{t}{8}+d(O,p_1)+\frac{t}{8}=d(O,p_1)+\frac{1}{4}t$$
-        $$< d(O,p_1)+\frac{3}{4}t = d(O,p_1)+t-\frac{1}{4}t = d(O,p_{\min})-\frac{1}{4}t \leq d(O,p_k)-\frac{1}{4}=d(O,p_{k})-\frac{t}{8}-\frac{t}{8}$$
-        $$\leq d(O,p_{k})-\varepsilon_1-\delta \leq d(O,p_{k})-d(O,O')-d(p_{k},p_{k}') \leq d(O',p_{k}').$$
-        This inequality is true for any $p_k' \in P'\backslash D'$. Hence, $D'$ is a Delaunay simplex.
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, for all $p_k \in P\backslash D$, $d(O,p_1) < d(O,p_k$). Let $t(p_k):=(d(O,p_k)-d(O,p_1))/4$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. It follows that,
+        $$d(O,p_1)+2t=d(O,p_{\min})-2t.$$
+        Since $P$ is in general position and finite, $t>0$. Let $\varepsilon_1 = t$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+        $$d(O',p_1') \leq d(O',O)+d(O,p_1)+d(p_1,p_1')$$
+        $$< \varepsilon_1 + d(O,p_1)+\delta \leq t+d(O,p_1)+t$$
+        $$= d(O,p_1)+2t = d(O,p_{\min})-2t.$$
+        Since $d(O,p_{\min})$ minimized $t$, it must be that $d(O,p_{\min}) \leq d(O,p_k)$ for any $p_k \in P\backslash D$. Thus, we have
+        $$d(O,p_{\min})-2t \leq d(O,p_k)-t-t < d(O,p_{k})-\varepsilon_1-\delta$$
+        $$\leq d(O,p_{k})-d(O,O')-d(p_{k},p_{k}') \leq d(O',p_{k}').$$
+        We have concluded that
+        $$d(O',p_1')<d(O',p_{k}')$$
+        for any $p_k' \in P'\backslash D'$. Hence, $D'$ is a Delaunay simplex.
     \end{proof}
+    % \begin{proof} My proof with t/8
+    %     Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, for all $p_k \in P\backslash D$, $d(O,p_1) < d(O,p_k$). Let $t(p_k):=d(O,p_k)-d(O,p_1)$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. Since $P$ is in general position and finite, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+    %     $$d(O',p_1') \leq d(O',O)+d(O,p_1)+d(p_1,p_1') \leq \varepsilon_1 + d(O,p_1)+\delta \leq \frac{t}{8}+d(O,p_1)+\frac{t}{8}=d(O,p_1)+\frac{1}{4}t$$
+    %     $$< d(O,p_1)+\frac{3}{4}t = d(O,p_1)+t-\frac{1}{4}t = d(O,p_{\min})-\frac{1}{4}t \leq d(O,p_k)-\frac{1}{4}=d(O,p_{k})-\frac{t}{8}-\frac{t}{8}$$
+    %     $$\leq d(O,p_{k})-\varepsilon_1-\delta \leq d(O,p_{k})-d(O,O')-d(p_{k},p_{k}') \leq d(O',p_{k}').$$
+    %     This inequality is true for any $p_k' \in P'\backslash D'$. Hence, $D'$ is a Delaunay simplex.
+    % \end{proof}
 
     \begin{lem}\label{stay-non-delaunay}
         For a non-Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a non-Delaunay simplex.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in P\backslash D$ such that $d(O,p_k) < d(O,p_1)$. Let $t:=d(O,p_1)-d(O,p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
-        $$d(O',p_k') \leq d(O',O)+d(O,p_k)+d(p_k,p_k') \leq \varepsilon_1 + d(O,p_k)+\delta \leq \frac{t}{8}+d(O,p_k)+\frac{t}{8}=d(O,p_k)+\frac{1}{4}t$$
-        $$< d(O,p_k)+\frac{3}{4}t = d(O,p_k)+t-\frac{1}{4}t = d(O,p_1)-\frac{1}{4}t = d(O,p_1)-\frac{t}{8}-\frac{t}{8}$$
-        $$\leq d(O,p_1)-\varepsilon_1-\delta \leq d(O,p_1)-d(O,O')-d(p_1,p_1') \leq d(O',p_1').$$
+        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in P\backslash D$ such that $d(O,p_k) < d(O,p_1)$. Let $t:=(d(O,p_1)-d(O,p_k))/4$ so that 
+        $$d(O,p_k)+2t = d(O,p_1)-2t.$$
+        Since $P$ is in general position, $t > 0$. Let $\varepsilon_1 = t$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+        $$d(O',p_k') \leq d(O',O)+d(O,p_k)+d(p_k,p_k') $$
+        $$< \varepsilon_1 + d(O,p_k)+\delta \leq t+d(O,p_k)+t$$
+        $$=d(O,p_k)+2t= d(O,p_1)-2t$$
+        $$=d(O,p_1)-t-t \leq d(O,p_1)-\varepsilon_1-\delta$$
+        $$< d(O,p_1)-d(O,O')-d(p_1,p_1') \leq d(O',p_1').$$
         Since $d(O',p_1')$ is the radius of $\Sph'$, we have that $p_k' \in \interior(\Sph')$. Hence, $D'$ is a non-Delaunay simplex.
-    \end{proof}
+    \end{proof}    
+    % \begin{proof} My t/8 argument
+    %     Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in P\backslash D$ such that $d(O,p_k) < d(O,p_1)$. Let $t:=d(O,p_1)-d(O,p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
+    %     $$d(O',p_k') \leq d(O',O)+d(O,p_k)+d(p_k,p_k') \leq \varepsilon_1 + d(O,p_k)+\delta \leq \frac{t}{8}+d(O,p_k)+\frac{t}{8}=d(O,p_k)+\frac{1}{4}t$$
+    %     $$< d(O,p_k)+\frac{3}{4}t = d(O,p_k)+t-\frac{1}{4}t = d(O,p_1)-\frac{1}{4}t = d(O,p_1)-\frac{t}{8}-\frac{t}{8}$$
+    %     $$\leq d(O,p_1)-\varepsilon_1-\delta \leq d(O,p_1)-d(O,O')-d(p_1,p_1') \leq d(O',p_1').$$
+    %     Since $d(O',p_1')$ is the radius of $\Sph'$, we have that $p_k' \in \interior(\Sph')$. Hence, $D'$ is a non-Delaunay simplex.
+    % \end{proof}
     
     
     \begin{thm}
@@ -313,8 +338,8 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
     \end{thm}
     \begin{proof}
         Let $D$ be a subset of $P$ of size $d+1$. Depending if $D$ is a Delaunay simplex in $P$, obtain $\varepsilon_D$ from Lemma \ref{stay-delaunay} or from Lemma \ref{stay-non-delaunay}. For any $\varepsilon_D$-perturbation $D'$ of $D$, we have $Del(D)=Del(D')$. Now, find
-        $$\varepsilon = min \{\varepsilon_D\ |\ \text{for every}\ D \subset P\}.$$
-        Hence, for any $\varepsilon$-perturbation $P'$ of $P$ has the same Delaunay Triangulation as $P$.
+        $$\varepsilon = \min \{\varepsilon_D\ |\ \text{for every}\ D \subset P\}.$$
+        Hence, for any $\varepsilon$-perturbation $P'$ or $P$, $P'$ has the same Delaunay Triangulation as $P$.
     \end{proof}
     
     Now, we need a theorem that gives us stability of PDs in PD space equipped with the bottle-neck distance. So,
@@ -416,7 +441,7 @@ $$(ac, acd): (\sqrt{3}, 2-x).$$
 The only point with non-zero persistence is $(\sqrt{3}, 2-x).$
 
 
-\subsection{Continuity of Matrix Inverse} %should I make V=GL_n?
+\subsection{Continuity of Matrix Inverse} \label{continuity_of_inverse} %should I make V=GL_n?
 Let $V=(\mathcal{M}_n(\R), ||\cdot||)$ be the normed vector space of $n\times n$ matrices over $\R$ with the Frobenius norm defined as
 $$||A||_F = \sqrt{\sum_{i=1}^n\sum_{j=1}^na_{ij}^2}$$
 where $a_{ij}$ is the entry in the $i$th row and $j$th column of $A$. Recall the definition of the vector 2-norm
