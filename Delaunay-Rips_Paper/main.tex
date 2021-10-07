@@ -389,7 +389,9 @@ Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into whe
 
 \subsection{Further Questions}
 
-\section{Appendix}
+
+\appendix
+\section{Appendix: Math}
 
 \subsection{Boundary Matrix Calculation for Instability}\label{boundary_mat}
 
@@ -471,7 +473,7 @@ The heavy machinery used to establish the continuity of the matrix inverse was d
 \end{proof}
 
 \begin{lem}\label{lem:AplusEinv_minus_Ainv_ineq}
-    Given $A,E \in V$ with $A$ invertible and $x,h,b \in \R^n$, let $(A+E)(x+h)=b$. If $||A\inv||\ ||E||<1$, then
+    Given $A,E \in V$ with $A$ invertible, let $x,h,b \in \R^n$ such that $Ax=b$ and $(A+E)(x+h)=b$. If $||A\inv||\ ||E||<1$, then
     $$\frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}||A\inv||\ ||E||}{1-||A\inv||\ ||E||}.$$   
 \end{lem}
 \begin{proof}%don't need ||A\inv||||E||<1/2, just need less 1, also take out \kappa(A)
@@ -523,6 +525,8 @@ The heavy machinery used to establish the continuity of the matrix inverse was d
     $$=2\sqrt{n}||A\inv||^2||E||< 2\sqrt{n}||A\inv||^2\delta \leq \varepsilon.$$
     Since $A$ was arbitrary, we have that $\iota$ (the matrix inverse) is a continuous function in the topology induced by the Frobenius norm.
 \end{proof}
+
+\section{Appendix: Tech}
 
 \subsection{Pseudo-code Implementation}
 
@@ -580,8 +584,6 @@ for $1\leq i\leq n$ \tcc{Add the 0-simplices into the filtration}
     \item Eluktronics laptop
 \end{enumerate}
 
-
-\section{Bibliography}
 
 \printbibliography[
 heading=bibintoc,
