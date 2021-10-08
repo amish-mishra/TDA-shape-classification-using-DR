@@ -496,9 +496,12 @@ The heavy machinery used to establish the continuity of the matrix inverse was d
     Division by $||x||$ results in
     $$\frac{||h||}{||x||}\leq \frac{\sqrt{n}||A\inv||\ ||E||}{1-||A\inv||\ ||E||}.$$
     Using the substitutions
-    $$h = (A+E)\inv b - x = (A+E)\inv b - A\inv b = ((A+E)\inv -A\inv)b$$
     $$x = A\inv b,$$
+    $$h = (A+E)\inv b - x = (A+E)\inv b - A\inv b = ((A+E)\inv -A\inv)b$$
     we have
+    $$\frac{||((A+E)\inv -A\inv)b||}{||A\inv||||b||} \leq \frac{||h||}{||x||} \leq \frac{\sqrt{n}||A\inv||\ ||E||}{1-||A\inv||\ ||E||} $$
+    $$\frac{||((A+E)\inv -A\inv)b||}{||b||} \leq \frac{\sqrt{n}||A\inv||^2\ ||E||}{1-||A\inv||\ ||E||}  $$
+
     $$\frac{||(A+E)\inv-A\inv||}{||A\inv||}\leq\frac{\sqrt{n}||A\inv||\ ||E||}{1-||A\inv||\ ||E||}.$$
 
 \end{proof}
