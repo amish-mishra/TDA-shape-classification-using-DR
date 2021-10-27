@@ -7,9 +7,11 @@ from ripser import ripser
 import cechmate as cm
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
 import tadasets
 import time
 from persim import plot_diagrams
+# matplotlib.rcParams['font.family'] = 'helvetica'
 
 
 
