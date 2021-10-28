@@ -17,14 +17,14 @@ from persim import plot_diagrams
 
 if __name__ == '__main__':
     # Initialize variables
-    trials = 3
+    trials = 10
     radius = 1
     noise = 0.1
-    start_pts = 20
-    max_pts = 50
-    increment = 5
+    start_pts = 50
+    max_pts = 1550
+    increment = 100
     fixed_dim = 2
-    max_run_time = 5
+    max_run_time = 7
     rips_time_array = [None] * (int((max_pts - start_pts) / increment))
     alpha_time_array = [None] * (int((max_pts - start_pts) / increment))
     del_rips_time_array = [None] * (int((max_pts - start_pts) / increment))
@@ -75,21 +75,21 @@ if __name__ == '__main__':
             avg_del_rips_time = np.median(del_rips_trial_time_array)
             if avg_del_rips_time < max_run_time:
                 del_rips_time_array[i] = avg_del_rips_time
-                plt.boxplot(del_rips_trial_time_array, showfliers=False, positions=[n], widths=1)
+                plt.boxplot(del_rips_trial_time_array, showfliers=False, positions=[n], widths=increment/5)
             else:
                 run_del_rips = False
         if run_rips:
             avg_rips_time = np.median(rips_trial_time_array)
             if avg_rips_time < max_run_time:
                 rips_time_array[i] = avg_rips_time
-                plt.boxplot(rips_trial_time_array, showfliers=False, positions=[n], widths=1)
+                plt.boxplot(rips_trial_time_array, showfliers=False, positions=[n], widths=increment/5)
             else:
                 run_rips = False
         if run_alpha:
             avg_alpha_time = np.median(alpha_trial_time_array)
             if avg_alpha_time < max_run_time:
                 alpha_time_array[i] = avg_alpha_time
-                plt.boxplot(alpha_trial_time_array, showfliers=False, positions=[n], widths=1)
+                plt.boxplot(alpha_trial_time_array, showfliers=False, positions=[n], widths=increment/5)
             else:
                 run_alpha = False        
 
