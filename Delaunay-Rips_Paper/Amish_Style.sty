@@ -27,8 +27,17 @@ sorting=ynt
 \usepackage{pdfpages}
 \usepackage{transparent}
 
-\newcommand*\cheese{\hfill\includegraphics[width=0.5cm]{images/cheese.png}}
-\renewcommand\qedsymbol{\cheese}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ill}[thm]{Illustration}
+
+
+% \newcommand*\cheese{\hfill\includegraphics[width=0.5cm]{images/cheese.png}}
+% \renewcommand\qedsymbol{\cheese}
 \newtheorem{innercustomthm}{Problem}
 \newenvironment{problem}[1]
   {\renewcommand\theinnercustomthm{#1}\innercustomthm}
@@ -36,15 +45,17 @@ sorting=ynt
 \newcommand{\inv}{^{-1}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Sph}{\mathcal{S}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\HH}{\mathbb{H}}
 \newcommand{\Log}{\text{Log}}
+\newcommand{\interior}{\text{int}}
+\newcommand{\Del}{\text{Del}}
 \theoremstyle{definition}
 \newtheorem*{prob}{Problem}
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-\newtheorem{lemma}{Lemma}
+\usepackage{algorithm2e}
+\RestyleAlgo{ruled}
