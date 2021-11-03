@@ -70,6 +70,12 @@ In this paper, we will be only be using the edges of the Delaunay Triangulation.
 $$Del_{1}(X) = \{\sigma \in Del(X)\ |\ dim(\sigma) = 1\}.$$
 We will use $Del_1(X)$ as the underlying graph structure when defining the Delaunay-Rips complex in section \ref{del-rips:def}.
 
+As an alternate defintion to the Delaunay Triangulation that we will employ in section \ref{stability}, we have the following
+
+\begin{defn}
+For a set $X$ of points in $\R^d$, a Delaunay triangulation is a triangulation $DT(X)$ such that no point in $X$ is inside the circum-hypersphere of any simplex in $DT(X)$. 
+\end{defn}
+
 \subsection{Persistence}
 
 
@@ -116,7 +122,7 @@ $$d: = W_\infty(\varphi(P),\varphi(P')) = 2-x-\sqrt{3} \geq 2-\frac{2-\sqrt{3}}{
 Hence, our map $\varphi$ is discontinuous at $P$. This gives us insight into when the Delaunay-Rips construction of the Persistence Diagram experiences instability--namely when points are not in general position. We now have motivation to ask if we have stability of the PD when the underlying Delaunay-Rips complex does not change under a perturbation of the point cloud.
 
 
-\subsection{Stability in a Neighborhood}
+\subsection{Stability in a Neighborhood}\label{stability}
 \begin{enumerate}
     \item What is the best our method can do? Use knowledge on stability of Delaunay Triangulation.
 \end{enumerate}
