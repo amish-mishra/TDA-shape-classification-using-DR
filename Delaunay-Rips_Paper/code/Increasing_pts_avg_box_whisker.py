@@ -103,10 +103,13 @@ if __name__ == '__main__':
     plt.plot(X, alpha_time_array, color='g', label='Alpha')
 
     # Naming the x-axis, y-axis and the whole graph
-    plt.xlabel("Number of points")
-    plt.ylabel("Time (seconds)")
+    plt.xlabel("Number of points", fontsize=16)
+    plt.ylabel("Time (seconds)", fontsize=16)
     plt.title("Run-time vs Number of points\n Noisy " + str(fixed_dim) + "-sphere" +
               ", radius=" + str(radius) + ", noise=" + str(noise)+ "\n(Plot of medians of "+str(trials)+" trials)")
+
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
 
     # Adding legend, which helps us recognize the curve according to it's color
     plt.legend()
