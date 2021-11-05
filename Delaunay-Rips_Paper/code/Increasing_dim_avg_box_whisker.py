@@ -18,11 +18,11 @@ if __name__ == '__main__':
     trials = 5
     radius = 1
     noise = 0.1
-    pts = 25
+    pts = 50
     start_dim = 1
-    max_dim = 4
+    max_dim = 5
     increment = 1
-    max_run_time = 3
+    max_run_time = 6
     rips_time_array = [None] * (int((max_dim - start_dim) / increment))
     alpha_time_array = [None] * (int((max_dim - start_dim) / increment))
     del_rips_time_array = [None] * (int((max_dim - start_dim) / increment))
@@ -73,21 +73,21 @@ if __name__ == '__main__':
             avg_del_rips_time = np.median(del_rips_trial_time_array)
             if avg_del_rips_time < max_run_time:
                 del_rips_time_array[i] = avg_del_rips_time
-                plt.boxplot(del_rips_trial_time_array, showfliers=False, positions=[n], widths=1)
+                plt.boxplot(del_rips_trial_time_array, showfliers=False, positions=[n], widths=increment/5)
             else:
                 run_del_rips = False
         if run_rips:
             avg_rips_time = np.median(rips_trial_time_array)
             if avg_rips_time < max_run_time:
                 rips_time_array[i] = avg_rips_time
-                plt.boxplot(rips_trial_time_array, showfliers=False, positions=[n], widths=1)
+                plt.boxplot(rips_trial_time_array, showfliers=False, positions=[n], widths=increment/5)
             else:
                 run_rips = False
         if run_alpha:
             avg_alpha_time = np.median(alpha_trial_time_array)
             if avg_alpha_time < max_run_time:
                 alpha_time_array[i] = avg_alpha_time
-                plt.boxplot(alpha_trial_time_array, showfliers=False, positions=[n], widths=1)
+                plt.boxplot(alpha_trial_time_array, showfliers=False, positions=[n], widths=increment/5)
             else:
                 run_alpha = False
 
