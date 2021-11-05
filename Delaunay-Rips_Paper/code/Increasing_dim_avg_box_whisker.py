@@ -18,7 +18,7 @@ if __name__ == '__main__':
     trials = 5
     radius = 1
     noise = 0.1
-    pts = 50
+    pts = 10
     start_dim = 1
     max_dim = 5
     increment = 1
@@ -101,10 +101,13 @@ if __name__ == '__main__':
     plt.plot(X, alpha_time_array, color='g', label='Alpha')
 
     # Naming the x-axis, y-axis and the whole graph
-    plt.xlabel("Dimension")
-    plt.ylabel("Time (seconds)")
+    plt.xlabel("Dimension", fontsize=16)
+    plt.ylabel("Time (seconds)", fontsize=16)
     plt.title("Run-time vs Dimension\n d-sphere of " + str(pts) + " points" +
               ", radius=" + str(radius) + ", noise=" + str(noise)+"\n(Plot of medians of "+str(trials)+" trials)")
+    
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
 
     # Adding legend, which helps us recognize the curve according to it's color
     plt.legend()
