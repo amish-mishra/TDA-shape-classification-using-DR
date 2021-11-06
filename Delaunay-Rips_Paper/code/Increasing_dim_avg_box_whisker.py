@@ -15,14 +15,14 @@ from persim import plot_diagrams
 
 if __name__ == '__main__':
     # Initialize variables
-    trials = 5
+    trials = 10
     radius = 1
     noise = 0.1
-    pts = 10
+    pts = 100
     start_dim = 1
-    max_dim = 5
+    max_dim = 7
     increment = 1
-    max_run_time = 6
+    max_run_time = 60
     rips_time_array = [None] * (int((max_dim - start_dim) / increment))
     alpha_time_array = [None] * (int((max_dim - start_dim) / increment))
     del_rips_time_array = [None] * (int((max_dim - start_dim) / increment))
@@ -104,13 +104,13 @@ if __name__ == '__main__':
     plt.xlabel("Dimension", fontsize=16)
     plt.ylabel("Time (seconds)", fontsize=16)
     plt.title("Run-time vs Dimension\n d-sphere of " + str(pts) + " points" +
-              ", radius=" + str(radius) + ", noise=" + str(noise)+"\n(Plot of medians of "+str(trials)+" trials)")
+              ", radius=" + str(radius) + ", noise=" + str(noise)+"\n(Plot of medians of "+str(trials)+" trials)", fontsize=16)
     
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
 
     # Adding legend, which helps us recognize the curve according to it's color
-    plt.legend()
+    plt.legend(fontsize=14)
 
     # To load the display window
     plt.show()

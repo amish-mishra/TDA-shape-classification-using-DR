@@ -106,13 +106,13 @@ if __name__ == '__main__':
     plt.xlabel("Number of points", fontsize=16)
     plt.ylabel("Time (seconds)", fontsize=16)
     plt.title("Run-time vs Number of points\n Noisy " + str(fixed_dim) + "-sphere" +
-              ", radius=" + str(radius) + ", noise=" + str(noise)+ "\n(Plot of medians of "+str(trials)+" trials)")
+              ", radius=" + str(radius) + ", noise=" + str(noise)+ "\n(Plot of medians of "+str(trials)+" trials)", fontsize=16)
 
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
 
     # Adding legend, which helps us recognize the curve according to it's color
-    plt.legend()
+    plt.legend(fontsize=14)
 
     # To load the display window
     plt.show()
