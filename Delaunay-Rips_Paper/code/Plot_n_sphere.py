@@ -2,9 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tadasets
 
-pts = 350
+pts = 1000
 d = 3
 vector_list = tadasets.dsphere(n=pts, d=d-1, r=1, noise=0.1)
+# vector_list = tadasets.torus(n=pts, noise=0.05)
 
 
 fig = plt.figure()

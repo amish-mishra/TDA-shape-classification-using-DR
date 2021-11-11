@@ -13,8 +13,8 @@ from persim import plot_diagrams
 
 
 # Sphere
-pts = 100
-dim = 3
+pts = 10
+dim = 4
 data = tadasets.dsphere(n=pts, d=dim, r=1, noise=0.1)
 
 filtration = DR.build_filtration(data, dim)
@@ -24,11 +24,11 @@ plt.title("Persistence Diagram\n"
 plot_diagrams(dgms_dr)
 
 
-# Sphere
+# Torus
 plt.figure()
-pts = 10000
-dim = 3
-data = tadasets.torus(n=pts, noise=.1)
+pts = 1000
+dim = 2
+data = tadasets.torus(n=pts, noise=0.05)
 
 filtration = DR.build_filtration(data, dim)
 dgms_dr = cm.phat_diagrams(filtration, show_inf=True)
