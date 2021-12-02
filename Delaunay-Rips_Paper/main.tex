@@ -2,7 +2,7 @@
 \usepackage{Amish_Style}
 
 \newcommand{\incfig}[1]{%
-    \def\svgwidth{\columnwidth}
+    % \def\svgwidth{\columnwidth}
     \import{./figures/}{#1.pdf_tex}
 }
 
@@ -111,6 +111,7 @@ The Delaunay-Rips construction gains computational efficiency at the cost of sta
 
 \begin{figure}[ht]
     \centering
+    \def\svgwidth{\columnwidth}
     \incfig{4pt_PDs_transformation}
     \caption{Persistence Diagrams of 4 point example}
     \label{fig:4pt_PDs_transformation}
@@ -294,7 +295,13 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
        
             
         $$g:(A,b) \mapsto A\inv b.$$
-    
+        \begin{figure}[ht]
+            \centering
+            \def\svgwidth{\columnwidth}
+            \incfig{circumcenter}
+            \caption{Circumcenter}
+            \label{fig:circumcenter}
+        \end{figure}
         We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d} \cong \R^{d^2}$, we have $\mathcal{M}_{d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each component of it's output by how it is defined. Thus, $f$ itself is continuous.
 
         We carefully prove that the map $g$ is continuous. Let $\R^d$ have the standard topology and $\text{GL}_d(\R)\times \R^d$ have the subspace topology of $\mathcal{M}_{d}(\R)\times \R^d$. Note that taking the inverse of a matrix is a continuous function in the topology induced by the Frobenius norm (proven in detail in Section \ref{continuity_of_inverse}). Mapping $b \mapsto b$ is a continuous function in the standard topology of $\R^d$. Since these two functions are defined on spaces with the same topology, recall that the product of two continous functions is continuous. Hence, $g(A,b)=A\inv b$ is a continuous function.
@@ -425,6 +432,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
 
 \begin{figure}[ht]
     \centering
+    \def\svgwidth{\columnwidth}
     \incfig{4pt_filtration}
     \caption{filtration}
     \label{fig:4pt_filtration}
