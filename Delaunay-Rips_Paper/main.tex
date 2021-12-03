@@ -357,7 +357,16 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         $$=d(O,p_1)-t-t \leq d(O,p_1)-\varepsilon_1-\delta$$
         $$< d(O,p_1)-d(O,O')-d(p_1,p_1') \leq d(O',p_1').$$
         Since $d(O',p_1')$ is the radius of $\Sph'$, we have that $p_k' \in \interior(\Sph')$. Hence, $D'$ is a non-Delaunay simplex.
-    \end{proof}    
+    \end{proof}
+    
+    \begin{figure}[ht]
+        \centering
+        \def\svgwidth{\columnwidth}
+        \incfig{non-delaunay}
+        \caption{Maintaing a non-Delaunay triangle in $\R^2$.}
+        % \label{fig:circumcenter}
+    \end{figure}
+
     % \begin{proof} My t/8 argument
     %     Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in P\backslash D$ such that $d(O,p_k) < d(O,p_1)$. Let $t:=d(O,p_1)-d(O,p_k)$. Since $P$ is in general position, $t>0$. Let $\varepsilon_1 = t/8$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
     %     $$d(O',p_k') \leq d(O',O)+d(O,p_k)+d(p_k,p_k') \leq \varepsilon_1 + d(O,p_k)+\delta \leq \frac{t}{8}+d(O,p_k)+\frac{t}{8}=d(O,p_k)+\frac{1}{4}t$$
