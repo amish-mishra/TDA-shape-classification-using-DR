@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{201.39709606bp}%
+    \setlength{\unitlength}{218.85584766bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,28 +50,40 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.83315444)%
+  \begin{picture}(1,1.85752319)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{non-delaunay.pdf}}%
-    \put(0.3407568,0.6952941){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
-    \put(0.73579325,0.77499604){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
-    \put(0.7203316,0.51941563){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k}$\end{tabular}}}}%
-    \put(0.62272021,0.35759681){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O$\end{tabular}}}}%
-    \put(0.57945837,0.3631382){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O'$\end{tabular}}}}%
+    \put(0.34257535,1.6991297){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
+    \put(0.67709693,1.76625891){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
+    \put(0.6628687,1.52485218){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k}$\end{tabular}}}}%
+    \put(0.57615134,1.36454854){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O$\end{tabular}}}}%
+    \put(0.20891143,1.26684345){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
+    \put(0.18419918,1.30790696){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0.28795077,1.67675146){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0.70395572,1.72864795){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0.56817673,1.42676852){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon_1$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{non-delaunay.pdf}}%
-    \put(0.22702159,0.23904058){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
-    \put(0.27559956,0.30133777){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1'}$\end{tabular}}}}%
-    \put(0.20241819,0.2937939){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
-    \put(0.3129127,0.68448278){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
-    \put(0.76498038,0.75213376){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
-    \put(0.61292869,0.4094525){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon_1$\end{tabular}}}}%
+    \put(0.71035767,1.49371738){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{non-delaunay.pdf}}%
-    \put(0.7719373,0.49233524){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0.31982724,0.72654808){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
+    \put(0.67713587,0.79160588){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
+    \put(0.66290764,0.55330645){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k}$\end{tabular}}}}%
+    \put(0.57981547,0.3940385){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O$\end{tabular}}}}%
+    \put(0.52702082,0.40053531){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O'$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{non-delaunay.pdf}}%
-    \put(0.35799198,0.62676225){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2'}$\end{tabular}}}}%
-    \put(0.6969819,0.71792336){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3'}$\end{tabular}}}}%
-    \put(0.72895208,0.58362799){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k'}$\end{tabular}}}}%
+    \put(0.20895036,0.29529761){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
+    \put(0.24225961,0.35262518){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1'}$\end{tabular}}}}%
+    \put(0.18630965,0.33843272){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0.2879897,0.70520563){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0.70399466,0.76746){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0.56407257,0.4521153){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{non-delaunay.pdf}}%
+    \put(0.7103966,0.52838624){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{non-delaunay.pdf}}%
+    \put(0.3602338,0.67113202){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2'}$\end{tabular}}}}%
+    \put(0.64142061,0.73597856){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3'}$\end{tabular}}}}%
+    \put(0.67084044,0.61446791){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k'}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{non-delaunay.pdf}}%
   \end{picture}%
 \endgroup%
