@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{480.39474451bp}%
+    \setlength{\unitlength}{271.07260328bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,16 +50,16 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.38852749)%
+  \begin{picture}(1,0.68854825)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{circumcenter.pdf}}%
-    \put(0.18438017,0.30817315){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
-    \put(0.09528663,0.22156693){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{n_2}$\end{tabular}}}}%
-    \put(0.26221395,0.37090687){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{n_3}$\end{tabular}}}}%
-    \put(0.36066958,0.33624823){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
-    \put(0.30737322,0.17544158){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$O = g\circ f(\mathbf{p_1},\mathbf{p_2},\mathbf{p_3})$\end{tabular}}}}%
-    \put(0.12201743,0.09187198){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
+    \put(0.32675845,0.54614431){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
+    \put(0.16886693,0.39266082){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{n_2}$\end{tabular}}}}%
+    \put(0.46469544,0.65732099){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{n_3}$\end{tabular}}}}%
+    \put(0.63917847,0.59589897){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
+    \put(0.55364707,0.30727131){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$O = g\circ f(\mathbf{p_1},\mathbf{p_2},\mathbf{p_3})$\end{tabular}}}}%
+    \put(0.21623923,0.16281548){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{circumcenter.pdf}}%
   \end{picture}%
 \endgroup%
