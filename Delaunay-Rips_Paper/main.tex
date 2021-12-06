@@ -87,6 +87,33 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq Del(X)\ |\ d(x,x') \leq 2\varepsilon,
 \begin{enumerate}
     \item Demonstrate construction on a small data-set (5-8 point data-set).
 \end{enumerate}
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{0.2\textwidth}
+    \begin{subfigure}[b]{0.2\textwidth}
+        \incfig{del_rips_construction_ex0}
+    \end{subfigure}
+    % \hfill
+    % \begin{subfigure}[b]{0.2\textwidth}
+    %     \incfig{del_rips_construction_ex1}
+    % \end{subfigure}
+    % \hfill
+    % \begin{subfigure}[b]{0.2\textwidth}
+    %     \incfig{del_rips_construction_ex2}
+    % \end{subfigure}
+
+    % \begin{subfigure}[b]{0.2\textwidth}
+    %     \incfig{del_rips_construction_ex3}
+    % \end{subfigure}
+
+    % \begin{subfigure}[b]{0.2\textwidth}
+    %     \incfig{del_rips_construction_ex4}
+    % \end{subfigure}
+    \caption{}
+    % \label{fig:circumcenter}
+\end{figure}
+
+
 
 \subsection{Run-time Analysis Comparison}
 In this section, we immediately show some empirical results of the performance of computing persistence using the Delaunay-Rips filtration on varying datasets. The runtimes are measured as the time between the data set being inputed into the corresponding algorithm and the persistence diagram being produced.
@@ -282,7 +309,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         $$\mathbf{n_i}\cdot \mathbf{r}=\mathbf{n_i}\cdot\mathbf{b_i}$$
         where $\mathbf{r}$ is the position vector for an arbitrary point on the hyperplane.
         \newline
-        We are now ready to construct the following maps whose composition will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$. This construction is instrumental to obtaining $\varepsilon$ balls around each point that ensures the circumcenter $O$ remains bounded. Define
+        We are now ready to construct the following maps whose composition will output the circumcenter $O \in \R^d$ as a function of the $d+1$ points defining the sphere $\Sph$. We illustrate an example of this with 3 points in $\R^2$ in figure \ref{fig:circumcenter}. This construction is instrumental to obtaining $\varepsilon$ balls around each point that ensures the circumcenter $O$ remains bounded. Define
 
         $$f:\underbrace{\R^d \times \dots \times \R^d}_{d+1} \to \mathcal{M}_{d}(\R)\times \R^d$$
         $$f:(\mathbf{p_1},\mathbf{p_2},\dots,\mathbf{p_{d+1}}) \mapsto \left(\begin{bmatrix}
@@ -300,7 +327,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
             \def\svgwidth{.7\textwidth}
             \incfig{circumcenter}
             \caption{Locating the circumcenter of 3 points in $\R^2$ as a function of the 3 points.}
-            % \label{fig:circumcenter}
+            \label{fig:circumcenter}
         \end{figure}
         We prove that the map $f$ is continuous. Let the domain of $f$ have the the standard topology of $\R^{d(d+1)}$ (i.e. the open balls in $\R^{d(d+1)}$ form a basis for the topology). Observing that $\mathcal{M}_{d} \cong \R^{d^2}$, we have $\mathcal{M}_{d}(\R)\times \R^d \cong \R^{d^2}\times \R^d \cong \R^{d(d+1)}$. We let this space have the standard topology of $\R^{d(d+1)}$. Note that $f$ is a polynomial in each component of it's output by how it is defined. Thus, $f$ itself is continuous.
 
@@ -348,7 +375,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         For a non-Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a non-Delaunay simplex.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in P\backslash D$ such that $d(O,p_k) < d(O,p_1)$. Let $t:=(d(O,p_1)-d(O,p_k))/4$ so that 
+        An illustrated example can be found in figure \ref{fig:non-delaunay}. Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a non-Delaunay simplex, there exists a $p_k \in P\backslash D$ such that $d(O,p_k) < d(O,p_1)$. Let $t:=(d(O,p_1)-d(O,p_k))/4$ so that 
         $$d(O,p_k)+2t = d(O,p_1)-2t.$$
         Since $P$ is in general position, $t > 0$. Let $\varepsilon_1 = t$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
         $$d(O',p_k') \leq d(O',O)+d(O,p_k)+d(p_k,p_k') $$
@@ -364,7 +391,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         \def\svgwidth{0.6\columnwidth}
         \incfig{non-delaunay}
         \caption{Maintaing a non-Delaunay triangle in $\R^2$. We take $\varepsilon = \min(\delta,\varepsilon_1)$. We illustrate in this figure how $p_k'$ remains within the circumcircle through $p_1', p_2',$ and $p_3'$.}
-        % \label{fig:circumcenter}
+        \label{fig:non-delaunay}
     \end{figure}
 
     % \begin{proof} My t/8 argument
