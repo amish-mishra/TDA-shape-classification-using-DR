@@ -87,31 +87,33 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq Del(X)\ |\ d(x,x') \leq 2\varepsilon,
 \begin{enumerate}
     \item Demonstrate construction on a small data-set (5-8 point data-set).
 \end{enumerate}
-\begin{figure}[ht]
+% Rotate 90 degrees counter-clockwise and put them on a line
+\begin{figure}[ht!]
     \centering
-    \def\svgwidth{0.3\textwidth}
-    \begin{subfigure}[b]{\textwidth}
-        \incfig{del_rips_construction_ex0}
-    \end{subfigure}
-    \hfill
-    \def\svgwidth{0.3\textwidth}
-    \begin{subfigure}[b]{\textwidth}
-        \incfig{del_rips_construction_ex1}
-    \end{subfigure}
-    \hfill
-    \def\svgwidth{0.3\textwidth}
-    \begin{subfigure}[b]{\textwidth}
-        \incfig{del_rips_construction_ex2}
-    \end{subfigure}
-    \def\svgwidth{0.3\textwidth}
-    \begin{subfigure}[b]{\textwidth}
-        \incfig{del_rips_construction_ex3}
-    \end{subfigure}
-    \hfill
-    \def\svgwidth{0.3\textwidth}
-    \begin{subfigure}[b]{\textwidth}
-        \incfig{del_rips_construction_ex4}
-    \end{subfigure}
+        \includegraphics[width=1.0\textwidth]{./figures/test.pdf}
+    %\def\svgwidth{0.3\textwidth}
+    %\begin{subfigure}[b]{\textwidth}
+    %    \incfig{del_rips_construction_ex0}
+    %\end{subfigure}
+    %\hfill
+    %\def\svgwidth{0.3\textwidth}
+    %\begin{subfigure}[b]{\textwidth}
+    %    \incfig{del_rips_construction_ex1}
+    %\end{subfigure}
+    %\hfill
+    %\def\svgwidth{0.3\textwidth}
+    %\begin{subfigure}[b]{\textwidth}
+    %   \incfig{del_rips_construction_ex2}
+    %\end{subfigure}
+    %\def\svgwidth{0.3\textwidth}
+    %\begin{subfigure}[b]{\textwidth}
+    %    \incfig{del_rips_construction_ex3}
+    %\end{subfigure}
+    %\hfill
+    %\def\svgwidth{0.3\textwidth}
+    %\begin{subfigure}[b]{\textwidth}
+    %    \incfig{del_rips_construction_ex4}
+    %\end{subfigure}
     % \hfill
     % \begin{subfigure}[b]{0.2\textwidth}
     %     \incfig{del_rips_construction_ex1}
@@ -128,7 +130,7 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq Del(X)\ |\ d(x,x') \leq 2\varepsilon,
     % \begin{subfigure}[b]{0.2\textwidth}
     %     \incfig{del_rips_construction_ex4}
     % \end{subfigure}
-    \caption{}
+    \caption{Example of constructing Delaunay-Rips complex on 10 points in $\R^2$.}
     % \label{fig:circumcenter}
 \end{figure}
 
@@ -598,7 +600,6 @@ The heavy machinery used to establish the continuity of the matrix inverse was d
     $$\sup\left\{\frac{||((A+E)\inv -A\inv)b||}{||b||}\ :\ b\neq 0\right\} \leq \frac{\sqrt{n}||A\inv||^2\ ||E||}{1-||A\inv||\ ||E||}.$$
     It follows by the definition of the norm that
     $$||(A+E)\inv-A\inv||\leq\frac{\sqrt{n}||A\inv||^2\ ||E||}{1-||A\inv||\ ||E||}.$$
-
 \end{proof}
 
 
