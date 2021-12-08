@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.1 (c68e22c387, 2021-05-23), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'del_rips_construction_ex1.pdf' (pdf, eps, ps)
+%% Accompanies image file 'del_rips_full_construction_10pts.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{282.5426323bp}%
+    \setlength{\unitlength}{481.99548287bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,9 +50,14 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.69916569)%
+  \begin{picture}(1,0.33735387)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{del_rips_construction_ex1.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{del_rips_full_construction_10pts.pdf}}%
+    \put(0.03052462,0.00219425){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$r=0$\end{tabular}}}}%
+    \put(0.22875232,0.00219425){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$r=1$\end{tabular}}}}%
+    \put(0.43343042,0.00219425){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$r=2$\end{tabular}}}}%
+    \put(0.63782144,0.00219425){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$r=3$\end{tabular}}}}%
+    \put(0.89475638,0.00219425){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$r=4$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

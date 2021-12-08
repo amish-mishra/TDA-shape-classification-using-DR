@@ -84,54 +84,14 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq Del(X)\ |\ d(x,x') \leq 2\varepsilon,
 
 
 \subsection{Example Data Set}
-\begin{enumerate}
-    \item Demonstrate construction on a small data-set (5-8 point data-set).
-\end{enumerate}
-% Rotate 90 degrees counter-clockwise and put them on a line
+We now illustrate an example construction of the Delaunay-Rips complex for increasing radius $r$ from 0 to 4 in figure \ref{fig:example_del_rips_10pts}. We add triangles as soon as their 3 edges appear in the complex: this is illustrated as a shaded triangle in the figure. Notice how at $r=4$ although many balls overlap, we have only added the simplices that appear in the Delaunay triangulation of the point cloud.
+
 \begin{figure}[ht!]
     \centering
-        \includegraphics[width=1.0\textwidth]{./figures/test.pdf}
-    %\def\svgwidth{0.3\textwidth}
-    %\begin{subfigure}[b]{\textwidth}
-    %    \incfig{del_rips_construction_ex0}
-    %\end{subfigure}
-    %\hfill
-    %\def\svgwidth{0.3\textwidth}
-    %\begin{subfigure}[b]{\textwidth}
-    %    \incfig{del_rips_construction_ex1}
-    %\end{subfigure}
-    %\hfill
-    %\def\svgwidth{0.3\textwidth}
-    %\begin{subfigure}[b]{\textwidth}
-    %   \incfig{del_rips_construction_ex2}
-    %\end{subfigure}
-    %\def\svgwidth{0.3\textwidth}
-    %\begin{subfigure}[b]{\textwidth}
-    %    \incfig{del_rips_construction_ex3}
-    %\end{subfigure}
-    %\hfill
-    %\def\svgwidth{0.3\textwidth}
-    %\begin{subfigure}[b]{\textwidth}
-    %    \incfig{del_rips_construction_ex4}
-    %\end{subfigure}
-    % \hfill
-    % \begin{subfigure}[b]{0.2\textwidth}
-    %     \incfig{del_rips_construction_ex1}
-    % \end{subfigure}
-    % \hfill
-    % \begin{subfigure}[b]{0.2\textwidth}
-    %     \incfig{del_rips_construction_ex2}
-    % \end{subfigure}
-
-    % \begin{subfigure}[b]{0.2\textwidth}
-    %     \incfig{del_rips_construction_ex3}
-    % \end{subfigure}
-
-    % \begin{subfigure}[b]{0.2\textwidth}
-    %     \incfig{del_rips_construction_ex4}
-    % \end{subfigure}
+    \def\svgwidth{\textwidth}
+    \incfig{del_rips_full_construction_10pts}
     \caption{Example of constructing Delaunay-Rips complex on 10 points in $\R^2$.}
-    % \label{fig:circumcenter}
+    \label{fig:example_del_rips_10pts}
 \end{figure}
 
 
@@ -140,14 +100,16 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq Del(X)\ |\ d(x,x') \leq 2\varepsilon,
 In this section, we immediately show some empirical results of the performance of computing persistence using the Delaunay-Rips filtration on varying datasets. The runtimes are measured as the time between the data set being inputed into the corresponding algorithm and the persistence diagram being produced.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\columnwidth]{./figures/runtime_pts_7sec_cap_3.png}
+    \def\svgwidth{\textwidth}
+    \incfig{runtime_pts_7sec_cap_3}
     \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as number of points are increased.}
     \label{fig:runtime_pts}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\columnwidth]{./figures/runtime_dim_60sec_cap_1.png}
+    \def\svgwidth{\textwidth}
+    \incfig{runtime_dim_60sec_cap_1}
     \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as dimension of data increases.}
     \label{fig:runtime_dim}
 \end{figure}
@@ -409,7 +371,8 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
     
     \begin{figure}[ht!]
         \centering
-        \def\svgwidth{0.6\columnwidth}
+        \fontsize{8pt}{9.8pt}\selectfont
+        \def\svgwidth{\textwidth}
         \incfig{non-delaunay}
         \caption{Maintaing a non-Delaunay triangle in $\R^2$. We take $\varepsilon = \min(\delta,\varepsilon_1)$. We illustrate in this figure how $p_k'$ remains within the circumcircle through $p_1', p_2',$ and $p_3'$.}
         \label{fig:non-delaunay}
