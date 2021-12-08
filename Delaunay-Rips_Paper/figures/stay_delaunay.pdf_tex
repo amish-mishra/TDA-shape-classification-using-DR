@@ -1,0 +1,87 @@
+%% Creator: Inkscape 1.1 (c68e22c387, 2021-05-23), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'stay_delaunay.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{393.19385036bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.50399973)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{stay_delaunay.pdf}}%
+    \put(0.11142134,0.34668128){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
+    \put(0.28922272,0.3823611){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
+    \put(0.23556919,0.1688482){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O$\end{tabular}}}}%
+    \put(0.0403777,0.11691707){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
+    \put(0.02724289,0.13874271){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0.08238785,0.33478705){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0.30349844,0.36237051){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0.23133062,0.20191876){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon_1$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{stay_delaunay.pdf}}%
+    \put(0.36507707,0.47761707){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k}$\end{tabular}}}}%
+    \put(0.39031791,0.46106863){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{stay_delaunay.pdf}}%
+    \put(0.66435615,0.32081043){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
+    \put(0.64815683,0.35199419){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2'}$\end{tabular}}}}%
+    \put(0.83539841,0.35858788){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
+    \put(0.78291022,0.17117887){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O$\end{tabular}}}}%
+    \put(0.8045472,0.19501672){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O'$\end{tabular}}}}%
+    \put(0.59471094,0.11738316){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
+    \put(0.62251908,0.11985585){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1'}$\end{tabular}}}}%
+    \put(0.58437295,0.13874271){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0.63951792,0.33478705){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0.86109457,0.37029494){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0.83414722,0.3913831){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3'}$\end{tabular}}}}%
+    \put(0.76701814,0.19958797){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{stay_delaunay.pdf}}%
+    \put(0.91474884,0.47482023){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k}$\end{tabular}}}}%
+    \put(0.9493125,0.46386547){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{stay_delaunay.pdf}}%
+    \put(0.90313604,0.44760331){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k'}$\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
