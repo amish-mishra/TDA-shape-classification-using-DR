@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.1 (c68e22c387, 2021-05-23), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'non-delaunay.pdf' (pdf, eps, ps)
+%% Accompanies image file 'stay_non-delaunay.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -53,7 +53,7 @@
   \begin{picture}(1,0.42072349)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{non-delaunay.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{stay_non-delaunay.pdf}}%
     \put(0.1147258,0.35809709){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
     \put(0.29780059,0.39483513){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
     \put(0.29001385,0.26271963){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k}$\end{tabular}}}}%
@@ -63,27 +63,27 @@
     \put(0.08483122,0.34585007){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
     \put(0.3124997,0.37425165){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
     \put(0.23819145,0.20904104){\color[rgb]{0,0,0.50196078}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon_1$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{non-delaunay.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{stay_non-delaunay.pdf}}%
     \put(0.31600331,0.24568038){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\delta$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{non-delaunay.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{stay_non-delaunay.pdf}}%
     \put(0.67139573,0.35639653){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2}$\end{tabular}}}}%
     \put(0.86694127,0.39200094){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3}$\end{tabular}}}}%
     \put(0.85915453,0.26158603){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k}$\end{tabular}}}}%
     \put(0.81368045,0.17442291){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O$\end{tabular}}}}%
     \put(0.78478734,0.17797844){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$O'$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{non-delaunay.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{stay_non-delaunay.pdf}}%
     \put(0.61071581,0.12038464){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1}$\end{tabular}}}}%
     \put(0.62894504,0.1517585){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_1'}$\end{tabular}}}}%
     \put(0.59832516,0.14399134){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
     \put(0.65397198,0.34471632){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
     \put(0.88164038,0.37878654){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
     \put(0.80506478,0.2062068){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{non-delaunay.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{stay_non-delaunay.pdf}}%
     \put(0.88514399,0.24794786){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\varepsilon$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{non-delaunay.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{stay_non-delaunay.pdf}}%
     \put(0.69350918,0.32606879){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_2'}$\end{tabular}}}}%
     \put(0.84739532,0.36155763){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_3'}$\end{tabular}}}}%
     \put(0.86349595,0.29505808){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\mathbf{p_k'}$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=7]{non-delaunay.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{stay_non-delaunay.pdf}}%
   \end{picture}%
 \endgroup%

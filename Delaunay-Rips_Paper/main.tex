@@ -333,7 +333,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         For a Delaunay simplex $D= \{p_1,p_2,\dots,p_{d+1}\} \subset P$, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $D'$ of $D$ has $\{p_1',p_2',\dots,p_{d+1}'\} \subset P'$ as a Delaunay simplex.
     \end{lem}
     \begin{proof}
-        Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, for all $p_k \in P\backslash D$, $d(O,p_1) < d(O,p_k$). Let $t(p_k):=(d(O,p_k)-d(O,p_1))/4$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. It follows that,
+        An illustrated example can be found in figure \ref{fig:stay_delaunay}. Let $\Sph$ be the unique $(d-1)$-sphere containing $D$ with center $O$. Since $D$ is a Delaunay simplex, for all $p_k \in P\backslash D$, $d(O,p_1) < d(O,p_k$). Let $t(p_k):=(d(O,p_k)-d(O,p_1))/4$ and select $p_{\min} \in P\backslash{D}$ that minimizes $t$. It follows that,
         $$d(O,p_1)+2t=d(O,p_{\min})-2t.$$
         Since $P$ is in general position and finite, $t>0$. Let $\varepsilon_1 = t$, then we obtain from Lemma \ref{affine_indep_lemma} that there is $\delta>0$ such that each $d(p_i,p_i')<\delta$ for $i=1,2,\dots,d+1$ implies $d(O,O')<\varepsilon_1$. Now, we take $\varepsilon = \min(\delta, \varepsilon_1)$ and $D'$ is the $\varepsilon$-perturbation of $D$. Let $\Sph'$ be the unique $(d-1)$-sphere containing $D'$ with center $O'$. Using the triangle inequality, we have the following chains of inequalities:
         $$d(O',p_1') \leq d(O',O)+d(O,p_1)+d(p_1,p_1')$$
