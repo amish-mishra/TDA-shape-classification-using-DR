@@ -86,6 +86,8 @@ $$DR_{\varepsilon}(X) = \{\sigma \subseteq Del(X)\ |\ d(x,x') \leq 2\varepsilon,
 \subsection{Example Data Set}
 We now illustrate an example construction of the Delaunay-Rips complex for increasing radius $r$ from 0 to 4 in figure \ref{fig:example_del_rips_10pts}. We add triangles as soon as their 3 edges appear in the complex: this is illustrated as a shaded triangle in the figure. Notice how at $r=4$ although many balls overlap, we have only added the simplices that appear in the Delaunay triangulation of the point cloud.
 
+% For dissertation, it would be good to include some example data sets with their corresponding persistence diagrams.
+
 \begin{figure}[ht!]
     \centering
     \def\svgwidth{\textwidth}
@@ -433,6 +435,16 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
     Next table will have 3 columns (Rips, Alpha, Del-Rips). Each row is (again) a data set. Each cell will be the corresponding run-time (in seconds).
        
     \textbf{Need a better measurement of accuracy: maybe look at a classification problem (see how the quality of prediction is affected when using del-rips)}
+    
+    What are we trying to illustrate?
+    \begin{enumerate}
+        \item Effect of instability of data set on PD
+        \item We want to quantify how sensitive the PD is to a change in the data: add some noise and measure how much the diagrams change
+        \item Simplest approach: begin with a ground-truth (sample space), perturb the ground truth by some amount of noise (write my own perturbation script), measure bottle-neck distance between OG PD and perturbed PD.
+        \item Plot with noise on x-axis, bottleneck distance on y-axis, 3 lines (Alpha, rips, delaunay-rips)
+        \item Use tadasets noise=0.001 for ground-truth and increase noise (generating new data sets) to see a preliminary graph
+        \item How to add noise? Sample random vectors from gaussian using np.randn (to get random direction to move data points), normalize the vectors, multiply by a magnitude less than the noise level, add these vectors to the data set
+    \end{enumerate}
 
     Section with graphs. First graph will be of a 2-sphere with points increasing from 100-10,000 with runtime on the y-axis. Second graph will be a $d$-sphere of 50 points with dimension increasing from 2-7 with the runtime on the y-axis. Each graph will compare Rips, Alpha, and Del-Rips.
     \textbf{plot the standard deviation along each curve for each data point: or better, a box-whisker plot at each point for this non-gaussian distribution}
