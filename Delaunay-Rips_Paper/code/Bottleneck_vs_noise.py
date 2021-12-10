@@ -15,19 +15,19 @@ from ripser import ripser
 start_noise = 0.001
 max_noise = 1
 noise_inc = 0.1
-pts = 50
+pts = 200
+dim = 2
 
 # Delaunay-Rips on original data
-data = tadasets.dsphere(n=pts, d=1, r=1, noise=start_noise)
-filtration = DR.build_filtration(data, 1)
+data = tadasets.dsphere(n=pts, d=dim, r=1, noise=start_noise)
+filtration = DR.build_filtration(data, dim)
 original_PD_DR  = cm.phat_diagrams(filtration, show_inf=True, verbose=False)[0]
 
 # Rips on original data
-filtration = DR.build_filtration(data, 1)
-original_PD_R = ripser(data, maxdim=1)['dgms'][0]
+original_PD_R = ripser(data, maxdim=dim)['dgms'][0]
 
 # Alpha on original data
-alpha = cm.Alpha()
+alpha = cm.Alpha(verbose=False)
 alpha_filtration = alpha.build(2*data)
 original_PD_A = alpha.diagrams(alpha_filtration)[0]
 
@@ -36,21 +36,21 @@ bott_dist_arr_DR = np.array(0)
 bott_dist_arr_R = np.array(0)
 bott_dist_arr_A = np.array(0)
 for curr_noise in np.arange(noise_inc, max_noise, noise_inc):
-    data = tadasets.dsphere(n=pts, d=1, r=1, noise=curr_noise)
+    data = tadasets.dsphere(n=pts, d=dim, r=1, noise=curr_noise)
 
     # Delaunay-Rips
-    filtration = DR.build_filtration(data, 1)
+    filtration = DR.build_filtration(data, dim)
     dgms_dr = cm.phat_diagrams(filtration, show_inf=True, verbose=False)[0]
     bott_dist = bottleneck(original_PD_DR, dgms_dr)
     bott_dist_arr_DR = np.append(bott_dist_arr_DR, bott_dist)
 
     # Rips
-    dgms_rips = ripser(data, maxdim=1)['dgms'][0]
+    dgms_rips = ripser(data, maxdim=dim-1)['dgms'][0]
     bott_dist = bottleneck(original_PD_R, dgms_rips)
     bott_dist_arr_R = np.append(bott_dist_arr_R, bott_dist)
 
     # Alpha
-    alpha = cm.Alpha()
+    alpha = cm.Alpha(verbose=False)
     alpha_filtration = alpha.build(2*data)
     dgms_alpha = alpha.diagrams(alpha_filtration)[0]
     bott_dist = bottleneck(original_PD_A, dgms_alpha)
