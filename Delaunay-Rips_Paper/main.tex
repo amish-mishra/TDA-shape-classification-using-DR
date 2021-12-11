@@ -52,10 +52,11 @@ Welcome to our paper!
     The idea behind extracting topological features from a given point-cloud requires there to be a method of assigning some sort of ``shape" to the data. Only then are we able to study its associated topological properties. The scenario we face is that we have a finite dimensional metric space out of the point-cloud that we need to assign a shape to. With the human eye, we may be able to make out some appropriate surface our data set can live on. However, this situation pokes at a fundamental question that arises when computing: how can we get a computer to do what a human can do? We need to introduce the idea of a \textit{simplicial complex}, a computational efficient way for a computer to build a surface onto a data set.
     
     \begin{defn}
-        A simplicial complex is a collection $K$ of non-empty subsets of a set $K_0$ such that $\{v\} \in K$ for all $v \in K_0$, and if $\sigma \in K$ then $\tau \in K$ for all $\tau \subseteq \sigma$. The elements of $K_0$ are called vertices of $K$, and the elements of $K$ are called simplices. Additionally, we say that a simplex has dimension $p$ or is a $p$-simplex if it has cardinality of $p+1$. We use $K_p$ to denote the collection of $p$-simplices. The $k$-skeleton of $K$ is the union of the sets $K_p$ for all $p \in \{0,1,\dots,k\}$. If $\tau$ and $\sigma$ are simplices such that $\tau \subset \sigma$, then we call $\tau$ a face of $\sigma$, and we say that $\tau$ is a face of $\sigma$ of codimension $k'$ if the dimensions of $\tau$ and $\sigma$ differ by $k'$. The dimension of $K$ is defined as the maximum of the dimensions of its simplices. A map of simplicial complexes, $f: K \to L$, is a map $f: K_0 \to L_0$ such that $f(\sigma) \in L$ for all $\sigma \in K$. \cite{Edelsbrunner}
+        A \textbf{simplicial complex} is a collection $K$ of non-empty subsets of a set $K_0$ such that $\{v\} \in K$ for all $v \in K_0$, and if $\sigma \in K$ then $\tau \in K$ for all $\tau \subseteq \sigma$. The elements of $K_0$ are called \textbf{vertices} of $K$, and the elements of $K$ are called \textbf{simplices}. Additionally, we say that a simplex has \textbf{dimension} $p$ or is a $p$-simplex if it has cardinality of $p+1$. We use $K_p$ to denote the collection of $p$-simplices. The $k$-skeleton of $K$ is the union of the sets $K_p$ for all $p \in \{0,1,\dots,k\}$. If $\tau$ and $\sigma$ are simplices such that $\tau \subset \sigma$, then we call $\tau$ a \textbf{face} of $\sigma$, and we say that $\tau$ is a face of $\sigma$ of \textbf{codimension} $k'$ if the dimensions of $\tau$ and $\sigma$ differ by $k'$. The \textbf{dimension} of $K$ is defined as the maximum of the dimensions of its simplices. A map of simplicial complexes, $f: K \to L$, is a map $f: K_0 \to L_0$ such that $f(\sigma) \in L$ for all $\sigma \in K$. \cite{Edelsbrunner}
     \end{defn}
     
 \subsection{Simplicial Homology}
+
 
 \subsection{Vietoris-Rips Complex} \label{rips}
 One of the simplest ways to build a complex on a data set $X$ is by considering the pairwise distance between the points. The approach described here is an algorithmic, bottom-up approach that adds higher and higher dimensional simplices to the complex for a fixed scale. For a given scale $\varepsilon>0$, if $d(x,x')\leq 2\varepsilon$ for $x,x' \in X$, then we add the edge between $x$ and $x'$ into our complex. Once all of the edges are added, we add the higher dimensional simplices if their faces are already in the complex. That is, we add the $k$-simplex $\sigma = \{x_0,x_1,\dots,x_k\}$ to the complex if every subset $u \subset \sigma$ is already in the complex. Formally, we define the Vietoris-Rips complex \cite{Roadmap} for scale $\varepsilon>0$ 
@@ -99,20 +100,20 @@ We now illustrate an example construction of the Delaunay-Rips complex for incre
 
 
 \subsection{Run-time Analysis Comparison}
-In this section, we immediately show some empirical results of the performance of computing persistence using the Delaunay-Rips filtration on varying datasets. The runtimes are measured as the time between the data set being inputed into the corresponding algorithm and the persistence diagram being produced.
-\begin{figure}[ht]
+In this section, we show some empirical results of the performance of computing persistence using the Delaunay-Rips filtration on varying datasets. The runtimes are measured as the time between the data set being inputed into the corresponding algorithm and the persistence diagram being produced. Figure \ref{fig:runtime_pts} shows the runtime compared to larger and larger number of points being sampled from a noisy 2-sphere. Each data point on the plot is the median of 10 trials. The box-and-whisker plots on each data point show the spread of the runtimes. Similarly, figure \ref{fig:runtime_dim} shows the runtime compared to larger and larger number of dimensions the data is sampled from.
+\begin{figure}[ht!]
     \centering
     \def\svgwidth{\textwidth}
     \incfig{runtime_pts_7sec_cap_3}
-    \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as number of points are increased.}
+    \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as number of points are increased. Data set is taken from the surface of a 2-sphere of radius 1 with 0.1 noise.}
     \label{fig:runtime_pts}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[ht!]
     \centering
     \def\svgwidth{\textwidth}
     \incfig{runtime_dim_60sec_cap_1}
-    \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as dimension of data increases.}
+    \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as dimension of $d$-sphere increases. (Note that 1, 2, 3 on the x-axis correspond to 1-sphere, 2-sphere, 3-sphere). Data set is 100 points from the surface of a $d$-sphere of radius 1 with 0.1 noise.}
     \label{fig:runtime_dim}
 \end{figure}
 
@@ -420,46 +421,41 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
 \end{enumerate}
 
 \subsection{Synthetic Data}
-    Focus is two things: Accuracy and Speed. Demonstrating accuracy (by comparing with Rips and Alpha) builds trust in Del-Rips. Demonstrating speed encourages using Del-Rips over Rips or Alpha.
+    % Focus is two things: Accuracy and Speed. Demonstrating accuracy (by comparing with Rips and Alpha) builds trust in Del-Rips. Demonstrating speed encourages using Del-Rips over Rips or Alpha.
 
-    Comparing Ripser, Cechmate's Alpha, and our Del-Rips implementation.
-    \begin{enumerate}
-        \item Data 1: Noisy 1000 pt 1-sphere
-        \item Data 2: Noisy 100 pt. 2-sphere
-        \item Data 3: Noisy 100 pt. Torus in 3 dimensions
-        \item Data 4: Noisy 100 pt. Klein bottle in 4 dimensions
-    \end{enumerate}
+    % Comparing Ripser, Cechmate's Alpha, and our Del-Rips implementation.
+    % \begin{enumerate}
+    %     \item Data 1: Noisy 1000 pt 1-sphere
+    %     \item Data 2: Noisy 100 pt. 2-sphere
+    %     \item Data 3: Noisy 100 pt. Torus in 3 dimensions
+    %     \item Data 4: Noisy 100 pt. Klein bottle in 4 dimensions
+    % \end{enumerate}
 
-    Section with tables. Make a table with a column labeled ``Rips" and the other column labeled ``Alpha". Each row of the table is a data set. In each cell of the table, put the PD for the corresponding column method alongside the PD made by using Del-Rips. Place underneath the bottleneck distance between the two PDs. Do this for each data set (row).
+    % Section with tables. Make a table with a column labeled ``Rips" and the other column labeled ``Alpha". Each row of the table is a data set. In each cell of the table, put the PD for the corresponding column method alongside the PD made by using Del-Rips. Place underneath the bottleneck distance between the two PDs. Do this for each data set (row).
 
-    Next table will have 3 columns (Rips, Alpha, Del-Rips). Each row is (again) a data set. Each cell will be the corresponding run-time (in seconds).
+    % Next table will have 3 columns (Rips, Alpha, Del-Rips). Each row is (again) a data set. Each cell will be the corresponding run-time (in seconds).
        
-    \textbf{Need a better measurement of accuracy: maybe look at a classification problem (see how the quality of prediction is affected when using del-rips)}
+    % \textbf{Need a better measurement of accuracy: maybe look at a classification problem (see how the quality of prediction is affected when using del-rips)}
     
-    What are we trying to illustrate?
-    \begin{enumerate}
-        \item Effect of instability of data set on PD
-        \item We want to quantify how sensitive the PD is to a change in the data: add some noise and measure how much the diagrams change
-        \item Simplest approach: begin with a ground-truth (sample space), perturb the ground truth by some amount of noise (write my own perturbation script), measure bottle-neck distance between OG PD and perturbed PD.
-        \item Plot with noise on x-axis, bottleneck distance on y-axis, 3 lines (Alpha, rips, delaunay-rips)
-        \item Use tadasets noise=0.001 for ground-truth and increase noise (generating new data sets) to see a preliminary graph
-        \item How to add noise? Sample random vectors from gaussian using np.randn (to get random direction to move data points), normalize the vectors, multiply by a magnitude less than the noise level, add these vectors to the data set
-    \end{enumerate}
+    % What are we trying to illustrate?
+    % \begin{enumerate}
+    %     \item Effect of instability of data set on PD
+    %     \item We want to quantify how sensitive the PD is to a change in the data: add some noise and measure how much the diagrams change
+    %     \item Simplest approach: begin with a ground-truth (sample space), perturb the ground truth by some amount of noise (write my own perturbation script), measure bottle-neck distance between OG PD and perturbed PD.
+    %     \item Plot with noise on x-axis, bottleneck distance on y-axis, 3 lines (Alpha, rips, delaunay-rips)
+    %     \item Use tadasets noise=0.001 for ground-truth and increase noise (generating new data sets) to see a preliminary graph
+    %     \item How to add noise? Sample random vectors from gaussian using np.randn (to get random direction to move data points), normalize the vectors, multiply by a magnitude less than the noise level, add these vectors to the data set
+    % \end{enumerate}
 
-    Section with graphs. First graph will be of a 2-sphere with points increasing from 100-10,000 with runtime on the y-axis. Second graph will be a $d$-sphere of 50 points with dimension increasing from 2-7 with the runtime on the y-axis. Each graph will compare Rips, Alpha, and Del-Rips.
-    \textbf{plot the standard deviation along each curve for each data point: or better, a box-whisker plot at each point for this non-gaussian distribution}
+    % Section with graphs. First graph will be of a 2-sphere with points increasing from 100-10,000 with runtime on the y-axis. Second graph will be a $d$-sphere of 50 points with dimension increasing from 2-7 with the runtime on the y-axis. Each graph will compare Rips, Alpha, and Del-Rips.
+    % \textbf{plot the standard deviation along each curve for each data point: or better, a box-whisker plot at each point for this non-gaussian distribution}
     
-    Note that we are comparing runtime of packages, not the run time of the filtration. So the theoretical runtime analysis will not compare with the actual runtime in this section. Or, we could compare rips (cechmate), alpha (cechmate), del-rips because they all use PHAT to reduce the boundary matrix and then the only comparison to make would be the filtration step.
+    % Note that we are comparing runtime of packages, not the run time of the filtration. So the theoretical runtime analysis will not compare with the actual runtime in this section. Or, we could compare rips (cechmate), alpha (cechmate), del-rips because they all use PHAT to reduce the boundary matrix and then the only comparison to make would be the filtration step.
     
     Highlight separately the speed up in the filtration step and then the PD step (since you have less simplices).
 
-
-\subsection{Real Data}
-
-
-
 \section{Conclusion}
-
+In this paper, we have defined the Delaunay-Rips complex and demonstrated its usage on some synthetic data. We compared the runtime of running the Delaunay-Rips method against Rips and Alpha on some synthetic data sets and showed the notable speed-up of Delaunay-Rips. We characterized the instability of this method by showing a 4 point example and carefully proving the instability in the corresponding persistence diagram for a small perturbation of the 4 points. We salvaged stability by imposing conditions on the data that would ensure the underlying Delaunay Triangulation would not change. This allowed us to leverage the stability theorem for Vietoris-Rips for Delaunay-Rips to guarantee stability in a neighborhood. We showed that practically, this instability is not a serious problem on data sets with sufficiently large number of points.
 
 
 \subsection{Further Questions}
