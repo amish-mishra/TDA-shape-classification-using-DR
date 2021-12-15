@@ -125,7 +125,7 @@ In this section, we show some empirical results of the performance of computing 
 
 
 
-\subsection{Persistence Diagram Instability}
+\subsection{Persistence Diagram Instability} \label{instability_section}
 The Delaunay-Rips construction gains computational efficiency at the cost of stability. We demonstrate a simple, yet clear example of how this instability can arise. In figure \ref{fig:4pt_PDs_transformation}, we can visually see a particular configuration of four points giving a radically different Persistence Diagram as we move the right-most point across the circumcircle of the other 3 points. In the figure, we have marked the Delaunay Triangulation of the points to show case the point at which an edge flip occurs (namely when all four points lie on the same circle). We now proceed to formally prove the instability of this particular configuration of points.
 
 \begin{figure}[ht]
@@ -360,7 +360,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         \fontsize{8pt}{9.8pt}\selectfont
         \def\svgwidth{\textwidth}
         \incfig{stay_delaunay}
-        \caption{Maintaing a Delaunay triangle in $\R^2$. We take $\varepsilon = \min(\delta,\varepsilon_1)$. We illustrate in this figure how $p_k'$ remains outside the circumcircle through $p_1', p_2',$ and $p_3'$.}
+        \caption{Maintaining a Delaunay triangle in $\R^2$. We take $\varepsilon = \min(\delta,\varepsilon_1)$. We illustrate in this figure how $p_k'$ remains outside the circumcircle through $p_1', p_2',$ and $p_3'$.}
         \label{fig:stay_delaunay}
     \end{figure}
     % \begin{proof} My proof with t/8
@@ -427,6 +427,9 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
 \end{enumerate}
 
 \subsection{Synthetic Data}
+
+    Although we have special cases where instability in the PD may arise (as shown in section \ref{instability_section}), we show here that this instability does not manifest itself when working with actual data sets. Our comparison is made in the following graphs. We compute the PD for a data set with 0.0001 noise (that is, the points are within a distance of 0.0001 of being exactly on the surface of the underlying shape). The tiny amount of noise makes it highly probable that our data set will be in general position. Then, we perturb the data set for increasing levels of noise and compute the PD for the perturbed data set using Delaunay-Rips, Rips, and Alpha. We plot the bottleneck distance between the PD of the perturbed data set with the PD of the original data set for each method. This captures how the PD evolves for increasing levels of noise in the data. The perturbation is made by moving each point in a random direction within a given magnitude (which is the noise level).
+
     % Focus is two things: Accuracy and Speed. Demonstrating accuracy (by comparing with Rips and Alpha) builds trust in Del-Rips. Demonstrating speed encourages using Del-Rips over Rips or Alpha.
 
     % Comparing Ripser, Cechmate's Alpha, and our Del-Rips implementation.
