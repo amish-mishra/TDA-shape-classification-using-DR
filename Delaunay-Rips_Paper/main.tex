@@ -101,10 +101,16 @@ We now illustrate an example construction of the Delaunay-Rips complex for incre
 
 \subsection{Run-time Analysis Comparison}
 In this section, we show some empirical results of the performance of computing persistence using the Delaunay-Rips filtration on varying datasets. The runtimes are measured as the time between the data set being inputed into the corresponding algorithm and the persistence diagram being produced. Figure \ref{fig:runtime_pts} shows the runtime compared to larger and larger number of points being sampled from a noisy 2-sphere. Each data point on the plot is the median of 10 trials. The box-and-whisker plots on each data point show the spread of the runtimes. Similarly, figure \ref{fig:runtime_dim} shows the runtime compared to larger and larger number of dimensions the data is sampled from.
+% \begin{figure}[ht!]
+%     \centering
+%     \def\svgwidth{\textwidth}
+%     \incfig{runtime_pts_7sec_cap_3}
+%     \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as number of points are increased. Data set is taken from the surface of a 2-sphere of radius 1 with 0.1 noise.}
+%     \label{fig:runtime_pts}
+% \end{figure}
 \begin{figure}[ht!]
     \centering
-    \def\svgwidth{\textwidth}
-    \incfig{runtime_pts_7sec_cap_3}
+    \includegraphics[width=\columnwidth]{figures/runtime_pts_7sec_cap_3.eps}
     \caption{Runtime comparison of Rips, Alpha, and Delaunay-Rips as number of points are increased. Data set is taken from the surface of a 2-sphere of radius 1 with 0.1 noise.}
     \label{fig:runtime_pts}
 \end{figure}
