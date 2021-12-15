@@ -21,13 +21,16 @@ def perturb(data, noise):
     return(perturbed_data)
 
 
-start_noise = 0.001
+start_noise = 0.0001
 max_noise = 1.1
-noise_inc = .05
+noise_inc = .1
 pts = 200
 dim = 1
 hom_class = 1
-trials = 5
+trials = 10
+del_rips_color = 'b'
+rips_color = 'r'
+alpha_color = 'g'
 
 data = tadasets.dsphere(n=pts, d=dim, r=1, noise=start_noise)
 # plt.scatter(data[:,0], data[:,1])
@@ -81,20 +84,27 @@ for curr_noise in np.arange(start_noise + noise_inc, max_noise, noise_inc):
     bott_dist_arr_DR = np.append(bott_dist_arr_DR, np.median(DR_trial_array))
     bott_dist_arr_R = np.append(bott_dist_arr_R, np.median(R_trial_array))
     bott_dist_arr_A = np.append(bott_dist_arr_A, np.median(A_trial_array))
-    # plt.boxplot(DR_trial_array, showfliers=False, positions=[rounded_curr_noise], widths=noise_inc/5)
-    # plt.boxplot(R_trial_array, showfliers=False, positions=[rounded_curr_noise], widths=noise_inc/5)
-    # plt.boxplot(A_trial_array, showfliers=False, positions=[rounded_curr_noise], widths=noise_inc/5)
+    plt.boxplot(DR_trial_array, showfliers=False, positions=[rounded_curr_noise], 
+                widths=noise_inc/5, boxprops=dict(color=del_rips_color), capprops=dict(color=del_rips_color),
+                whiskerprops=dict(color=del_rips_color), medianprops=dict(color=del_rips_color))
+    plt.boxplot(R_trial_array, showfliers=False, positions=[rounded_curr_noise], 
+                widths=noise_inc/5, boxprops=dict(color=rips_color), capprops=dict(color=rips_color),
+                whiskerprops=dict(color=rips_color), medianprops=dict(color=rips_color))
+    plt.boxplot(A_trial_array, showfliers=False, positions=[rounded_curr_noise], 
+                widths=noise_inc/5, boxprops=dict(color=alpha_color), capprops=dict(color=alpha_color),
+                whiskerprops=dict(color=alpha_color), medianprops=dict(color=alpha_color))
 
     noise_arr = np.append(noise_arr, rounded_curr_noise)
 
 # Plotting both the curves simultaneously
 # print(bott_dist_arr_A, bott_dist_arr_R, bott_dist_arr_DR)
-plt.plot(noise_arr, bott_dist_arr_DR, color='b', label='Del-Rips')
-plt.plot(noise_arr, bott_dist_arr_R, color='r', label='Rips')
-plt.plot(noise_arr, bott_dist_arr_A, color='g', label='Alpha')
+plt.plot(noise_arr, bott_dist_arr_DR, color=del_rips_color, label='Del-Rips')
+plt.plot(noise_arr, bott_dist_arr_R, color=rips_color, label='Rips')
+plt.plot(noise_arr, bott_dist_arr_A, color=alpha_color, label='Alpha')
 
 # Naming the x-axis, y-axis and the whole graph
 plt.xlabel("Noise", fontsize=16)
+plt.xlim([0, max_noise])
 plt.ylabel("Bottleneck Distance", fontsize=16)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
