@@ -11,15 +11,64 @@ import cechmate as cm
 from persim import plot_diagrams, bottleneck
 from ripser import ripser
 
-num_sets = 5
-num_points = 3
-noise = 0.1
-dataset1 = [None]*num_sets
-dataset2 = [None]*num_sets
 
-for i in range(num_sets):
-    dataset1[i] = tadasets.dsphere(n=num_points, d=1, r=1, noise=noise)
-    dataset2[i] = tadasets.torus(n=num_points, c=2, a=1, noise=noise)
+# TODO: compare PDs in the upper triangle of comparison matrix
+def intra_cluster_max_dist(cluster):    # returns the size of a given cluster
+    max_dist = -1
+    for x in cluster:
+        for y in cluster:
+            dist = bottleneck(x, y)
+            if dist > max_dist:
+                max_dist = dist
+    return max_dist
+
+
+def inter_cluster_min_dist(cluster1, cluster2): # returns the distance between two clusters
+    min_dist = None
+    for pd1 in cluster1:
+        for pd2 in cluster2:
+            dist = bottleneck(pd1, pd2)
+            if min_dist is None:
+                min_dist = dist
+            if dist < min_dist:
+                min_dist = dist
+    return min_dist
+
+
+num_per_cluster = 30
+num_points = 100
+noise = 0.01
+hom_class = 2
+PD_dataset1 = [None]*num_per_cluster
+PD_dataset2 = [None]*num_per_cluster
+
+for i in range(num_per_cluster):
+    # Delaunay-Rips
+    filtration = DR.build_filtration(tadasets.dsphere(n=num_points, d=2, r=1, noise=noise), hom_dim=hom_class)
+    PD_dataset1[i] = cm.phat_diagrams(filtration, show_inf=True, verbose=False)[hom_class]
+    filtration = DR.build_filtration(tadasets.torus(n=num_points, c=2, a=1, noise=noise), hom_dim=hom_class)
+    PD_dataset2[i] = cm.phat_diagrams(filtration, show_inf=True, verbose=False)[hom_class]
+
+all_clusters = [PD_dataset1, PD_dataset2]
+min_inter_dist = None
+max_intra_dist = -1
+for i, C_i in enumerate(all_clusters):
+    for j, C_j in enumerate(all_clusters):
+        if i != j:  # found different clusters
+            inter_dist = inter_cluster_min_dist(C_i, C_j)
+            if min_inter_dist is None:
+                min_inter_dist = inter_dist
+            if inter_dist < min_inter_dist:
+                min_inter_dist = inter_dist
+    intra_dist = intra_cluster_max_dist(C_i)
+    if intra_dist > max_intra_dist:
+        max_intra_dist = intra_dist
+
+dunn_index = min_inter_dist/max_intra_dist
+print(dunn_index)
+
+
+
 
 
 
