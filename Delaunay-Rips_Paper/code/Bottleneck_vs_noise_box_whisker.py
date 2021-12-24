@@ -16,18 +16,18 @@ def perturb(data, noise):
     perturb_vects = np.random.randn(len(data),len(data[0]))
     mags = np.linalg.norm(perturb_vects, axis=1)
     for i, mag in enumerate(mags):
-        perturb_vects[i] /= mag*(1/noise)
+        perturb_vects[i] /= mag*(1/noise) # check that this is actually appying to the whole row. Also, perturb by at MOST noise, not exactly noise
     perturbed_data = data + perturb_vects
     return(perturbed_data)
 
 
 start_noise = 0.0001
-max_noise = 1.1
+max_noise = 2
 noise_inc = .1
-pts = 200
-dim = 1
+pts = 100
+dim = 2
 hom_class = 1
-trials = 10
+trials = 5
 del_rips_color = 'b'
 rips_color = 'r'
 alpha_color = 'g'
