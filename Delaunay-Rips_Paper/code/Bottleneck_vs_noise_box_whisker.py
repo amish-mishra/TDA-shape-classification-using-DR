@@ -8,7 +8,7 @@ import tadasets
 import matplotlib.pyplot as plt
 import Del_Rips as DR
 import cechmate as cm
-from persim import plot_diagrams, bottleneck
+from persim import plot_diagrams, bottleneck, bottleneck_matching
 from ripser import ripser
 
 
@@ -21,11 +21,11 @@ def perturb(data, noise):
     return(perturbed_data)
 
 
-start_noise = 0.0001
-max_noise = 2
+start_noise = 0.001
+max_noise = .8
 noise_inc = .1
-pts = 100
-dim = 2
+pts = 50
+dim = 1
 hom_class = 1
 trials = 5
 del_rips_color = 'b'
@@ -95,6 +95,15 @@ for curr_noise in np.arange(start_noise + noise_inc, max_noise, noise_inc):
                 whiskerprops=dict(color=alpha_color), medianprops=dict(color=alpha_color))
 
     noise_arr = np.append(noise_arr, rounded_curr_noise)
+
+    # Plot testting
+    # dist, (matchidx, D) = bottleneck(dgms_rips, original_PD_R, matching=True) 
+    # print(rounded_curr_noise, i,j)
+    # bottleneck_matching(dgms_rips, original_PD_R, matchidx, D, labels=["Noisy", "Perfect Circle"])
+    # plt.title("Persistence pair matching for Rips \n between PD of perfect circle and PD of circle with noise "+ str(rounded_curr_noise))
+    # plt.show()
+
+    # plot_diagrams([dgms_dr, dgms_alpha, dgms_rips], labels=['DR', 'A', 'R'], show=True, title=rounded_curr_noise)
 
 # Plotting both the curves simultaneously
 # print(bott_dist_arr_A, bott_dist_arr_R, bott_dist_arr_DR)
