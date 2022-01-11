@@ -13,7 +13,7 @@ from ripser import ripser
 
 
 # TODO: compare PDs in the upper triangle of comparison matrix
-def intra_cluster_max_dist(cluster):    # returns the size of a given cluster
+def intra_cluster_max_dist(cluster):    # returns the size of a given cluster by taking the max distance between pairs
     max_dist = -1
     for x in cluster:
         for y in cluster:
@@ -21,6 +21,16 @@ def intra_cluster_max_dist(cluster):    # returns the size of a given cluster
             if dist > max_dist:
                 max_dist = dist
     return max_dist
+
+
+def intra_cluster_mean_dist(cluster):    # returns the size of a given cluster by finding the mean distance between pairs
+    size = len(cluster)
+    sum = 0
+    for i in range(size):
+        for j in range(i, size):
+            if i != j:
+                sum += bottleneck(cluster[i], cluster[j]) 
+    return sum
 
 
 def inter_cluster_min_dist(cluster1, cluster2): # returns the distance between two clusters
@@ -35,7 +45,7 @@ def inter_cluster_min_dist(cluster1, cluster2): # returns the distance between t
     return min_dist
 
 
-def dunn_index(all_clusters):
+def dunn_index(all_clusters, intra_cluster_method):
     min_inter_dist = None
     max_intra_dist = -1
     for i, C_i in enumerate(all_clusters):
@@ -46,27 +56,29 @@ def dunn_index(all_clusters):
                     min_inter_dist = inter_dist
                 if inter_dist < min_inter_dist:
                     min_inter_dist = inter_dist
-        intra_dist = intra_cluster_max_dist(C_i)
+        intra_dist = intra_cluster_method(C_i)
         if intra_dist > max_intra_dist:
             max_intra_dist = intra_dist
     dunn_index = min_inter_dist/max_intra_dist
     return dunn_index
 
 
+# Initialize variables
 start_noise = 0.001
-max_noise = 0.5
+max_noise = 0.55
 noise_inc = .05
-noise_arr = np.array(start_noise)
-num_per_cluster = 20
+num_per_cluster = 10
 num_points = 100
 hom_class = 2
+del_rips_color = 'b'
+rips_color = 'r'
+alpha_color = 'g'
+intra_cluster_method = intra_cluster_mean_dist
+
 noise_arr = np.empty(0)
 dunn_index_arr_DR = np.empty(0)
 dunn_index_arr_R = np.empty(0)
 dunn_index_arr_A = np.empty(0)
-del_rips_color = 'b'
-rips_color = 'r'
-alpha_color = 'g'
 
 for curr_noise in np.arange(start_noise + noise_inc, max_noise, noise_inc):
     rounded_curr_noise = round(curr_noise, 3)
@@ -100,9 +112,9 @@ for curr_noise in np.arange(start_noise + noise_inc, max_noise, noise_inc):
     all_clusters_A = [PD_dataset1[2], PD_dataset2[2]]
 
     # Calculate Dunn-index
-    dunn_index_DR = dunn_index(all_clusters_DR)
-    dunn_index_R = dunn_index(all_clusters_R)
-    dunn_index_A = dunn_index(all_clusters_A)
+    dunn_index_DR = dunn_index(all_clusters_DR, intra_cluster_method)
+    dunn_index_R = dunn_index(all_clusters_R, intra_cluster_method)
+    dunn_index_A = dunn_index(all_clusters_A, intra_cluster_method)
 
     noise_arr = np.append(noise_arr, rounded_curr_noise)
     dunn_index_arr_DR = np.append(dunn_index_arr_DR, dunn_index_DR)
