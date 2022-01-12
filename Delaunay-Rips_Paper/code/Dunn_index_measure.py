@@ -67,13 +67,13 @@ def dunn_index(all_clusters, intra_cluster_method):
 start_noise = 0.001
 max_noise = 0.55
 noise_inc = .05
-num_per_cluster = 10
-num_points = 100
+num_per_cluster = 20
+num_points = 200
 hom_class = 2
 del_rips_color = 'b'
 rips_color = 'r'
 alpha_color = 'g'
-intra_cluster_method = intra_cluster_mean_dist
+intra_cluster_method = intra_cluster_max_dist
 
 noise_arr = np.empty(0)
 dunn_index_arr_DR = np.empty(0)
