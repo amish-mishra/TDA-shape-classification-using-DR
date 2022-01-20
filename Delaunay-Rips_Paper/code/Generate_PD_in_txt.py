@@ -4,55 +4,48 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from persim import plot_diagrams
+import tadasets
 import cechmate as cm
 
 
-X = np.random.rand(20, 2)
-rips = cm.Rips(maxdim=1, verbose=False) #Go up to 1D homology
-filtration = rips.build(X)
-dgmsrips = rips.diagrams(filtration, verbose=False)
+def generate_noisy_data(shape, noise, pts):
+    def perturb(data, noise):       # local function that perturbs the data by the noise level
+        perturb_vects = np.random.randn(len(data), len(data[0]))
+        mags = np.linalg.norm(perturb_vects, axis=1)
+        for i, mag in enumerate(mags):
+            perturb_vects[i] /= mag * (
+                        1 / noise)  # check that this is actually appying to the whole row. Also, perturb by at MOST noise, not exactly noise
+        perturbed_data = data + perturb_vects
+        return perturbed_data
 
-plt.figure()
-plt.subplot(121)
-plt.scatter(X[:, 0], X[:, 1])
-plt.axis('square')
-plt.title("Point Cloud")
-plt.subplot(122)
-plot_diagrams(dgmsrips)
-plt.title("Rips Persistence Diagrams")
-plt.tight_layout()
-plt.show()
+    if shape.lower() == "circle":
+        data = tadasets.dsphere(n=pts, d=1, r=1, noise=0)
 
-
-alpha = cm.Alpha(verbose=False)
-filtration = alpha.build(2*X) # Alpha goes by radius instead of diameter
-dgmsalpha = alpha.diagrams(filtration, verbose=False)
+    return perturb(data, noise)
 
 
-plt.figure()
-plt.subplot(121)
-plt.scatter(X[:, 0], X[:, 1])
-plt.axis('square')
-plt.title("Point Cloud")
-plt.subplot(122)
-plot_diagrams(dgmsalpha)
-plt.title("Alpha Persistence Diagrams")
-plt.tight_layout()
-plt.show()
+def get_pd(filtration_method, data):
+    if filtration_method.lower() == "alpha":
+        alpha = cm.Alpha(verbose=False)
+        filtration = alpha.build(2 * data)  # Alpha goes by radius instead of diameter
+        dgms = alpha.diagrams(filtration, verbose=False)
 
-my_filtration = cm.DR(verbose=False)
-filtration = my_filtration.build(X) # Alpha goes by radius instead of diameter
-dgmsDR = my_filtration.diagrams(filtration, verbose=False)
+    return dgms
 
 
-plt.figure()
-plt.subplot(121)
-plt.scatter(X[:, 0], X[:, 1])
-plt.axis('square')
-plt.title("Point Cloud")
-plt.subplot(122)
-plot_diagrams(dgmsDR)
-plt.title("Delaunay-Rips Persistence Diagrams")
-plt.tight_layout()
-plt.show()
+# Initialize variables
+noise_level = 0.001
+filtration_func = "Alpha"
+k = 2   # maximum homology dimension to output into files
+shape_name = "Circle"
+num_datasets = 50
+pts_per_dataset = 100
+
+X = generate_noisy_data(shape_name, noise_level, pts_per_dataset)
+dgm = get_pd(filtration_func, X)
+
+
+# TODO: output pd to text file in appropriate folder
+# filename = str(filtration_func + "/PD_n"+noise_level)
+# np.savetxt(filename, dgm[0])
+
