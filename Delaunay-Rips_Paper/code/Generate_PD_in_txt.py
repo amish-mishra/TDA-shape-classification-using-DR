@@ -47,6 +47,7 @@ def get_pd(filtration_method, data):
     return dgms
 
 
+# TODO: add functionality for more shape types
 # Initialize variables
 noise_level = 0.01
 filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
