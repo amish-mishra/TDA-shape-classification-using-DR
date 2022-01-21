@@ -10,13 +10,13 @@ from ripser import ripser
 from persim import plot_diagrams
 import os
 
-def generate_noisy_data(shape, noise, pts):
-    def perturb(data, noise):       # local function that perturbs the data by the noise level
+def generate_noisy_data(shape, max_noise, pts):
+    def perturb(data, max_noise):       # local function that perturbs the data by the noise level
         perturb_vects = np.random.randn(len(data), len(data[0]))
         mags = np.linalg.norm(perturb_vects, axis=1)
         for i, mag in enumerate(mags):
-            perturb_vects[i] /= mag * (
-                        1 / noise)  # check that this is actually appying to the whole row. Also, perturb by at MOST noise, not exactly noise
+            noise = np.random.rand()*max_noise # perturb by a length of no more than 'max_noise'
+            perturb_vects[i] *= noise/mag
         perturbed_data = data + perturb_vects
         return perturbed_data
 
@@ -26,7 +26,7 @@ def generate_noisy_data(shape, noise, pts):
         data = tadasets.dsphere(n=pts, d=2, r=1, noise=0)
     elif shape.lower() == "torus":
         data = tadasets.torus(n=pts, c=1, a=0.5, noise=0)
-    return perturb(data, noise)
+    return perturb(data, max_noise)
 
 
 def get_pd(filtration_method, data):
@@ -47,6 +47,12 @@ def get_pd(filtration_method, data):
     return dgms
 
 
+# Testing
+X = generate_noisy_data('circle', 0.05, 100)   # generate data for a shape
+plt.scatter(X[:,0], X[:,1])
+plt.show()
+
+exit()
 # TODO: add functionality for more shape types
 # Initialize variables
 noise_level = 0.01
