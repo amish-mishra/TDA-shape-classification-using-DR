@@ -11,15 +11,14 @@ from persim import plot_diagrams
 import os
 
 def generate_noisy_data(shape, max_noise, pts):
-    def perturb(data, max_noise):       # local function that perturbs the data by the noise level
-        perturb_vects = np.random.randn(len(data), len(data[0]))
-        mags = np.linalg.norm(perturb_vects, axis=1)
-        for i, mag in enumerate(mags):
-            noise = np.random.rand()*max_noise # perturb by a length of no more than 'max_noise'
-            perturb_vects[i] *= noise/mag
-        perturbed_data = data + perturb_vects
-        return perturbed_data
-
+    # def perturb(data, max_noise):       # local function that perturbs the data by the noise level
+    #     perturb_vects = np.random.randn(len(data), len(data[0]))
+    #     mags = np.linalg.norm(perturb_vects, axis=1)
+    #     for i, mag in enumerate(mags):
+    #         noise = np.random.rand()*max_noise # perturb by a length of no more than 'max_noise'
+    #         perturb_vects[i] *= noise/mag
+    #     perturbed_data = data + perturb_vects
+    #     return perturbed_data
     if shape.lower() == "circle":
         data = tadasets.dsphere(n=pts, d=1, r=1, noise=0)
     elif shape.lower() == "sphere":
@@ -34,7 +33,8 @@ def generate_noisy_data(shape, max_noise, pts):
         b =  np.random.randint(np.floor(.1*(pts-a)), np.floor(.45*(pts-a))) # random number of pts in 2nd cluster, at least 10% remaining, at most 45%
         c = pts-a-b; 
         data = np.concatenate((np.tile(centers[0,:], (a, 1)), np.tile(centers[1,:], (b, 1)),  np.tile(centers[2,:], (c, 1))))
-    return perturb(data, max_noise)
+    perturb_vects = max_noise*np.random.rand(len(data), len(data[0]))
+    return data + perturb_vects
 
 
 def get_pd(filtration_method, data):
@@ -56,9 +56,11 @@ def get_pd(filtration_method, data):
 
 
 # Testing
-X = generate_noisy_data('clusters', 0.1, 100)   # generate data for a shape
-# plt.scatter(X[:,0], X[:,1])
-# plt.show()
+X = generate_noisy_data('circle', 0.5, 100)   # generate data for a shape
+plt.scatter(X[:,0], X[:,1])
+plt.show()
+
+exit()
 
 fig = plt.figure()
  
@@ -71,7 +73,6 @@ ax.scatter(X[:,0], X[:,1], X[:,2])
 ax.set_title('3d Scatter plot geeks for geeks')
 plt.show()
 
-exit()
 # TODO: add functionality for more shape types
 # Initialize variables
 noise_level = 0.01
