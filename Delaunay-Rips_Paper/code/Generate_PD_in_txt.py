@@ -28,6 +28,12 @@ def generate_noisy_data(shape, max_noise, pts):
         data = tadasets.torus(n=pts, c=1, a=0.5, noise=0)
     elif shape.lower() == "random":
         data = np.random.rand(pts, 3)
+    elif shape.lower() == "clusters":
+        centers = np.random.rand(3, 3);  
+        a = np.random.randint(np.floor(.1*pts), np.floor(.45*pts))  # random number of points for first cluster, can be at most 45% of all points, but is at least 10%
+        b =  np.random.randint(np.floor(.1*(pts-a)), np.floor(.45*(pts-a))) # random number of pts in 2nd cluster, at least 10% remaining, at most 45%
+        c = pts-a-b; 
+        data = np.concatenate((np.tile(centers[0,:], (a, 1)), np.tile(centers[1,:], (b, 1)),  np.tile(centers[2,:], (c, 1))))
     return perturb(data, max_noise)
 
 
@@ -50,8 +56,19 @@ def get_pd(filtration_method, data):
 
 
 # Testing
-X = generate_noisy_data('random', 0.05, 1000)   # generate data for a shape
-plt.scatter(X[:,0], X[:,1])
+X = generate_noisy_data('clusters', 0.1, 100)   # generate data for a shape
+# plt.scatter(X[:,0], X[:,1])
+# plt.show()
+
+fig = plt.figure()
+ 
+# syntax for 3-D projection
+ax = plt.axes(projection ='3d')
+ 
+ax.scatter(X[:,0], X[:,1], X[:,2])
+ 
+# syntax for plotting
+ax.set_title('3d Scatter plot geeks for geeks')
 plt.show()
 
 exit()
