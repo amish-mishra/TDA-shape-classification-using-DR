@@ -26,6 +26,8 @@ def generate_noisy_data(shape, max_noise, pts):
         data = tadasets.dsphere(n=pts, d=2, r=1, noise=0)
     elif shape.lower() == "torus":
         data = tadasets.torus(n=pts, c=1, a=0.5, noise=0)
+    elif shape.lower() == "random":
+        data = np.random.rand(pts, 3)
     return perturb(data, max_noise)
 
 
@@ -48,7 +50,7 @@ def get_pd(filtration_method, data):
 
 
 # Testing
-X = generate_noisy_data('circle', 0.05, 100)   # generate data for a shape
+X = generate_noisy_data('random', 0.05, 1000)   # generate data for a shape
 plt.scatter(X[:,0], X[:,1])
 plt.show()
 
@@ -58,7 +60,7 @@ exit()
 noise_level = 0.01
 filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
 k = 2   # maximum homology dimension to output into files
-shape_name_arr = ["Circle", "Sphere", "Torus"]
+shape_name_arr = ["Circle", "Sphere", "Torus", "Random"]
 num_datasets = 25
 pts_per_dataset = 100
 
