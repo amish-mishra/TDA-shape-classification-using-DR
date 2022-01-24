@@ -33,6 +33,7 @@ def generate_noisy_data(shape, max_noise, pts):
         b =  np.random.randint(np.floor(.1*(pts-a)), np.floor(.45*(pts-a))) # random number of pts in 2nd cluster, at least 10% remaining, at most 45%
         c = pts-a-b; 
         data = np.concatenate((np.tile(centers[0,:], (a, 1)), np.tile(centers[1,:], (b, 1)),  np.tile(centers[2,:], (c, 1))))
+    
     perturb_vects = max_noise*np.random.rand(len(data), len(data[0]))
     return data + perturb_vects
 
@@ -56,29 +57,29 @@ def get_pd(filtration_method, data):
 
 
 # Testing
-X = generate_noisy_data('circle', 0.5, 100)   # generate data for a shape
-plt.scatter(X[:,0], X[:,1])
-plt.show()
-
-exit()
+X = generate_noisy_data('clusters', 0.05, 100)   # generate data for a shape
 
 fig = plt.figure()
  
 # syntax for 3-D projection
 ax = plt.axes(projection ='3d')
  
-ax.scatter(X[:,0], X[:,1], X[:,2])
+if len(X[0]) == 3:
+    ax.scatter(X[:,0], X[:,1], X[:,2])
+else:
+    ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
  
 # syntax for plotting
 ax.set_title('3d Scatter plot geeks for geeks')
 plt.show()
+exit()
 
 # TODO: add functionality for more shape types
 # Initialize variables
 noise_level = 0.01
 filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
 k = 2   # maximum homology dimension to output into files
-shape_name_arr = ["Circle", "Sphere", "Torus", "Random"]
+shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters"]
 num_datasets = 25
 pts_per_dataset = 100
 
