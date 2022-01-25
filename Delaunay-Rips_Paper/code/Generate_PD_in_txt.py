@@ -56,7 +56,7 @@ def generate_noisy_data(shape, max_noise, pts):
         cluster3 = np.concatenate((np.tile(centers_9[6,:], (a1, 1)), np.tile(centers_9[7,:], (a2, 1)),  np.tile(centers_9[8,:], (a3, 1))))
 
         data = np.concatenate((cluster1, cluster2, cluster3))
-        
+
     perturb_vects = max_noise*np.random.rand(len(data), len(data[0]))
     return data + perturb_vects
 
@@ -79,31 +79,26 @@ def get_pd(filtration_method, data):
     return dgms
 
 
-# Testing
-X = generate_noisy_data('clusters_in_clusters', 0.05, 100)   # generate data for a shape
+# # Testing
+# X = generate_noisy_data('clusters_in_clusters', 0.05, 100)   # generate data for a shape
+# fig = plt.figure()
+#  # syntax for 3-D projection
+# ax = plt.axes(projection ='3d')
+# if len(X[0]) == 3:
+#     ax.scatter(X[:,0], X[:,1], X[:,2])
+# else:
+#     ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
+# # syntax for plotting
+# ax.set_title('3d Scatter plot geeks for geeks')
+# plt.show()
+# exit()
 
-fig = plt.figure()
- 
-# syntax for 3-D projection
-ax = plt.axes(projection ='3d')
- 
-if len(X[0]) == 3:
-    ax.scatter(X[:,0], X[:,1], X[:,2])
-else:
-    ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
- 
-# syntax for plotting
-ax.set_title('3d Scatter plot geeks for geeks')
-plt.show()
-exit()
-
-# TODO: add functionality for more shape types
 # Initialize variables
 noise_level = 0.01
 filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
 k = 2   # maximum homology dimension to output into files
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 25
+num_datasets = 5
 pts_per_dataset = 100
 
 for i in range(num_datasets):
