@@ -61,7 +61,7 @@ def generate_noisy_data(shape, max_noise, pts):
 
         data = np.concatenate((cluster1, cluster2, cluster3))
 
-    perturb_vects = max_noise*np.random.rand(len(data), len(data[0]))
+    perturb_vects = max_noise*np.random.rand(len(data), len(data[0])) # TODO: revert back to perturbation function for true uniform distribution on sphere
     return data + perturb_vects
 
 
