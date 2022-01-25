@@ -107,7 +107,7 @@ for i in range(num_datasets):
         for filtration_func in filtration_func_arr: # compute PDs using each filtration for a fixed dataset
             dgm = get_pd(filtration_func, X)
             for j in range(k+1):  # put H_0, H_1,... classes in separate text files
-                if j < len(dgm):
+                if j < len(dgm):    # create file path and file name and save the PDs
                     home = os.path.expanduser("~")
                     filepath = f"{home}/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_05/" \
                                f"{filtration_func}/{shape_name}/"
