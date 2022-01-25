@@ -31,9 +31,32 @@ def generate_noisy_data(shape, max_noise, pts):
         centers = np.random.rand(3, 3);  
         a = np.random.randint(np.floor(.1*pts), np.floor(.45*pts))  # random number of points for first cluster, can be at most 45% of all points, but is at least 10%
         b =  np.random.randint(np.floor(.1*(pts-a)), np.floor(.45*(pts-a))) # random number of pts in 2nd cluster, at least 10% remaining, at most 45%
-        c = pts-a-b; 
+        c = pts-a-b
         data = np.concatenate((np.tile(centers[0,:], (a, 1)), np.tile(centers[1,:], (b, 1)),  np.tile(centers[2,:], (c, 1))))
-    
+    elif shape.lower() == "clusters_in_clusters":
+        # Set up the 3 clusters with 3 centers in each one
+        centers_3 = np.random.rand(3, 3);  
+        cluster_centers = np.concatenate((np.tile(centers_3[0,:], (3, 1)), np.tile(centers_3[1,:], (3, 1)),  np.tile(centers_3[2,:], (3, 1))))
+        perturb_centers = max_noise*np.random.rand(9, 3)
+        centers_9 = cluster_centers + perturb_centers # create 9 cluster centers; 3 clusters each in 3 large clusters
+        # Create cluster 1 just like in the "clusters" case
+        a1 = np.random.randint(np.floor(.1*pts), np.floor(.45*pts))
+        a2 =  np.random.randint(np.floor(.1*(pts-a1)), np.floor(.45*(pts-a1)))
+        a3 = pts-a1-a2 
+        cluster1 = np.concatenate((np.tile(centers_9[0,:], (a1, 1)), np.tile(centers_9[1,:], (a2, 1)),  np.tile(centers_9[2,:], (a3, 1))))
+        # Create cluster 2 just like in the "clusters" case
+        a1 = np.random.randint(np.floor(.1*pts), np.floor(.45*pts))
+        a2 =  np.random.randint(np.floor(.1*(pts-a1)), np.floor(.45*(pts-a1)))
+        a3 = pts-a1-a2 
+        cluster2 = np.concatenate((np.tile(centers_9[3,:], (a1, 1)), np.tile(centers_9[4,:], (a2, 1)),  np.tile(centers_9[5,:], (a3, 1))))
+        # Create cluster 3 just like in the "clusters" case
+        a1 = np.random.randint(np.floor(.1*pts), np.floor(.45*pts))
+        a2 =  np.random.randint(np.floor(.1*(pts-a1)), np.floor(.45*(pts-a1)))
+        a3 = pts-a1-a2 
+        cluster3 = np.concatenate((np.tile(centers_9[6,:], (a1, 1)), np.tile(centers_9[7,:], (a2, 1)),  np.tile(centers_9[8,:], (a3, 1))))
+
+        data = np.concatenate((cluster1, cluster2, cluster3))
+        
     perturb_vects = max_noise*np.random.rand(len(data), len(data[0]))
     return data + perturb_vects
 
@@ -57,7 +80,7 @@ def get_pd(filtration_method, data):
 
 
 # Testing
-X = generate_noisy_data('clusters', 0.05, 100)   # generate data for a shape
+X = generate_noisy_data('clusters_in_clusters', 0.05, 100)   # generate data for a shape
 
 fig = plt.figure()
  
@@ -79,7 +102,7 @@ exit()
 noise_level = 0.01
 filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
 k = 2   # maximum homology dimension to output into files
-shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters"]
+shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
 num_datasets = 25
 pts_per_dataset = 100
 
