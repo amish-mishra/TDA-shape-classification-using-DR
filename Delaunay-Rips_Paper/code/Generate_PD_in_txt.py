@@ -10,16 +10,21 @@ from ripser import ripser
 from persim import plot_diagrams
 import os
 import time
+from scipy.spatial import ConvexHull
+from scipy.spatial.distance import cdist
+
 
 def generate_noisy_data(shape, max_noise, pts):
-    # def perturb(data, max_noise):       # local function that perturbs the data by the noise level
-    #     perturb_vects = np.random.randn(len(data), len(data[0]))
-    #     mags = np.linalg.norm(perturb_vects, axis=1)
-    #     for i, mag in enumerate(mags):
-    #         noise = np.random.rand()*max_noise # perturb by a length of no more than 'max_noise'
-    #         perturb_vects[i] *= noise/mag
-    #     perturbed_data = data + perturb_vects
-    #     return perturbed_data
+    '''
+    generate_noisy_data generates data on a specified shape type, perturbs it, and scales it down to have diameter 1
+    '''
+    def perturb(data, max_noise):       # local function that perturbs the data by the noise level
+        perturb_vects = np.random.randn(len(data), len(data[0]))
+        mags = np.linalg.norm(perturb_vects, axis=1)
+        for i, mag in enumerate(mags):
+            noise = np.random.rand()*max_noise # perturb by a length of no more than 'max_noise'
+            perturb_vects[i] *= noise/mag
+        return data + perturb_vects
     if shape.lower() == "circle":
         data = tadasets.dsphere(n=pts, d=1, r=1, noise=0)
     elif shape.lower() == "sphere":
@@ -61,15 +66,15 @@ def generate_noisy_data(shape, max_noise, pts):
 
         data = np.concatenate((cluster1, cluster2, cluster3))
 
-    perturb_vects = max_noise*np.random.rand(len(data), len(data[0])) # TODO: revert back to perturbation function for true uniform distribution on sphere
-    return data + perturb_vects
+    data = data/get_diameter(data)  # scale data down to have diameter 1
+    return perturb(data, max_noise)
 
 
 def get_pd(filtration_method, data):
     if filtration_method.lower() == "alpha":
         alpha = cm.Alpha(verbose=False)
         filtration = alpha.build(2 * data)  # Alpha goes by radius instead of diameter
-        dgms = alpha.diagrams(filtration, verbose=False)
+        dgms = alpha.diagrams(filtration)#, verbose=False)
     elif filtration_method.lower() == "rips":
         # only compute homology classes of dimension 1 less than the dimension of the data
         dgm_with_inf = ripser(data, maxdim=(len(data[0])-1))['dgms']
@@ -83,8 +88,21 @@ def get_pd(filtration_method, data):
     return dgms
 
 
-# # Testing
-# X = generate_noisy_data('clusters_in_clusters', 0.05, 200)   # generate data for a shape
+def get_diameter(X): 
+    hull = ConvexHull(X) # Find a convex hull in O(N log N)
+    hullpoints = X[hull.vertices,:] # Extract the points forming the hull
+    # Naive way of finding the best pair in O(H^2) time if H is number of points on hull
+    hdist = cdist(hullpoints, hullpoints, metric='euclidean')
+    return hdist.max()
+    # Get the farthest apart points
+    # bestpair = np.unravel_index(hdist.argmax(), hdist.shape)
+    # print([hullpoints[bestpair[0]], hullpoints[bestpair[1]]])
+
+
+# Testing
+shape = 'Sphere'
+filt_func = 'Alpha'
+X = generate_noisy_data(shape, 0.0, 500)   # generate data for a shape
 # fig = plt.figure()
 #  # syntax for 3-D projection
 # ax = plt.axes(projection ='3d')
@@ -95,7 +113,12 @@ def get_pd(filtration_method, data):
 # # syntax for plotting
 # ax.set_title('3d Scatter plot geeks for geeks')
 # plt.show()
-# exit()
+
+dgm = get_pd(filt_func, X)
+plt.title(filt_func+" on "+shape+' with diameter '+str(get_diameter(X)))
+plot_diagrams(dgm, show=True)
+
+exit()
 
 # Initialize variables
 noise_level = 0.05
