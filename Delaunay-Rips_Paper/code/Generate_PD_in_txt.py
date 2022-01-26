@@ -88,7 +88,8 @@ def get_pd(filtration_method, data):
     return dgms
 
 
-def get_diameter(X): 
+def get_diameter(X):
+    print(len(X)) 
     hull = ConvexHull(X) # Find a convex hull in O(N log N)
     hullpoints = X[hull.vertices,:] # Extract the points forming the hull
     # Naive way of finding the best pair in O(H^2) time if H is number of points on hull
@@ -100,23 +101,23 @@ def get_diameter(X):
 
 
 # Testing
-shape = 'Sphere'
+shape = 'clusters'
 filt_func = 'Alpha'
-X = generate_noisy_data(shape, 0.0, 500)   # generate data for a shape
-# fig = plt.figure()
-#  # syntax for 3-D projection
-# ax = plt.axes(projection ='3d')
-# if len(X[0]) == 3:
-#     ax.scatter(X[:,0], X[:,1], X[:,2])
-# else:
-#     ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
-# # syntax for plotting
-# ax.set_title('3d Scatter plot geeks for geeks')
-# plt.show()
+X = generate_noisy_data(shape, 0.01, 500)   # generate data for a shape
+fig = plt.figure()
+ # syntax for 3-D projection
+ax = plt.axes(projection ='3d')
+if len(X[0]) == 3:
+    ax.scatter(X[:,0], X[:,1], X[:,2])
+else:
+    ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
+# syntax for plotting
+ax.set_title('3d Scatter plot geeks for geeks')
+plt.show()
 
-dgm = get_pd(filt_func, X)
-plt.title(filt_func+" on "+shape+' with diameter '+str(get_diameter(X)))
-plot_diagrams(dgm, show=True)
+# dgm = get_pd(filt_func, X)
+# plt.title(filt_func+" on "+shape+' with diameter '+str(get_diameter(X)))
+# plot_diagrams(dgm, show=True)
 
 exit()
 
