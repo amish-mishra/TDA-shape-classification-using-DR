@@ -72,9 +72,7 @@ def generate_noisy_data(shape, max_noise, pts):
         cluster3 = np.concatenate((np.tile(centers_9[6,:], (a1, 1)), np.tile(centers_9[7,:], (a2, 1)),  np.tile(centers_9[8,:], (a3, 1))))
 
         data = np.concatenate((cluster1, cluster2, cluster3))
-    tic = time.time()
     data = data/get_diameter(data, shape)  # scale data down to have diameter 1
-    print("Took", time.time()-tic)
     return perturb(data, max_noise)
 
 
@@ -82,7 +80,7 @@ def get_pd(filtration_method, data):
     if filtration_method.lower() == "alpha":
         alpha = cm.Alpha(verbose=False)
         filtration = alpha.build(2 * data)  # Alpha goes by radius instead of diameter
-        dgms = alpha.diagrams(filtration)#, verbose=False)
+        dgms = alpha.diagrams(filtration, verbose=False)
     elif filtration_method.lower() == "rips":
         # only compute homology classes of dimension 1 less than the dimension of the data
         dgm_with_inf = ripser(data, maxdim=(len(data[0])-1))['dgms']
@@ -111,33 +109,33 @@ def get_diameter(X, shape):
         # print([hullpoints[bestpair[0]], hullpoints[bestpair[1]]])
 
 
-# Testing
-shape = 'clusters'
-filt_func = 'Alpha'
-X = generate_noisy_data(shape, 0.1, 500)   # generate data for a shape
-fig = plt.figure()
- # syntax for 3-D projection
-ax = plt.axes(projection ='3d')
-if len(X[0]) == 3:
-    ax.scatter(X[:,0], X[:,1], X[:,2])
-else:
-    ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
-# syntax for plotting
-ax.set_title('3d Scatter plot geeks for geeks')
-plt.show()
-
+# # Testing
+# shape = 'clusters'
+# filt_func = 'Alpha'
+# X = generate_noisy_data(shape, 0.1, 500)   # generate data for a shape
+# fig = plt.figure()
+#  # syntax for 3-D projection
+# ax = plt.axes(projection ='3d')
+# if len(X[0]) == 3:
+#     ax.scatter(X[:,0], X[:,1], X[:,2])
+# else:
+#     ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
+# # syntax for plotting
+# ax.set_title('3d Scatter plot geeks for geeks')
+# plt.show()
+#
 # dgm = get_pd(filt_func, X)
-# plt.title(filt_func+" on "+shape+' with diameter '+str(get_diameter(X)))
+# plt.title(filt_func+" on "+shape+' with diameter '+str(get_diameter(X, shape)))
 # plot_diagrams(dgm, show=True)
-
-exit()
+#
+# exit()
 
 # Initialize variables
 noise_level = 0.05
 filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
 k = 2   # maximum homology dimension to output into files
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 50
+num_datasets = 100
 pts_per_dataset = 500
 
 for i in range(num_datasets):
