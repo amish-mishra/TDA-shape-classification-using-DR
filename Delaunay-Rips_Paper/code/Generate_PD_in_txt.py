@@ -9,7 +9,6 @@ import cechmate as cm
 from ripser import ripser
 from persim import plot_diagrams
 import os
-import time
 from scipy.spatial import ConvexHull
 from scipy.spatial.distance import cdist
 
@@ -138,9 +137,10 @@ shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_i
 num_datasets = 100
 pts_per_dataset = 500
 
+exit()  # this is here so this file doesn't accidentally run and overwrite the previous data
+
 for i in range(num_datasets):
     for shape_name in shape_name_arr:
-        tic = time.time()
         X = generate_noisy_data(shape_name, noise_level, pts_per_dataset)   # generate data for a shape
         for filtration_func in filtration_func_arr: # compute PDs using each filtration for a fixed dataset
             dgm = get_pd(filtration_func, X)
