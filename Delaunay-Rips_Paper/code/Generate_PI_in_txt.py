@@ -10,35 +10,68 @@ from persim import PersistenceImager
 
 # Initialize variables
 noise_level = 0.05
-filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
+filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 4
+num_datasets = 10
 pts_per_dataset = 500
 
 
-# Fit PI attributes to all H_0 classes
-pdgms_H0 = []
-k = 0   # Hom class to extract
-for filtration_func in filtration_func_arr:
-    for shape_name in shape_name_arr:
-        if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
-            continue
-        for i in range(num_datasets):
-            path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
-            pd = np.loadtxt(path)
-            pdgms_H0.append(pd)
+# # Fit PI attributes to all H_0 classes
 
-pimgr = PersistenceImager(pixel_size=0.01, birth_range=(0,1))
-pimgr.fit(pdgms_H0, skew=True)
-pimgr.weight_params = {'n': 1.0}
-pimgr.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
-pimgs_H0 = pimgr.transform(pdgms_H0, skew=True)
+# # Track which path of input PD associates with index in pimgs
+# pd_H0_shapes_idx_dict_array = [{}, {}, {}]
+# for dict in pd_H0_shapes_idx_dict_array:
+#     for shape_name in shape_name_arr:
+#         dict[shape_name.lower()] = []
+# idx = 0
+# pdgms_H0 = []
+# k = 0   # Hom class to extract
+# for filtration_func in filtration_func_arr:
+#     if filtration_func.lower() == 'alpha':
+#         dict = pd_H0_shapes_idx_dict_array[0]
+#     elif filtration_func.lower() == 'del_rips':
+#         dict = pd_H0_shapes_idx_dict_array[1]
+#     elif filtration_func.lower() == 'rips':
+#         dict = pd_H0_shapes_idx_dict_array[2]
+#     for shape_name in shape_name_arr:
+#         if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
+#             continue
+#         for i in range(num_datasets):
+#             path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
+#             pd = np.loadtxt(path)
+#             pdgms_H0.append(pd)
+#             dict[shape_name.lower()].append(idx)
+#             idx += 1
+
+# print(pd_H0_shapes_idx_dict_array)
+
+# pimgr = PersistenceImager(pixel_size=0.01)
+# pimgr.fit(pdgms_H0, skew=True)
+# pimgr.weight_params = {'n': 1.0}
+# pimgr.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
+# pimgs_H0 = pimgr.transform(pdgms_H0, skew=True)
+
+# print(pimgs_H0)
+# exit()
 
 
 # Fit PI attributes to all H_1 classes
+
+# Track which path of input PD associates with index in pimgs
+pd_H1_shapes_idx_dict_array = [{}, {}, {}]
+for dict in pd_H1_shapes_idx_dict_array:
+    for shape_name in shape_name_arr:
+        dict[shape_name.lower()] = []
+idx = 0
 pdgms_H1 = []
 k = 1   # Hom class to extract
 for filtration_func in filtration_func_arr:
+    if filtration_func.lower() == 'alpha':
+        dict = pd_H1_shapes_idx_dict_array[0]
+    elif filtration_func.lower() == 'del_rips':
+        dict = pd_H1_shapes_idx_dict_array[1]
+    elif filtration_func.lower() == 'rips':
+        dict = pd_H1_shapes_idx_dict_array[2]
     for shape_name in shape_name_arr:
         if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
             continue
@@ -46,12 +79,36 @@ for filtration_func in filtration_func_arr:
             path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
             pd = np.loadtxt(path)
             pdgms_H1.append(pd)
+            dict[shape_name.lower()].append(idx)
+            idx += 1
 
-pimgr = PersistenceImager(pixel_size=0.01, birth_range=(0,1))
+print(pd_H1_shapes_idx_dict_array)
+
+pimgr = PersistenceImager(pixel_size=0.05)
 pimgr.fit(pdgms_H1, skew=True)
 pimgr.weight_params = {'n': 1.0}
 pimgr.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
 pimgs_H1 = pimgr.transform(pdgms_H1, skew=True)
+
+print(pimgs_H1[17])
+
+fig, axs = plt.subplots(1, 3, figsize=(10,5))
+
+disp_idx = 17
+axs[0].set_title("Original Diagram")
+pimgr.plot_diagram(pdgms_H1[disp_idx], skew=False, ax=axs[0])
+
+axs[1].set_title("Birth-Persistence\nCoordinates")
+pimgr.plot_diagram(pdgms_H1[disp_idx], skew=True, ax=axs[1])
+
+axs[2].set_title("Persistence Image")
+
+pimgr.plot_image(pimgs_H1[disp_idx], ax=axs[2])
+
+plt.tight_layout()
+plt.show()
+
+exit()
 
 
 # Fit PI attributes to all H_2 classes
@@ -132,6 +189,12 @@ plt.show()
 
 
 ''''
-Motta notes:
+Notes:
 - Put all H_k pds in a k_dgm array and run the .fit transformer on them to set the scale of the diagram
+- Currently, I have all H_0, H_1, and H_2 diagrams in PI form for each dataset. I can also associate which
+PI goes with the path to its respective PD.
+- Next, I need to save the PI in a similar directory structure to the PDs under a new folder like
+"pi_noise_0_05"
+- Possibly, I will have to write another python script that will concatenate the H_0, 1, 2 classes for each
+dataset together into one single vector for input into the ML model
 '''
