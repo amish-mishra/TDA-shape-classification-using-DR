@@ -1,32 +1,99 @@
-# Author: Amish Mishra
-# Date: Feb 3, 2022
-# README: Generate the PIs of various PDs from txt files into txt files
+'''
+Author: Amish Mishra
+Date: Feb 3, 2022
+README: Generate the PIs of various PDs from txt files into a single dataframe with structure
+Class | H_1 pixel 1 | H_1 pixel 2 |....| H_2 pixel 1 | H_2 pixel 2 | .....
+0     |             |             |    |             |             |
+0     |             |             |    |             |             |
+0     |             |             |    |             |             |
+.     |             |             |    |             |             |
+.     |             |             |    |             |             |
+.     |             |             |    |             |             |
+1     |             |             |    |             |             |
+.     |             |             |    |             |             |
+.     |             |             |    |             |             |
+.     |             |             |    |             |             |
+2     |             |             |    |             |             |
+.     |             |             |    |             |             |
+.     |             |             |    |             |             |
+.     |             |             |    |             |             |
+5     |             |             |    |             |             |
+'''
 
 import matplotlib.pyplot as plt
 import numpy as np
 import os
 from persim import PersistenceImager
+import pandas
 
 
 # Initialize variables
+home = os.path.expanduser("~")
+basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_05/"
 noise_level = 0.05
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 10
+num_datasets = 5
 pts_per_dataset = 500
 
 
+# Find the image range for the H_2 class diagrams
+pdgms_H2 = []
+k = 2   # Hom class to extract
+filtration_func = "Alpha"
+for shape_name in shape_name_arr:
+    if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
+        continue
+    for i in range(num_datasets):
+        path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
+        pd = np.loadtxt(path)
+        pdgms_H2.append(pd)
 
-path0 = '/home/amishra/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_05/Alpha/Circle/PD_0_0.txt'
-pd0 = np.loadtxt(path0)
-pimgr = PersistenceImager(pixel_size=0.01)
-pimgr.fit(pd0, skew=True)
-pimgr.weight_params = {'n': 1.0}
-pimgr.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
-pimg_H0 = pimgr.transform(pd0, skew=True)
+# Find the image range for the H_1 class diagrams
+pdgms_H1 = []
+k = 1   # Hom class to extract
+filtration_func = "Alpha"
+for shape_name in shape_name_arr:
+    if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
+        continue
+    for i in range(num_datasets):
+        path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
+        pd = np.loadtxt(path)
+        pdgms_H1.append(pd)
 
-print(pimg_H0)
+# Set the persistence image parameters
+pimgrH2 = PersistenceImager(pixel_size=0.5)
+pimgrH2.fit(pdgms_H2, skew=True)
+pimgrH2.weight_params = {'n': 1.0}
+pimgrH2.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
+pimgrH1 = PersistenceImager(pixel_size=0.5)
+pimgrH1.fit(pdgms_H1, skew=True)
+pimgrH1.weight_params = {'n': 1.0}
+pimgrH1.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
 
+# Work on just turning the Torus H_2 and H_1 into a flattened PI vector
+shape_name = 'Torus'
+path = f"{basefilepath}{filtration_func}/{shape_name}/"
+data_list = [None]*num_datasets
+for i in range(num_datasets):
+    # Make PI of H_2 diagram
+    if shape_name.lower() != 'circle':    
+        filename = str("PD_"+str(i)+"_"+str(2))               
+        print(f'{path}{filename}')
+        pd = np.loadtxt(f'{path}{filename}.txt')
+        pimg_H2 = pimgrH2.transform(pd, skew=True)
+    # Make PI of H_1 diagram
+    filename = str("PD_"+str(i)+"_"+str(1))               
+    print(f'{path}{filename}')
+    pd = np.loadtxt(f'{path}{filename}.txt')
+    pimg_H1 = pimgrH1.transform(pd, skew=True)
+    # Add vector as a row to data_list
+    data_list[i] = np.concatenate(([1], pimg_H2.flatten(), pimg_H1.flatten()))
+        
+df = pandas.DataFrame(data_list)
+print(df)
+
+exit()
 path1 = '/home/amishra/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_05/Alpha/Torus/PD_0_1.txt'
 pd1 = np.loadtxt(path1)
 pimgr = PersistenceImager(pixel_size=0.01)
@@ -35,20 +102,6 @@ pimgr.weight_params = {'n': 1.0}
 pimgr.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
 pimg_H1 = pimgr.transform(pd1, skew=True)
 
-print(pimg_H1)
-path2 = '/home/amishra/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_05/Alpha/Torus/PD_0_2.txt'
-pd2 = np.loadtxt(path2)
-pimgr = PersistenceImager(pixel_size=0.01)
-pimgr.fit(pd2, skew=True)
-pimgr.weight_params = {'n': 1.0}
-pimgr.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
-pimg_H2 = pimgr.transform(pd2, skew=True)
-
-print(pimg_H2)
-
-final_img = np.concatenate((pimg_H2, pimg_H1))
-
-print(final_img)
 
 # fig, axs = plt.subplots(1, 3, figsize=(10,5))
 #
