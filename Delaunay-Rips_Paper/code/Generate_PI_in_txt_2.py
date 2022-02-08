@@ -37,6 +37,36 @@ num_datasets = 5
 pts_per_dataset = 500
 
 
+path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\Alpha\\Circle\\PD_0_0.txt"
+pd = np.loadtxt(path)
+pimgrH0 = PersistenceImager(pixel_size=0.00001)
+print(pimgrH0.pers_range)
+pimgrH0.fit(pd, skew=True)
+print(pimgrH0.pers_range)
+pimgrH0.pixel_size = (pimgrH0.pers_range[1]-pimgrH0.pers_range[0])/20
+pimgrH0.birth_range = (-pimgrH0.pixel_size/2, pimgrH0.pixel_size/2)
+pimgrH0.weight_params = {'n': 1.0}
+pimgrH0.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
+pimg_H0 = pimgrH0.transform(pd, skew=True)
+# print(pimg_H0)
+
+fig, axs = plt.subplots(1, 3, figsize=(10,5))
+
+axs[0].set_title("Original Diagram")
+pimgrH0.plot_diagram(pd, skew=False, ax=axs[0])
+
+axs[1].set_title("Birth-Persistence\nCoordinates")
+pimgrH0.plot_diagram(pd, skew=True, ax=axs[1])
+
+axs[2].set_title("Persistence Image")
+
+pimgrH0.plot_image(pimg_H0, ax=axs[2])
+
+plt.tight_layout()
+plt.show()
+
+exit()
+
 # Find the image range for the H_2 class diagrams
 pdgms_H2 = []
 k = 2   # Hom class to extract
