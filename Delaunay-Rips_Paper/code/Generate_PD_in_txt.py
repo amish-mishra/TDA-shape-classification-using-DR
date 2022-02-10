@@ -130,7 +130,9 @@ def get_diameter(X, shape):
 # exit()
 
 # Initialize variables
-noise_level = 0.05
+home = os.path.expanduser("~")
+basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_10/"
+noise_level = 0.10
 filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
 k = 2   # maximum homology dimension to output into files
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
@@ -143,13 +145,11 @@ for i in range(num_datasets):
     for shape_name in shape_name_arr:
         X = generate_noisy_data(shape_name, noise_level, pts_per_dataset)   # generate data for a shape
         for filtration_func in filtration_func_arr: # compute PDs using each filtration for a fixed dataset
+            path = f"{basefilepath}{filtration_func}/{shape_name}/"
             dgm = get_pd(filtration_func, X)
             for j in range(k+1):  # put H_0, H_1,... classes in separate text files
                 if j < len(dgm):    # create file path and file name and save the PDs
-                    home = os.path.expanduser("~")
-                    filepath = f"{home}/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_10/" \
-                               f"{filtration_func}/{shape_name}/"
-                    filename = str("PD_"+str(i)+"_"+str(j))
-                    np.savetxt(f"{filepath}{filename}.txt", dgm[j])
-                    print("Finished making", f"{filepath}{filename}.txt")
+                    filename = str("PD_"+str(i)+"_"+str(j))               
+                    np.savetxt(f"{path}{filename}.txt", dgm[j])
+                    print("Finished making", f"{path}{filename}.txt")
 

@@ -107,7 +107,7 @@ alpha_H0_resolution = pimgrH0.resolution
 
 print(alpha_H0_resolution, alpha_H1_resolution, alpha_H2_resolution)
 
-# Work on turning H_2 and H_1 into a flattened PI vector for each shape class and dataset
+# Work on turning H_2, H_1, H_0 into a flattened PI vector for each shape class and dataset
 data_list = len(shape_name_arr)*[None]*num_datasets
 idx = 0
 shape_idx = 0
