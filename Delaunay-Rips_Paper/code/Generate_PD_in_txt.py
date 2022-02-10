@@ -137,7 +137,7 @@ shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_i
 num_datasets = 100
 pts_per_dataset = 500
 
-exit()  # this is here so this file doesn't accidentally run and overwrite the previous data
+# exit()  # this is here so this file doesn't accidentally run and overwrite the previous data
 
 for i in range(num_datasets):
     for shape_name in shape_name_arr:
@@ -147,7 +147,7 @@ for i in range(num_datasets):
             for j in range(k+1):  # put H_0, H_1,... classes in separate text files
                 if j < len(dgm):    # create file path and file name and save the PDs
                     home = os.path.expanduser("~")
-                    filepath = f"{home}/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_05/" \
+                    filepath = f"{home}/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_10/" \
                                f"{filtration_func}/{shape_name}/"
                     filename = str("PD_"+str(i)+"_"+str(j))
                     np.savetxt(f"{filepath}{filename}.txt", dgm[j])
