@@ -1,6 +1,6 @@
 # Author: Amish Mishra
 # Date: February 7, 2022
-# README: This file is to practice creating a random forest classifier
+# README: This file is creating a random forest classifier and assess accuracy
 
 
 from sklearn import datasets
