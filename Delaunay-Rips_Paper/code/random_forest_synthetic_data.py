@@ -13,10 +13,10 @@ import os
 
 
 home = os.path.expanduser("~")
-basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_05/"
+basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_40/Alpha"
 
 # Loading the iris plants dataset (classification)
-data = pd.read_pickle(f'{basefilepath}alpha_df.pkl') 
+data = pd.read_pickle(f'{basefilepath}/alpha_df.pkl')
 
 print(data)
 # dividing the datasets into two parts i.e. training datasets and test datasets
