@@ -107,7 +107,7 @@ for shape_name in shape_name_arr:
     for i in range(num_datasets):
         # Make PI of H_2 diagram
         if shape_name.lower() == 'circle':    
-            pimg_H2 = np.full(pimgrH2.resolution, np.nan)
+            pimg_H2 = np.full(pimgrH2.resolution, 0)
         else:
             filename = str("PD_"+str(i)+"_"+str(2))               
             print(f'{path}{filename}')

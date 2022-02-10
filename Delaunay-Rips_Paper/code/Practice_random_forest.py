@@ -9,39 +9,25 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 import pandas as pd
 import numpy as np
+import os
 
+
+home = os.path.expanduser("~")
+basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_05/"
 
 # Loading the iris plants dataset (classification)
-iris = datasets.load_iris()
-print(iris.target_names)
-print(iris.feature_names)
+data = pd.read_pickle(f'{basefilepath}alpha_df.pkl') 
 
 # dividing the datasets into two parts i.e. training datasets and test datasets
-X, y = datasets.load_iris( return_X_y = True)
-X.tolist()
-X[4][0] = [1,2]
-print(X[4][0])
-exit()
-
-for i in range(len(X)):
-    X[i][0]= np.random.rand(1,5)
-
+X = data.iloc[:,1:]
+y = data.iloc[:,0]
 
 # Spliting arrays or matrices into random train and test subsets
 # i.e. 70 % training dataset and 30 % test datasets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30)
 
-# importing random forest classifier from assemble module
-# creating dataframe of IRIS dataset
-data = pd.DataFrame({'sepallength': iris.data[:, 0], 'sepalwidth': iris.data[:, 1],
-					'petallength': iris.data[:, 2], 'petalwidth': iris.data[:, 3],
-					'species': iris.target})
-
-# printing the top 5 datasets in iris dataset
-print(data.head())
-
 # creating a RF classifier
-clf = RandomForestClassifier(n_estimators = 100)
+clf = RandomForestClassifier(n_estimators = 100, min_samples_leaf = 5)
 
 # Training the model on the training dataset
 # fit function is used to train the model using the training sets as parameters
