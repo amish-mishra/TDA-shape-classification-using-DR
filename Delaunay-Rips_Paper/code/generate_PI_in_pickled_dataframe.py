@@ -28,14 +28,27 @@ from persim import PersistenceImager
 import pandas
 
 
+
+
+def plot_PI(pd, pimgr, pimg):
+    fig, axs = plt.subplots(1, 3, figsize=(10,5))
+    axs[0].set_title("Original Diagram")
+    pimgr.plot_diagram(pd, skew=False, ax=axs[0])
+    axs[1].set_title("Birth-Persistence\nCoordinates")
+    pimgr.plot_diagram(pd, skew=True, ax=axs[1])
+    axs[2].set_title("Persistence Image")
+    pimgr.plot_image(pimg, ax=axs[2])
+    plt.tight_layout()
+    plt.show()
+
+
 # Initialize variables
 home = os.path.expanduser("~")
 basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_05/"
 noise_level = 0.05
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 5 
-pts_per_dataset = 500
+num_datasets = 100
 
 
 # Find the image range for the H_2 class diagrams
@@ -55,8 +68,6 @@ pdgms_H1 = []
 k = 1   # Hom class to extract
 filtration_func = "Alpha"
 for shape_name in shape_name_arr:
-    if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
-        continue
     for i in range(num_datasets):
         path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
         pd = np.loadtxt(path)
@@ -67,15 +78,13 @@ pdgms_H0 = []
 k = 0   # Hom class to extract
 filtration_func = "Alpha"
 for shape_name in shape_name_arr:
-    if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
-        continue
     for i in range(num_datasets):
         path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
         pd = np.loadtxt(path)
         pdgms_H0.append(pd)
 
 # Set the persistence image parameters
-pixel_size = 0.05
+pixel_size = 1
 pimgrH2 = PersistenceImager(pixel_size=pixel_size)
 pimgrH2.fit(pdgms_H2, skew=True)
 pimgrH2.weight_params = {'n': 1.0}
@@ -86,7 +95,7 @@ pimgrH1.weight_params = {'n': 1.0}
 pimgrH1.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
 pimgrH0 = PersistenceImager(pixel_size=0.00001)
 pimgrH0.fit(pdgms_H0, skew=True)
-pimgrH0.pixel_size = (pimgrH0.pers_range[1]-pimgrH0.pers_range[0])/20
+pimgrH0.pixel_size = (pimgrH0.pers_range[1]-pimgrH0.pers_range[0])/1
 pimgrH0.birth_range = (-pimgrH0.pixel_size/2, pimgrH0.pixel_size/2)
 pimgrH0.weight_params = {'n': 1.0}
 pimgrH0.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
@@ -113,13 +122,13 @@ for shape_name in shape_name_arr:
             print(f'{path}{filename}')
             pd = np.loadtxt(f'{path}{filename}.txt')
             pimg_H2 = pimgrH2.transform(pd, skew=True)
-            
+
         # Make PI of H_1 diagram
         filename = str("PD_"+str(i)+"_"+str(1))               
         print(f'{path}{filename}')
         pd = np.loadtxt(f'{path}{filename}.txt')
         pimg_H1 = pimgrH1.transform(pd, skew=True)
-
+        
         # Make PI of H_0 diagram
         filename = str("PD_"+str(i)+"_"+str(0))               
         print(f'{path}{filename}')
