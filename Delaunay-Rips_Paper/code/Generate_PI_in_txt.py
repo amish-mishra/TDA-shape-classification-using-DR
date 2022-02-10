@@ -1,6 +1,8 @@
 # Author: Amish Mishra
 # Date: January 26, 2022
 # README: Generate the PIs of various PDs from txt files into txt files
+# This file was never used because I decided to put the PIs directly into
+# a dataframe and pickle
 
 import matplotlib.pyplot as plt
 import numpy as np

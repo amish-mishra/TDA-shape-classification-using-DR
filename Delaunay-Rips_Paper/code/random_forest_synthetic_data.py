@@ -27,7 +27,7 @@ y = data.iloc[:,0]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30)
 
 # creating a RF classifier
-clf = RandomForestClassifier(n_estimators = 100, min_samples_leaf = 5)
+clf = RandomForestClassifier(n_estimators = 100, min_samples_leaf = 1)
 
 # Training the model on the training dataset
 # fit function is used to train the model using the training sets as parameters
