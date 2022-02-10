@@ -20,6 +20,7 @@ Class | H_1 pixel 1 | H_1 pixel 2 |....| H_2 pixel 1 | H_2 pixel 2 | .....
 5     |             |             |    |             |             |
 '''
 
+from turtle import shape
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -33,39 +34,9 @@ basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_05/"
 noise_level = 0.05
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 5
+num_datasets = 100 
 pts_per_dataset = 500
 
-
-path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\Alpha\\Circle\\PD_0_0.txt"
-pd = np.loadtxt(path)
-pimgrH0 = PersistenceImager(pixel_size=0.00001)
-print(pimgrH0.pers_range)
-pimgrH0.fit(pd, skew=True)
-print(pimgrH0.pers_range)
-pimgrH0.pixel_size = (pimgrH0.pers_range[1]-pimgrH0.pers_range[0])/20
-pimgrH0.birth_range = (-pimgrH0.pixel_size/2, pimgrH0.pixel_size/2)
-pimgrH0.weight_params = {'n': 1.0}
-pimgrH0.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
-pimg_H0 = pimgrH0.transform(pd, skew=True)
-# print(pimg_H0)
-
-fig, axs = plt.subplots(1, 3, figsize=(10,5))
-
-axs[0].set_title("Original Diagram")
-pimgrH0.plot_diagram(pd, skew=False, ax=axs[0])
-
-axs[1].set_title("Birth-Persistence\nCoordinates")
-pimgrH0.plot_diagram(pd, skew=True, ax=axs[1])
-
-axs[2].set_title("Persistence Image")
-
-pimgrH0.plot_image(pimg_H0, ax=axs[2])
-
-plt.tight_layout()
-plt.show()
-
-exit()
 
 # Find the image range for the H_2 class diagrams
 pdgms_H2 = []
@@ -91,37 +62,78 @@ for shape_name in shape_name_arr:
         pd = np.loadtxt(path)
         pdgms_H1.append(pd)
 
+# Find the image range for the H_0 class diagrams
+pdgms_H0 = []
+k = 0   # Hom class to extract
+filtration_func = "Alpha"
+for shape_name in shape_name_arr:
+    if shape_name.lower()=="circle" and k==2:   # there are no H_2 persistence pairs for the Circle
+        continue
+    for i in range(num_datasets):
+        path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\{filtration_func}\\{shape_name}\\PD_{i}_{k}.txt"
+        pd = np.loadtxt(path)
+        pdgms_H0.append(pd)
+
 # Set the persistence image parameters
-pimgrH2 = PersistenceImager(pixel_size=0.5)
+pixel_size = 0.05
+pimgrH2 = PersistenceImager(pixel_size=pixel_size)
 pimgrH2.fit(pdgms_H2, skew=True)
 pimgrH2.weight_params = {'n': 1.0}
 pimgrH2.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
-pimgrH1 = PersistenceImager(pixel_size=0.5)
+pimgrH1 = PersistenceImager(pixel_size=pixel_size)
 pimgrH1.fit(pdgms_H1, skew=True)
 pimgrH1.weight_params = {'n': 1.0}
 pimgrH1.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
+pimgrH0 = PersistenceImager(pixel_size=0.00001)
+pimgrH0.fit(pdgms_H0, skew=True)
+pimgrH0.pixel_size = (pimgrH0.pers_range[1]-pimgrH0.pers_range[0])/20
+pimgrH0.birth_range = (-pimgrH0.pixel_size/2, pimgrH0.pixel_size/2)
+pimgrH0.weight_params = {'n': 1.0}
+pimgrH0.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
 
-# Work on just turning the Torus H_2 and H_1 into a flattened PI vector
-shape_name = 'Torus'
-path = f"{basefilepath}{filtration_func}/{shape_name}/"
-data_list = [None]*num_datasets
-for i in range(num_datasets):
-    # Make PI of H_2 diagram
-    if shape_name.lower() != 'circle':    
-        filename = str("PD_"+str(i)+"_"+str(2))               
+# Save resolution of images to be used when running rips and del-rips
+alpha_H2_resolution = pimgrH2.resolution
+alpha_H1_resolution = pimgrH1.resolution
+alpha_H0_resolution = pimgrH0.resolution
+
+print(alpha_H0_resolution, alpha_H1_resolution, alpha_H2_resolution)
+
+# Work on turning H_2 and H_1 into a flattened PI vector for each shape class and dataset
+data_list = len(shape_name_arr)*[None]*num_datasets
+idx = 0
+shape_idx = 0
+for shape_name in shape_name_arr:
+    path = f"{basefilepath}{filtration_func}/{shape_name}/"
+    for i in range(num_datasets):
+        # Make PI of H_2 diagram
+        if shape_name.lower() == 'circle':    
+            pimg_H2 = np.full(pimgrH2.resolution, np.nan)
+        else:
+            filename = str("PD_"+str(i)+"_"+str(2))               
+            print(f'{path}{filename}')
+            pd = np.loadtxt(f'{path}{filename}.txt')
+            pimg_H2 = pimgrH2.transform(pd, skew=True)
+            
+        # Make PI of H_1 diagram
+        filename = str("PD_"+str(i)+"_"+str(1))               
         print(f'{path}{filename}')
         pd = np.loadtxt(f'{path}{filename}.txt')
-        pimg_H2 = pimgrH2.transform(pd, skew=True)
-    # Make PI of H_1 diagram
-    filename = str("PD_"+str(i)+"_"+str(1))               
-    print(f'{path}{filename}')
-    pd = np.loadtxt(f'{path}{filename}.txt')
-    pimg_H1 = pimgrH1.transform(pd, skew=True)
-    # Add vector as a row to data_list
-    data_list[i] = np.concatenate(([1], pimg_H2.flatten(), pimg_H1.flatten()))
+        pimg_H1 = pimgrH1.transform(pd, skew=True)
+
+        # Make PI of H_0 diagram
+        filename = str("PD_"+str(i)+"_"+str(0))               
+        print(f'{path}{filename}')
+        pd = np.loadtxt(f'{path}{filename}.txt')
+        pimg_H0 = pimgrH0.transform(pd, skew=True)
+
+        # Add vector as a row to data_list
+        data_list[idx] = np.concatenate(([shape_idx], pimg_H2.flatten(), pimg_H1.flatten(), pimg_H0.flatten()))
+        idx += 1
+    shape_idx += 1
         
-df = pandas.DataFrame(data_list)
-print(df)
+alpha_df = pandas.DataFrame(data_list)
+print(alpha_df)
+alpha_df.to_pickle(f'{basefilepath}alpha_df.pkl')
 
 exit()
 path1 = '/home/amishra/Documents/Del_Rips_Paper/research/Delaunay-Rips_Paper/pd_noise_0_05/Alpha/Torus/PD_0_1.txt'
@@ -286,51 +298,15 @@ plt.show()
 
 exit()
 
-
-
-print(pd)
-
-# Printing a PersistenceImager() object will print its defining attributes
-pimgr = PersistenceImager(pixel_size=0.2, birth_range=(0,1))
-# PersistenceImager() attributes can be adjusted at or after instantiation.
-# Updating attributes of a PersistenceImager() object will automatically update all other dependent attributes.
-pimgr.pixel_size = 0.01
-# pimgr.birth_range = (0, 0.2)
-# The `fit()` method can be called on one or more (*,2) numpy arrays to automatically determine the miniumum birth and
-# persistence ranges needed to capture all persistence pairs. The ranges and resolution are automatically adjusted to
-# accomodate the specified pixel size.
-pimgr.fit(pd, skew=True)
-# The `transform()` method can then be called on one or more (*,2) numpy arrays to generate persistence images from diagrams.
-# The option `skew=True` specifies that the diagrams are currently in birth-death coordinates and must first be transformed
-# to birth-persistence coordinates.
-pimgr.weight_params = {'n': 1.0}
-pimgr.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
-pimgs = pimgr.transform(pd, skew=True)
-# The `plot_diagram()` and `plot_image()` methods can be used to visualize persistence diagrams and images
-fig, axs = plt.subplots(1, 3, figsize=(10,5))
-
-axs[0].set_title("Original Diagram")
-pimgr.plot_diagram(pd, skew=False, ax=axs[0])
-
-axs[1].set_title("Birth-Persistence\nCoordinates")
-pimgr.plot_diagram(pd, skew=True, ax=axs[1])
-
-axs[2].set_title("Persistence Image")
-
-pimgr.plot_image(pimgs, ax=axs[2])
-print(pimgs)
-
-plt.tight_layout()
-plt.show()
-
-
-''''
-Notes:
-- Put all H_k pds in a k_dgm array and run the .fit transformer on them to set the scale of the diagram
-- Currently, I have all H_0, H_1, and H_2 diagrams in PI form for each dataset. I can also associate which
-PI goes with the path to its respective PD.
-- Next, I need to save the PI in a similar directory structure to the PDs under a new folder like
-"pi_noise_0_05"
-- Possibly, I will have to write another python script that will concatenate the H_0, 1, 2 classes for each
-dataset together into one single vector for input into the ML model
-'''
+# path = f"C:\\Users\\amish\Documents\\research\\Delaunay-Rips_Paper\\pd_noise_0_05\\\Alpha\\Circle\\PD_0_0.txt"
+# pd = np.loadtxt(path)
+# pimgrH0 = PersistenceImager(pixel_size=0.00001)
+# print(pimgrH0.pers_range)
+# pimgrH0.fit(pd, skew=True)
+# print(pimgrH0.pers_range)
+# pimgrH0.pixel_size = (pimgrH0.pers_range[1]-pimgrH0.pers_range[0])/20
+# pimgrH0.birth_range = (-pimgrH0.pixel_size/2, pimgrH0.pixel_size/2)
+# pimgrH0.weight_params = {'n': 1.0}
+# pimgrH0.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
+# pimg_H0 = pimgrH0.transform(pd, skew=True)
+# print(pimg_H0)
