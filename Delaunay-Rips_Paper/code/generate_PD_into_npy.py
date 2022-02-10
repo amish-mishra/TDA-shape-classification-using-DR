@@ -94,8 +94,8 @@ def get_pd(filtration_method, data):
 
 
 def get_diameter(X, shape):
-    if shape.lower() in ["clusters", "clusters_in_clusters"]: # this has already been handled when clusters were generated
-    # ConvexHull will not work for 3 clusters of many repeated points because they only span a plane, not a 3-D space
+    if shape.lower() in ["clusters", "clusters_in_clusters"]: # this has been handled when clusters were generated
+        # ConvexHull will not work for 3 clusters of many repeated points because they span a plane, not a 3-D space
         return 1      
     else:
         hull = ConvexHull(X) # Find a convex hull in O(N log N)
@@ -106,6 +106,41 @@ def get_diameter(X, shape):
         # Get the farthest apart points
         # bestpair = np.unravel_index(hdist.argmax(), hdist.shape)
         # print([hullpoints[bestpair[0]], hullpoints[bestpair[1]]])
+
+
+def main(pd_directory, noise, num_datasets, pts_per_dataset):
+    # Initialize variables
+    home = os.path.expanduser("~")
+    basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/{pd_directory}/"
+    noise_level = noise
+    filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
+    k = 2   # maximum homology dimension to output into files
+    shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
+
+
+    # exit()  # this is here so this file doesn't accidentally run and overwrite the previous data
+
+    for i in range(num_datasets):
+        for shape_name in shape_name_arr:
+            X = generate_noisy_data(shape_name, noise_level, pts_per_dataset)   # generate data for a shape
+            for filtration_func in filtration_func_arr: # compute PDs using each filtration for a fixed dataset
+                path = f"{basefilepath}{filtration_func}/{shape_name}/"
+                dgm = get_pd(filtration_func, X)
+                for j in range(k+1):  # put H_0, H_1,... classes in separate text files
+                    if j < len(dgm):    # create file path and file name and save the PDs
+                        filename = str("PD_"+str(i)+"_"+str(j))
+                        np.save(f"{path}{filename}.npy", dgm[j])
+                        print("Finished making", f"{path}{filename}.npy")
+
+
+if __name__ == '__main__':
+    directory_arr = ['pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25', 'pd_noise_0_30',
+                     'pd_noise_0_35', 'pd_noise_0_45', 'pd_noise_0_50']
+    noise_arr = [0.15, 0.20, 0.25, 0.30, 0.35, 0.45, 0.50]
+    for i in range(len(directory_arr)):
+        main(pd_directory=directory_arr[i], noise=noise_arr[i], num_datasets=100, pts_per_dataset=500)
+
+
 
 
 # # Testing
@@ -129,27 +164,33 @@ def get_diameter(X, shape):
 #
 # exit()
 
-# Initialize variables
-home = os.path.expanduser("~")
-basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_40/"
-noise_level = 0.40
-filtration_func_arr = ["Alpha", "Rips", "Del_Rips"]
-k = 2   # maximum homology dimension to output into files
-shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 100
-pts_per_dataset = 500
 
-# exit()  # this is here so this file doesn't accidentally run and overwrite the previous data
 
-for i in range(num_datasets):
-    for shape_name in shape_name_arr:
-        X = generate_noisy_data(shape_name, noise_level, pts_per_dataset)   # generate data for a shape
-        for filtration_func in filtration_func_arr: # compute PDs using each filtration for a fixed dataset
-            path = f"{basefilepath}{filtration_func}/{shape_name}/"
-            dgm = get_pd(filtration_func, X)
-            for j in range(k+1):  # put H_0, H_1,... classes in separate text files
-                if j < len(dgm):    # create file path and file name and save the PDs
-                    filename = str("PD_"+str(i)+"_"+str(j))               
-                    np.save(f"{path}{filename}.npy", dgm[j])
-                    print("Finished making", f"{path}{filename}.npy")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
