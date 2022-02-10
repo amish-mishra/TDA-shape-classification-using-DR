@@ -2,7 +2,7 @@
 Author: Amish Mishra
 Date: Feb 3, 2022
 README: Generate the PIs of various PDs from txt files into a single dataframe with structure
-Class | H_1 pixel 1 | H_1 pixel 2 |....| H_2 pixel 1 | H_2 pixel 2 | .....
+Class | H_2 pixel 1 | H_2 pixel 2 |....| H_1 pixel 1 | H_1 pixel 2 | ..... H_0 pixel 1 .....
 0     |             |             |    |             |             |
 0     |             |             |    |             |             |
 0     |             |             |    |             |             |
@@ -34,7 +34,7 @@ basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_05/"
 noise_level = 0.05
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-num_datasets = 100 
+num_datasets = 5 
 pts_per_dataset = 500
 
 
@@ -132,6 +132,8 @@ for shape_name in shape_name_arr:
     shape_idx += 1
         
 alpha_df = pandas.DataFrame(data_list)
+alpha_df.rename(columns = {0:'shape_class'}, inplace = True)
+alpha_df = alpha_df.astype({'shape_class': np.int})
 print(alpha_df)
 alpha_df.to_pickle(f'{basefilepath}alpha_df.pkl')
 
