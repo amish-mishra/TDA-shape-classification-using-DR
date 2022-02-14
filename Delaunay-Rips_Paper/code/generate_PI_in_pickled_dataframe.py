@@ -42,7 +42,7 @@ def plot_PI(pd, pimgr, pimg):
 
 # Initialize variables
 home = os.path.expanduser("~")
-basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_40/"
+basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/pd_noise_0_05/"
 noise_level = 0.05
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
@@ -82,7 +82,7 @@ for shape_name in shape_name_arr:
         pdgms_H0.append(pd)
 
 # Set the persistence image parameters
-pixel_size = 1
+pixel_size = 0.05
 pimgrH2 = PersistenceImager(pixel_size=pixel_size)
 pimgrH2.fit(pdgms_H2, skew=True)
 pimgrH2.weight_params = {'n': 1.0}
@@ -138,8 +138,29 @@ for shape_name in shape_name_arr:
         idx += 1
     shape_idx += 1
         
-alpha_df = pandas.DataFrame(data_list)
-alpha_df.rename(columns = {0:'shape_class'}, inplace = True)
-alpha_df = alpha_df.astype({'shape_class': int})
-print(alpha_df)
-alpha_df.to_pickle(f'{basefilepath}{filtration_func}/alpha_df.pkl')
+df = pandas.DataFrame(data_list)
+df.rename(columns = {0:'shape_class'}, inplace = True)
+df = df.astype({'shape_class': int})
+print(df)
+df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_df.pkl')
+
+
+# TODO: work on applying same resolution to rips and del_rips methods
+print(alpha_H1_resolution)
+pdgms_H1 = []
+k = 1   # Hom class to extract
+filtration_func = "Rips"
+for shape_name in shape_name_arr:
+    for i in range(num_datasets):
+        path = f"{basefilepath}{filtration_func}/{shape_name}/PD_{i}_{k}.npy"
+        pd = np.load(path)
+        pdgms_H1.append(pd)
+
+pimgrH1 = PersistenceImager(pixel_size=0.05)
+pimgrH1.resolution = alpha_H1_resolution
+pimgrH1.fit(pdgms_H1, skew=True)
+pimgrH1.weight_params = {'n': 1.0}
+pimgrH1.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
+pimg_H1 = pimgrH1.transform(pdgms_H1[0], skew=True)
+print(pimgrH1.resolution)
+plot_PI(pdgms_H1[0], pimgrH1, pimg_H1)
