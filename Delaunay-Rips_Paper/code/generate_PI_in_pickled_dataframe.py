@@ -142,15 +142,14 @@ def main(filtration_func, num_datasets, noise_folder, verbose=True):
     df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_df.pkl')
 
 
-
 if __name__ == '__main__':
     filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
     directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
                      'pd_noise_0_30', 'pd_noise_0_35','pd_noise_0_40' , 'pd_noise_0_45', 'pd_noise_0_50']
-    for dir in directory_arr:
+    for directory in directory_arr:
         for f in filtration_func_arr:
-            print("Running", f,"...")
-            main(filtration_func=f, num_datasets=1, noise_folder=dir, verbose=True)
+            print("Generating pickle file in", directory, "for", f, "...")
+            main(filtration_func=f, num_datasets=100, noise_folder=directory, verbose=False)
 
 exit()
 # TODO: work on applying same resolution to rips and del_rips methods
