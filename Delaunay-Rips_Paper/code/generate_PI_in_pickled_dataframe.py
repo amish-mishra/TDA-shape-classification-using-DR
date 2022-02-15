@@ -134,12 +134,13 @@ def main(filtration_func, num_datasets, noise_folder, verbose=True):
             data_list[idx] = np.concatenate(([shape_idx], pimg_H2.flatten(), pimg_H1.flatten(), pimg_H0.flatten()))
             idx += 1
         shape_idx += 1
-    
+
+    # Make the dataframe for all of the PI data    
     df = pandas.DataFrame(data_list)
     df.rename(columns = {0:'shape_class'}, inplace = True)
     df = df.astype({'shape_class': int})
     print(df) if verbose else ''
-    df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_df.pkl')
+    # df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_df.pkl')
 
 
 if __name__ == '__main__':
