@@ -145,8 +145,10 @@ def main(filtration_func, num_datasets, noise_folder, verbose=True):
 
 if __name__ == '__main__':
     filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
-    directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
-                     'pd_noise_0_30', 'pd_noise_0_35','pd_noise_0_40' , 'pd_noise_0_45', 'pd_noise_0_50']
+    # directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
+    #                  'pd_noise_0_30', 'pd_noise_0_35','pd_noise_0_40' , 'pd_noise_0_45', 'pd_noise_0_50']
+    directory_arr = ['pd_noise_0_55', 'pd_noise_0_60', 'pd_noise_0_65', 'pd_noise_0_70', 'pd_noise_0_75']
+
     for directory in directory_arr:
         for f in filtration_func_arr:
             print("Generating pickle file in", directory, "for", f, "...")

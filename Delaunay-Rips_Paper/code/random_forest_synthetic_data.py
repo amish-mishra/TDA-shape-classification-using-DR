@@ -18,8 +18,9 @@ basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/"
 
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
-                    'pd_noise_0_30', 'pd_noise_0_35','pd_noise_0_40' , 'pd_noise_0_45', 'pd_noise_0_50']
-noise_arr = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]
+                 'pd_noise_0_30', 'pd_noise_0_35','pd_noise_0_40' , 'pd_noise_0_45', 'pd_noise_0_50',
+                 'pd_noise_0_55', 'pd_noise_0_60', 'pd_noise_0_65', 'pd_noise_0_70', 'pd_noise_0_75']
+noise_arr = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75]
 
 alpha_accuracy = np.empty((len(directory_arr), 1))
 del_rips_accuracy = np.empty((len(directory_arr), 1))
@@ -37,7 +38,8 @@ for f in filtration_func_arr:
 
         # Spliting arrays or matrices into random train and test subsets
         # i.e. 70 % training dataset and 30 % test datasets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3)
+        test_size = 0.3
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = test_size)
 
         # creating a RF classifier
         clf = RandomForestClassifier(n_estimators = 100, min_samples_leaf = 1)
@@ -69,6 +71,9 @@ plt.xlabel("Noise", fontsize=16)
 plt.ylabel("Model Accuracy", fontsize=16)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
+plt.title("Classifying 6 shape classes using Random Forest:\n"+
+          str(1-test_size)+"-"+str(test_size)+" training-test split", fontsize=16)
+plt.grid(b=True, axis='y')
 
 # Adding legend, which helps us recognize the curve according to it's color
 plt.legend(fontsize=14)

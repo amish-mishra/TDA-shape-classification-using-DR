@@ -134,9 +134,11 @@ def main(pd_directory, noise, num_datasets, pts_per_dataset):
 
 
 if __name__ == '__main__':
-    directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
-                     'pd_noise_0_30', 'pd_noise_0_35', 'pd_noise_0_45', 'pd_noise_0_50']
-    noise_arr = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.45, 0.50]
+    # directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
+    #                  'pd_noise_0_30', 'pd_noise_0_35', 'pd_noise_0_45', 'pd_noise_0_50']
+    # noise_arr = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.45, 0.50]
+    directory_arr = ['pd_noise_0_55', 'pd_noise_0_60', 'pd_noise_0_65', 'pd_noise_0_70', 'pd_noise_0_75']
+    noise_arr = [0.55, 0.60, 0.65, 0.70, 0.75]
     for i in range(len(directory_arr)):
         main(pd_directory=directory_arr[i], noise=noise_arr[i], num_datasets=100, pts_per_dataset=500)
 
