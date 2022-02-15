@@ -79,7 +79,7 @@ def main(filtration_func, num_datasets, noise_folder, verbose=True):
             pdgms_H0.append(pd)
 
     # Set the persistence image parameters
-    pixel_size = 0.1
+    pixel_size = 1
     pimgrH2 = PersistenceImager(pixel_size=pixel_size)
     pimgrH2.fit(pdgms_H2, skew=True)
     pimgrH2.weight_params = {'n': 1.0}
@@ -99,7 +99,7 @@ def main(filtration_func, num_datasets, noise_folder, verbose=True):
     H2_resolution = pimgrH2.resolution
     H1_resolution = pimgrH1.resolution
     H0_resolution = pimgrH0.resolution
-    print('Resolutions of H_0, H_1, H_2:', H0_resolution, H1_resolution, H2_resolution)
+    # print('Resolutions of H_0, H_1, H_2:', H0_resolution, H1_resolution, H2_resolution)
 
     # Turn H_2, H_1, H_0 into a flattened PI vector for each shape class and dataset
     data_list = len(shape_name_arr)*[None]*num_datasets
@@ -145,9 +145,12 @@ def main(filtration_func, num_datasets, noise_folder, verbose=True):
 
 if __name__ == '__main__':
     filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
-    for f in filtration_func_arr:
-        print("Running", f,"...")
-        main(filtration_func=f, num_datasets=1, noise_folder='pd_noise_0_05', verbose=False)
+    directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
+                     'pd_noise_0_30', 'pd_noise_0_35','pd_noise_0_40' , 'pd_noise_0_45', 'pd_noise_0_50']
+    for dir in directory_arr:
+        for f in filtration_func_arr:
+            print("Running", f,"...")
+            main(filtration_func=f, num_datasets=1, noise_folder=dir, verbose=True)
 
 exit()
 # TODO: work on applying same resolution to rips and del_rips methods
