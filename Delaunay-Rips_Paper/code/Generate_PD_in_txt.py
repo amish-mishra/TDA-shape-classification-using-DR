@@ -1,7 +1,7 @@
 # Author: Amish Mishra
 # Date: January 19, 2022
 # README: Generate the PDs of various classes of datasets using different filtrations
-# I decided to save files as .npy so this file is not used
+# I decided to save files as .npy so this file is just for experimenting now
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -80,7 +80,7 @@ def get_pd(filtration_method, data):
     if filtration_method.lower() == "alpha":
         alpha = cm.Alpha(verbose=False)
         filtration = alpha.build(2 * data)  # Alpha goes by radius instead of diameter
-        dgms = alpha.diagrams(filtration, verbose=False)
+        dgms = alpha.diagrams(filtration)
     elif filtration_method.lower() == "rips":
         # only compute homology classes of dimension 1 less than the dimension of the data
         dgm_with_inf = ripser(data, maxdim=(len(data[0])-1))['dgms']
@@ -109,26 +109,26 @@ def get_diameter(X, shape):
         # print([hullpoints[bestpair[0]], hullpoints[bestpair[1]]])
 
 
-# # Testing
-# shape = 'clusters'
-# filt_func = 'Alpha'
-# X = generate_noisy_data(shape, 0.1, 500)   # generate data for a shape
-# fig = plt.figure()
-#  # syntax for 3-D projection
-# ax = plt.axes(projection ='3d')
-# if len(X[0]) == 3:
-#     ax.scatter(X[:,0], X[:,1], X[:,2])
-# else:
-#     ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
-# # syntax for plotting
-# ax.set_title('3d Scatter plot geeks for geeks')
-# plt.show()
-#
-# dgm = get_pd(filt_func, X)
-# plt.title(filt_func+" on "+shape+' with diameter '+str(get_diameter(X, shape)))
-# plot_diagrams(dgm, show=True)
-#
-# exit()
+# Testing
+shape = 'clusters'
+filt_func = 'Alpha'
+X = generate_noisy_data(shape, 0.1, 500)   # generate data for a shape
+fig = plt.figure()
+ # syntax for 3-D projection
+ax = plt.axes(projection ='3d')
+if len(X[0]) == 3:
+    ax.scatter(X[:,0], X[:,1], X[:,2])
+else:
+    ax.scatter(X[:,0], X[:,1], np.zeros((len(X), 1)))
+# syntax for plotting
+ax.set_title('3d Scatter plot geeks for geeks')
+plt.show()
+
+dgm = get_pd(filt_func, X)
+plt.title(filt_func+" on "+shape+' with diameter '+str(get_diameter(X, shape)))
+plot_diagrams(dgm, show=True)
+
+exit()
 
 # Initialize variables
 home = os.path.expanduser("~")
@@ -151,6 +151,6 @@ for i in range(num_datasets):
             for j in range(k+1):  # put H_0, H_1,... classes in separate text files
                 if j < len(dgm):    # create file path and file name and save the PDs
                     filename = str("PD_"+str(i)+"_"+str(j))               
-                    np.savetxt(f"{path}{filename}.txt", dgm[j])
-                    print("Finished making", f"{path}{filename}.txt")
+                    print("Ready to make", f"{path}{filename}.txt")
+                    # np.savetxt(f"{path}{filename}.txt", dgm[j])
 
