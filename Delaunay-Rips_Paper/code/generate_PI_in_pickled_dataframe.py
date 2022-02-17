@@ -185,3 +185,5 @@ if __name__ == '__main__':
         for f in filtration_func_arr:
             print("Generating pickle file in", directory, "for", f, "...")
             main(f, 100, directory, H2imgr, H1imgr, H0imgr, verbose=False)
+
+# TODO: Need to figure out why 0.15 noise produces non-square grids for at least H_1 PDS
