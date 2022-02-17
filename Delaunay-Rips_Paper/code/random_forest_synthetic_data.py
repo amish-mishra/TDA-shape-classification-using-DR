@@ -38,7 +38,7 @@ for f in filtration_func_arr:
 
         # Spliting arrays or matrices into random train and test subsets
         # i.e. 70 % training dataset and 30 % test datasets
-        test_size = 0.3
+        test_size = 0.1
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = test_size)
 
         # creating a RF classifier
