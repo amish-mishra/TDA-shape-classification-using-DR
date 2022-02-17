@@ -70,9 +70,3 @@ plt.grid(b=True, axis='y')
 plt.legend(fontsize=14)
 
 plt.show()
-
-if data.shape[1]-1 == 3: # only 3 pixels used to make PIs
-    data.rename(columns = {1: 'H_2_PI', 2: 'H_1_PI', 3: 'H_0_PI'}, inplace = True)
-    feature_imp = pd.Series(clf.feature_importances_, index = ['H_2_PI', 'H_1_PI', 'H_0_PI']).sort_values(ascending = False)
-    print(feature_imp)
-

@@ -180,29 +180,8 @@ if __name__ == '__main__':
 
     for directory in directory_arr:
         print('Getting imgr objects ready...')
-        H2imgr, H1imgr, H0imgr = get_fitted_pimgr(directory, H1_H2_num_pixels=3, H0_num_pixels=3)
+        H2imgr, H1imgr, H0imgr = get_fitted_pimgr(directory, H1_H2_num_pixels=2, H0_num_pixels=3)
         print('Imgr objects ready')
         for f in filtration_func_arr:
             print("Generating pickle file in", directory, "for", f, "...")
-            main(f, 1, directory, H2imgr, H1imgr, H0imgr, verbose=False)
-
-exit()
-# TODO: work on applying same resolution to rips and del_rips methods
-print(alpha_H1_resolution)
-pdgms_H1 = []
-k = 1   # Hom class to extract
-filtration_func = "Rips"
-for shape_name in shape_name_arr:
-    for i in range(num_datasets):
-        path = f"{basefilepath}{filtration_func}/{shape_name}/PD_{i}_{k}.npy"
-        pd = np.load(path)
-        pdgms_H1.append(pd)
-
-pimgrH1 = PersistenceImager(pixel_size=0.05)
-pimgrH1.resolution = alpha_H1_resolution
-pimgrH1.fit(pdgms_H1, skew=True)
-pimgrH1.weight_params = {'n': 1.0}
-pimgrH1.kernel_params = {'sigma': [[0.00001, 0.0], [0.0, 0.00001]]}
-pimg_H1 = pimgrH1.transform(pdgms_H1[0], skew=True)
-print(pimgrH1.resolution)
-plot_PI(pdgms_H1[0], pimgrH1, pimg_H1)
+            main(f, 100, directory, H2imgr, H1imgr, H0imgr, verbose=False)
