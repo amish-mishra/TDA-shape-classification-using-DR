@@ -15,6 +15,7 @@ import os
 
 home = os.path.expanduser("~")
 basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/"
+expected_features = 11
 
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
@@ -29,8 +30,12 @@ for f in filtration_func_arr:
     i = 0
     for directory in directory_arr:
         # Loading the iris plants dataset (classification)
-        print("Loading", f'{basefilepath}{directory}/{f}_df.pkl')
+        print("Loading", f'{basefilepath}{directory}/{f}/{f}_df.pkl')
         data = pd.read_pickle(f'{basefilepath}{directory}/{f}/{f}_df.pkl')
+
+        if data.shape[1] != expected_features+1:
+            print("Dataframe does not have expected number of columns! Check",
+                  f'{basefilepath}{directory}/{f}/{f}_df.pkl')
 
         # dividing the datasets into two parts i.e. training datasets and test datasets
         X = data.iloc[:,1:]

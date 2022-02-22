@@ -49,7 +49,8 @@ def make_img_square(pimgr, H1_H2_num_pixels):
         pimgr.pers_range = (pimgr.pers_range[0], pimgr.pers_range[0] + birth_len)
     else:
         pimgr.birth_range = (pimgr.birth_range[0], pimgr.birth_range[0] + pers_len)
-    pimgr.pixel_size = max(birth_len, pers_len)/H1_H2_num_pixels
+    pimgr.pixel_size = round(max(birth_len, pers_len)/H1_H2_num_pixels, 2) * 1.05    # make pixel 5% larger
+    # to make resolution square
     return pimgr
 
 
@@ -118,7 +119,7 @@ def get_fitted_pimgr(noise_folder, H1_H2_num_pixels, H0_num_pixels):
     return pimgrH2, pimgrH1, pimgrH0
 
 
-def main(filtration_func, num_datasets, noise_folder, H2imgr, H1imgr, H0imgr, verbose=True):
+def main(filtration_func, num_datasets, noise_folder, H2imgr, H1imgr, H0imgr, verbose=True, output_file=False):
     # Initialize variables
     home = os.path.expanduser("~")
     basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/{noise_folder}/"
@@ -169,13 +170,16 @@ def main(filtration_func, num_datasets, noise_folder, H2imgr, H1imgr, H0imgr, ve
     df.rename(columns = {0:'shape_class'}, inplace = True)
     df = df.astype({'shape_class': int})
     print(df) if verbose else ''
-    # df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_df.pkl')
+    if output_file:
+        df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_df.pkl')
+    else:
+        print("WARNING: No pickled df is being saved")
 
 
 if __name__ == '__main__':
     filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
     directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
-                     'pd_noise_0_30', 'pd_noise_0_35','pd_noise_0_40' , 'pd_noise_0_45', 'pd_noise_0_50',
+                     'pd_noise_0_30', 'pd_noise_0_35', 'pd_noise_0_40', 'pd_noise_0_45', 'pd_noise_0_50',
                      'pd_noise_0_55', 'pd_noise_0_60', 'pd_noise_0_65', 'pd_noise_0_70', 'pd_noise_0_75']
 
     for directory in directory_arr:
@@ -184,6 +188,7 @@ if __name__ == '__main__':
         print('Imgr objects ready')
         for f in filtration_func_arr:
             print("Generating pickle file in", directory, "for", f, "...")
-            main(f, 100, directory, H2imgr, H1imgr, H0imgr, verbose=False)
+            main(f, 100, directory, H2imgr, H1imgr, H0imgr, verbose=False, output_file=True)
 
-# TODO: Need to figure out why 0.15 noise produces non-square grids for at least H_1 PDS
+
+
