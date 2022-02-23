@@ -430,6 +430,49 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
 
     Although we have special cases where instability in the PD may arise (as shown in section \ref{instability_section}), we show here that this instability does not manifest itself when working with actual data sets. Our comparison is made in the following graphs. We compute the PD for a data set with 0.0001 noise (that is, the points are within a distance of 0.0001 of being exactly on the surface of the underlying shape). The tiny amount of noise makes it highly probable that our data set will be in general position. Then, we perturb the data set for increasing levels of noise and compute the PD for the perturbed data set using Delaunay-Rips, Rips, and Alpha. We plot the bottleneck distance between the PD of the perturbed data set with the PD of the original data set for each method. This captures how the PD evolves for increasing levels of noise in the data. The perturbation is made by moving each point in a random direction within a given magnitude (which is the noise level).
 
+\subsection{Machine Learning Classification}
+    To test the robustness of Delaunay-Rips, we develop some ML classification models using Rips, Alpha, and Delaunay-Rips. Although the Persistence Diagrams produced using the Delaunay-Rips Filtration enjoy stability in a neighborhood (see Section \ref{stability}), in reality, the underlying Delaunay Triangulation of the point cloud should be expected to change with varying levels of noise. The purpose of this section is to demonstrate how the instability of the Persistence Diagrams does not manifest itself in practical application. Here is the experiment:
+    \begin{enumerate}
+        \item Choose 6 shape classes of synthetic data: circle, sphere, torus, random, three clusters, and three clusters within three clusters.
+        \item Choose 3 filtration methods: Alpha, Rips, and Delaunay-Rips.
+        \item Fix a noise level $\nu$ and generate 100 point clouds for each shape class.
+        \item With the 600 point clouds, use one of the filtration methods to generate Persistence Diagrams for $H_0, H_1$, and $H_2$ classes for each point cloud.
+        \item Use a vectorization method to convert the PDs to a flattened vector. Concatenate the vectors corresponding to $H_0, H_1$, and $H_2$ diagrams into one vector for each point cloud. (This should produce 600 total vectors corresponding to each original point cloud.)
+        \item Build a dataframe with each vector labeled 0-5 where
+        \[
+            0: Circle,\ 1: Sphere,\ 2: Torus,\ 3: Random,\ 4: Clusters,\ 5: Clusters\_in\_clusters.
+        \]
+        \item Train an ML model on the 600 vectors to distinguish the 6 shape classes with 10-fold cross validation. Output the average accuracy of the model on the testing portion of the data.
+        \item Plot the average accuracy for increasing noise levels $\nu=0.05, 0.10,...,0.75$. Thus, repeat steps 3-7.
+        \item Compare accuracy plots of using Alpha, Rips, and Delaunay-Rips as the filtration method to train ML model.
+        \item Further, change the ML model and the vectorization method (steps 5 and 7) to make a fair comparison of filtration method affecting the model accuracy rather than another factor.
+    \end{enumerate}
+    
+    One of our vectorization techniques was using the python package ``persim'' from the scikit-tda library. For our ML model, we decided to train a Random Forest Classifier from scikit-learn with 100 trees and minimum number of samples required to be at a leaf node set to 1. Figure \ref{fig:persim_rfc} shows the accuracy of our model for increasing noise levels.
+    \begin{figure}[ht!]
+        \centering
+        % \includegraphics[width=\columnwidth]{figures/persim_rfc.eps}
+        \caption{}
+        \label{fig:persim_rfc}
+    \end{figure}
+    
+    We also changed our vectorization technique to be persistence landscapes and our ML model to be a Support Vector Machine. Thus we assessed accuracy of our models with the following pairings:
+    \begin{enumerate}
+        \item persistence images + random forest
+        \item persistence images + SVM
+        \item persistence landscapes + random forest
+        \item persistence landscapes + SVM
+    \end{enumerate}
+
+    The results are summarized in Figure \ref{fig:4_models}. 
+    \begin{figure}[ht!]
+        \centering
+        % \includegraphics[width=\columnwidth]{figures/persim_rfc.eps}
+        \caption{}
+        \label{fig:4_models}
+    \end{figure}
+
+
     % Focus is two things: Accuracy and Speed. Demonstrating accuracy (by comparing with Rips and Alpha) builds trust in Del-Rips. Demonstrating speed encourages using Del-Rips over Rips or Alpha.
 
     % Comparing Ripser, Cechmate's Alpha, and our Del-Rips implementation.
@@ -586,7 +629,7 @@ The heavy machinery used to establish the continuity of the matrix inverse was d
     $$\frac{||((A+E)\inv -A\inv)b||}{||b||} \leq \frac{\sqrt{n}||A\inv||^2\ ||E||}{1-||A\inv||\ ||E||}.$$
     Since this inequality is true for any $b$, we have that
     $$\sup\left\{\frac{||((A+E)\inv -A\inv)b||}{||b||}\ :\ b\neq 0\right\} \leq \frac{\sqrt{n}||A\inv||^2\ ||E||}{1-||A\inv||\ ||E||}.$$
-    It follows by the definition of the norm that
+    It follows by the definition of the operator norm that
     $$||(A+E)\inv-A\inv||\leq\frac{\sqrt{n}||A\inv||^2\ ||E||}{1-||A\inv||\ ||E||}.$$
 \end{proof}
 
