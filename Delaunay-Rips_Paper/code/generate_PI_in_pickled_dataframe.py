@@ -171,13 +171,23 @@ def main(filtration_func, num_datasets, noise_folder, H2imgr, H1imgr, H0imgr, ve
     df = df.astype({'shape_class': int})
     print(df) if verbose else ''
     if output_file:
-        df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_df.pkl')
+        df.to_pickle(f'{basefilepath}{filtration_func}/{filtration_func}_res_25_df.pkl')
     else:
         print("WARNING: No pickled df is being saved")
 
 
 if __name__ == '__main__':
     filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
+
+    # # This portion below just makes a high res PI for the heatmap comparison of feature vector importance
+    # directory = 'pd_noise_0_20'
+    # print('Getting imgr objects ready...')
+    # H2imgr, H1imgr, H0imgr = get_fitted_pimgr(directory, H1_H2_num_pixels=5, H0_num_pixels=5)
+    # print('Imgr objects ready')
+    # for f in filtration_func_arr:
+    #     print("Generating pickle file in", directory, "for", f, "...")
+    #     main(f, 100, directory, H2imgr, H1imgr, H0imgr, verbose=False, output_file=True)
+    # exit()
     directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
                      'pd_noise_0_30', 'pd_noise_0_35', 'pd_noise_0_40', 'pd_noise_0_45', 'pd_noise_0_50',
                      'pd_noise_0_55', 'pd_noise_0_60', 'pd_noise_0_65', 'pd_noise_0_70', 'pd_noise_0_75']
@@ -188,7 +198,7 @@ if __name__ == '__main__':
         print('Imgr objects ready')
         for f in filtration_func_arr:
             print("Generating pickle file in", directory, "for", f, "...")
-            main(f, 100, directory, H2imgr, H1imgr, H0imgr, verbose=False, output_file=True)
+            main(f, 100, directory, H2imgr, H1imgr, H0imgr, verbose=False, output_file=False)
 
 
 

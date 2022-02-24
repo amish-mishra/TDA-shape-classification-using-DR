@@ -1,12 +1,10 @@
 # Author: Amish Mishra
 # Date: February 16, 2022
-# README: This file is creating a random forest classifier and assess accuracy using cross validation
+# README: This file is creating a classifier and assesses accuracy using cross validation
 
-
-from sklearn import datasets
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_validate
-from sklearn import metrics
+from sklearn import svm
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -41,8 +39,9 @@ for f in filtration_func_arr:
         X = data.iloc[:,1:]
         y = data.iloc[:,0]
 
-        # creating a RF classifier
-        clf = RandomForestClassifier(n_estimators = 100, min_samples_leaf = 1)
+        # creating a classifier
+        # clf = RandomForestClassifier()
+        clf = svm.SVC(kernel='linear')
 
         # Cross validated
         cv_results = cross_validate(clf, X, y, cv=10)
