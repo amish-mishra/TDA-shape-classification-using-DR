@@ -448,7 +448,9 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         \item Further, change the ML model and the vectorization method (steps 5 and 7) to make a fair comparison of filtration method affecting the model accuracy rather than another factor.
     \end{enumerate}
     
-    One of our vectorization techniques was using the python package ``persim'' from the scikit-tda library. For our ML model, we decided to train a Random Forest Classifier from scikit-learn with 100 trees and minimum number of samples required to be at a leaf node set to 1. Figure \ref{fig:persim_rfc} shows the accuracy of our model for increasing noise levels.
+    One of our vectorization techniques was using Persistence Images from the python package ``persim'' from the scikit-tda library. Fixing a homology class and fixing a $\nu$, we decided to fit a desired resolution to all of the PDs produced using Alpha, Rips, and Delaunay-Rips. For example, we iterate through all $H_1$ persistence diagrams for all three of our filtration methods that were produced using $\nu=0.20$. Then, we find the maximum birth range and persistence range and use those values to set a $2\times2$ resolution grid to produce the Persistence Images. The purpose of doing this was to ensure that if we compared pixels of the PIs corresponding to different filtration methods, we would make a fair comparison because corresponding persistence pairs would land in corresponding pixels (we leverage this design in Figure \ref{fig:heatmaps} when comparing feature importance).
+    
+    For our ML model, we decided to train a Random Forest Classifier from scikit-learn with 100 trees and minimum number of samples required to be at a leaf node set to 1. Figure \ref{fig:persim_rfc} shows the accuracy of our model for increasing noise levels.
     \begin{figure}[ht!]
         \centering
         % \includegraphics[width=\columnwidth]{figures/persim_rfc.eps}
@@ -456,6 +458,21 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         \label{fig:persim_rfc}
     \end{figure}
     
+    Further, we investigated the most important features that the Random Forest Classfier was detecting when constructing the model making classificaitons. We began with the PDs produced from the $\nu=0.20$ noisy data. We generated our Persistence Images to have the following resolutions for each Persistence Diagram:
+    \begin{itemize}
+        \item $H_0$ diagram resolution: $5 \times 1$
+        \item $H_1$ diagram resolution: $5 \times 5$
+        \item $H_2$ diagram resolution: $5 \times 5$
+    \end{itemize}
+    Using this, each of our 600 vectors had a total of 55 features. We trained a Random Forest Classfier with the same parameters as before, but no cross-validation this time (or else we could not get a feature importance summary easily). Using a train-test split of 70-30, we generated the heatmaps in Figure \ref{fig:heatmaps}. Notice how for the different filtrations we used to obtain the PDs, the PIs generated have similar corresponding pixels that the ML model found important. Remember that each pixel was a feature for our ML model. Hence, we have reason to believe that regardless of the filtration method used, our ML model learned the importance of similar features to classify the various datasets.
+
+    \begin{figure}[ht!]
+        \centering
+        % \includegraphics[width=\columnwidth]{figures/persim_rfc.eps}
+        \caption{}
+        \label{fig:heatmaps}
+    \end{figure}
+
     We also changed our vectorization technique to be persistence landscapes and our ML model to be a Support Vector Machine. Thus we assessed accuracy of our models with the following pairings:
     \begin{enumerate}
         \item persistence images + random forest
@@ -471,7 +488,6 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         \caption{}
         \label{fig:4_models}
     \end{figure}
-
 
     % Focus is two things: Accuracy and Speed. Demonstrating accuracy (by comparing with Rips and Alpha) builds trust in Del-Rips. Demonstrating speed encourages using Del-Rips over Rips or Alpha.
 
