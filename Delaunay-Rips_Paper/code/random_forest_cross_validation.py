@@ -14,6 +14,9 @@ import os
 home = os.path.expanduser("~")
 basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/"
 expected_features = 11
+del_rips_color = 'b'
+rips_color = 'r'
+alpha_color = 'g'
 
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 directory_arr = ['pd_noise_0_05', 'pd_noise_0_10', 'pd_noise_0_15', 'pd_noise_0_20', 'pd_noise_0_25',
@@ -48,12 +51,22 @@ for f in filtration_func_arr:
 
         # using metrics module for accuracy calculation
         if f.lower() == 'alpha':
-            alpha_accuracy[i] = cv_results['test_score'].mean()
+            alpha_accuracy[i] = np.median(cv_results['test_score'])
+            plt.boxplot(cv_results['test_score'], showfliers=False, positions=[noise_arr[i]], 
+                widths=0.05/5, boxprops=dict(color=alpha_color), capprops=dict(color=alpha_color),
+                whiskerprops=dict(color=alpha_color), medianprops=dict(color=alpha_color))
         elif f.lower() == 'del_rips':
-            del_rips_accuracy[i] = cv_results['test_score'].mean()
+            del_rips_accuracy[i] = np.median(cv_results['test_score'])
+            plt.boxplot(cv_results['test_score'], showfliers=False, positions=[noise_arr[i]], 
+                widths=0.05/5, boxprops=dict(color=del_rips_color), capprops=dict(color=del_rips_color),
+                whiskerprops=dict(color=del_rips_color), medianprops=dict(color=del_rips_color))
         if f.lower() == 'rips':
-            rips_accuracy[i] = cv_results['test_score'].mean()
+            rips_accuracy[i] = np.median(cv_results['test_score'])
+            plt.boxplot(cv_results['test_score'], showfliers=False, positions=[noise_arr[i]], 
+                widths=0.05/5, boxprops=dict(color=rips_color), capprops=dict(color=rips_color),
+                whiskerprops=dict(color=rips_color), medianprops=dict(color=rips_color))
         i += 1
+
 
 # Plotting both the curves simultaneously
 # print(bott_dist_arr_A, bott_dist_arr_R, bott_dist_arr_DR)
@@ -66,6 +79,8 @@ plt.xlabel("Noise", fontsize=16)
 plt.ylabel("Model Accuracy", fontsize=16)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
+plt.xlim([min(noise_arr)-0.05, max(noise_arr)+0.05])
+
 # plt.title("Classifying 6 shape classes using Random Forest:\n"+
 #           str(1-test_size)+"-"+str(test_size)+" training-test split", fontsize=16)
 plt.grid(b=True, axis='y')
