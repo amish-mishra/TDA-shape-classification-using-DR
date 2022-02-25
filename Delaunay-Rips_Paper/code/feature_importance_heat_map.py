@@ -16,20 +16,19 @@ plt.style.use("seaborn")
 home = os.path.expanduser("~")
 basefilepath = f"{home}/Documents/research/Delaunay-Rips_Paper/"
 expected_features = 11
+colormap = sns.color_palette("Blues")
 
 filtration_func_arr = ["Alpha", "Del_Rips", "Rips"]
 directory = 'pd_noise_0_20'
-noise = 0.25
+noise = 0.20
 
 i = 1
+fig, ax = plt.subplots (3,3)
 for f in filtration_func_arr:
     # Loading the iris plants dataset (classification)
     print("Loading", f'{basefilepath}{directory}/{f}/{f}_res_25_df.pkl')
     data = pd.read_pickle(f'{basefilepath}{directory}/{f}/{f}_res_25_df.pkl')
     
-    if data.shape[1] != expected_features+1:
-        print("Dataframe does not have expected number of columns! Check",
-                f'{basefilepath}{directory}/{f}/{f}_res_25_df.pkl')
 
     # dividing the datasets into two parts i.e. training datasets and test datasets
     X = data.iloc[:,1:]
@@ -48,13 +47,14 @@ for f in filtration_func_arr:
     feat_imp_H0 = np.rot90(clf.feature_importances_[50:].reshape(1,5))
 
     plt.subplot(3,3,i)
-    heat_map = sns.heatmap(feat_imp_H0, linewidth = 1 , annot = True)
-    plt.title(str(f)+" HeatMap of H0 Image")
+    heat_map = sns.heatmap(feat_imp_H0, linewidth = 1 , annot = True, cbar = True, xticklabels = False,yticklabels = False, vmin = 0, vmax = 0.2, cmap = colormap, square = True)
+    plt.title(str(f)+" HeatMap of H0 Images")
     plt.subplot(3,3,i+1)
-    heat_map = sns.heatmap(feat_imp_H1, linewidth = 1 , annot = True)
-    plt.title(str(f)+" HeatMap of H1 Image")
+    heat_map = sns.heatmap(feat_imp_H1, linewidth = 1 , annot = True, cbar = True, xticklabels = False,yticklabels = False, vmin = 0, vmax = 0.2, cmap = colormap)
+    plt.title(str(f)+" HeatMap of H1 Images")
     plt.subplot(3,3,i+2)
-    heat_map = sns.heatmap(feat_imp_H2, linewidth = 1 , annot = True)
-    plt.title(str(f)+" HeatMap of H2 Image")
+    heat_map = sns.heatmap(feat_imp_H2, linewidth = 1 , annot = True, cbar = True, xticklabels = False,yticklabels = False, vmin = 0, vmax = 0.2, cmap = colormap)
+    plt.title(str(f)+" HeatMap of H2 Images")
     i+=3
+fig.tight_layout()
 plt.show()
