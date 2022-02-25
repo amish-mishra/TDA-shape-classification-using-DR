@@ -48,11 +48,11 @@ def main(filtration_func, num_datasets, noise_folder, verbose=True, output_file=
                     print(f'{path}{filename}') if verbose else ''
                     pd = np.load(f'{path}{filename}.npy')
                     pds.append(pd)
-            # TODO: Unable to compute and plot Persistence landscape
-            pl = persim.landscapes.PersLandscapeExact(pds, hom_deg=1)
-            print(pl)
-            persim.landscapes.plot_landscape_simple(pl, title=f"{filtration_func}: {shape_name}")
-            plt.show()
+            # TODO: How should I decide the start stop and num_steps?
+            landscaper = persim.landscapes.PersistenceLandscaper(hom_deg=1, start=0, stop=2.0, num_steps=500, flatten=True)
+            pl = landscaper.fit_transform(pds)
+            # persim.landscapes.plot_landscape_simple(pl, title=f"{filtration_func}: {shape_name}")
+            # plt.show()
             # Add vector as a row to data_list
             # data_list[idx] = np.concatenate(([shape_idx]))
             idx += 1
