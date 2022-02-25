@@ -20,9 +20,6 @@ Class | H_2 pixel 1 | H_2 pixel 2 |....| H_1 pixel 1 | H_1 pixel 2 | ..... H_0 p
 5     |             |             |    |             |             |
 '''
 
-from cmath import pi
-from tabnanny import verbose
-from turtle import shape
 import matplotlib.pyplot as plt
 import numpy as np
 import os
