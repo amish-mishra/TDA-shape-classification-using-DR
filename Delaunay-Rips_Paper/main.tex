@@ -404,7 +404,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
     % \end{proof}
     
     
-    \begin{thm}
+    \begin{thm}\label{thm:same_delaunay}
         Let $P \subset \R^d$ be in general position, that is no $d+2$ points lie on the same $(d-1)$-sphere and no $d+1$ points are affinely dependent. Then, there exists $\varepsilon>0$ such that any $\varepsilon$-perturbation $P'$ of $P$ has the same Delaunay Triangulation as $P$. That is,
         $$\Del(P) = \Del(P').$$
     \end{thm}
@@ -414,9 +414,12 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         Hence, for any $\varepsilon$-perturbation $P'$ of $P$, $P'$ has the same Delaunay Triangulation as $P$.
     \end{proof}
     
-    Now, we need a theorem that gives us stability of PDs in PD space equipped with the bottle-neck distance. So,
-
-
+    Now we know that for any point cloud in general position, there always exists an $\varepsilon$-perturbation that maintains the Delaunay Triangulation. With the underlying complex now fixed, we allow for the weights on the simplicies to change. This corresponds to choosing two monotonic functions on the same complex. Hence, we may apply the stability theorem for filtrations from \cite{Edelsbrunner}.
+    \begin{thm}
+        Let $K$ be a simplicial complex and $f,g: K \to \R$ two monotonic functions. For each dimension $p$, the bottleneck distance between the diagrams $X = \text{Dgm}_p(f)$ and $Y = \text{Dgm}_p(g)$ is bounded from above by the $L_\infty$-distance between the functions,
+        $$W_\infty(X,Y) \leq ||f-g||_\infty.$$
+    \end{thm}
+    Hence, by application of this theorem, we conclude that the PDs produced using the Delaunay-Rips filtration are stable in an $\varepsilon$-perturbation of the original point cloud.
 
     
 \section{Application of Delaunay-Rips}
@@ -458,7 +461,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         \label{fig:accuracy_v_noise}
     \end{figure}
     
-    Further, we investigated the most important features that the Random Forest Classfier was detecting when constructing the model making classificaitons. We began with the PDs produced from the $\nu=0.20$ noisy data. We generated our Persistence Images to have the following resolutions for each Persistence Diagram:
+    Further, we investigated the most important features that the Random Forest Classfier was detecting when constructing the model making classifications. We began with the PDs produced from the $\nu=0.20$ noisy data. We generated our Persistence Images to have the following resolutions for each Persistence Diagram:
     \begin{itemize}
         \item $H_0$ diagram resolution: $5 \times 1$
         \item $H_1$ diagram resolution: $5 \times 5$
