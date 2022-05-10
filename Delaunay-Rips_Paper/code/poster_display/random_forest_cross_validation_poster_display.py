@@ -65,13 +65,13 @@ rips_accuracy *= 100
 
 # Plotting both the curves simultaneously
 # print(bott_dist_arr_A, bott_dist_arr_R, bott_dist_arr_DR)
-plt.plot(noise_arr, alpha_accuracy, ls='--', color='b', label='Alpha', linewidth=5, solid_capstyle='round')
-plt.plot(noise_arr, del_rips_accuracy, ls=':', color='b', label='Del-Rips', linewidth=5, solid_capstyle='round')
-plt.plot(noise_arr, rips_accuracy, color='b', label='Rips', linewidth=5, solid_capstyle='round')
+plt.plot(noise_arr, alpha_accuracy, color='g', label='Alpha', linewidth=5, solid_capstyle='round')
+plt.plot(noise_arr, del_rips_accuracy, color='b', label='Del-Rips', linewidth=5, solid_capstyle='round')
+plt.plot(noise_arr, rips_accuracy, color='r', label='Rips', linewidth=5, solid_capstyle='round')
 
 # Naming the x-axis, y-axis and the whole graph
 plt.xlabel("Noise", fontsize=16)
-plt.ylabel("Model Accuracy", fontsize=16)
+plt.ylabel("Model Accuracy (%)", fontsize=16)
 plt.xticks(fontsize=14, ticks=[0.1, 0.4, 0.7])
 plt.yticks(fontsize=14)
 plt.xlim([min(noise_arr)-0.05, max(noise_arr)+0.05])
