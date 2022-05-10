@@ -106,5 +106,6 @@ for i, shape_name in enumerate(shape_name_arr):
     ax.yaxis.set_ticklabels([])
     ax.zaxis.set_ticklabels([])
     plt.gca().view_init(68, -14)
+    ax.set_title(shape_name)
 
 plt.show()
