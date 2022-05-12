@@ -88,7 +88,7 @@ def get_diameter(X, shape):
 
 
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-noise_level = 0.75
+noise_level = 0.4
 pts_per_dataset = 500
 fig = plt.figure(figsize=plt.figaspect(0.5))
 

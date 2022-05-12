@@ -4,7 +4,7 @@
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_validate
-from sklearn import svm
+from sklearn import svm, metrics
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -32,7 +32,7 @@ for f in filtration_func_arr:
         # Loading the iris plants dataset (classification)
         print("Loading", f'{basefilepath}{directory}/{f}/{f}_df.pkl')
         data = pd.read_pickle(f'{basefilepath}{directory}/{f}/{f}_df.pkl')
-        
+
         if data.shape[1] != expected_features+1:
             print("Dataframe does not have expected number of columns! Check",
                   f'{basefilepath}{directory}/{f}/{f}_df.pkl')
@@ -72,7 +72,7 @@ plt.plot(noise_arr, rips_accuracy, color='r', label='Rips', linewidth=5, solid_c
 # Naming the x-axis, y-axis and the whole graph
 plt.xlabel("Noise", fontsize=16)
 plt.ylabel("Model Accuracy (%)", fontsize=16)
-plt.xticks(fontsize=14, ticks=[0.1, 0.4, 0.7])
+plt.xticks(fontsize=14, ticks=[0.05, 0.4, 0.75])
 plt.yticks(fontsize=14)
 plt.xlim([min(noise_arr)-0.05, max(noise_arr)+0.05])
 
@@ -84,3 +84,21 @@ plt.grid(b=True, axis='y')
 plt.legend(fontsize=14)
 
 plt.show()
+
+# # Test to see confusion matrix
+# print("Loading", f'{basefilepath}pd_noise_0_05/Del_Rips/Del_Rips_df.pkl')
+# data = pd.read_pickle(f'{basefilepath}pd_noise_0_05/Del_Rips/Del_Rips_df.pkl')
+# X = data.iloc[:, 1:]
+# y = data.iloc[:, 0]
+# # Spliting arrays or matrices into random train and test subsets
+# from sklearn.model_selection import train_test_split
+# # i.e. 70 % training dataset and 30 % test datasets
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.0)
+#
+# clf = svm.SVC(kernel='linear')
+# clf.fit(X_train, y_train)
+#
+# # performing predictions on the test dataset
+# y_pred = clf.predict(X_test)
+# cm = metrics.confusion_matrix(y_test, y_pred)
+# print(cm)
