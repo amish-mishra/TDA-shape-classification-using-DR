@@ -88,9 +88,9 @@ def get_diameter(X, shape):
 
 
 shape_name_arr = ["Circle", "Sphere", "Torus", "Random", "Clusters", "Clusters_in_clusters"]
-noise_level = 0.4
+noise_level = 0.75
 pts_per_dataset = 500
-fig = plt.figure(figsize=plt.figaspect(0.5))
+fig = plt.figure(figsize=(9,6))
 
 for i, shape_name in enumerate(shape_name_arr):
     X = generate_noisy_data(shape_name, noise_level, pts_per_dataset)   # generate data for a shape
@@ -106,6 +106,7 @@ for i, shape_name in enumerate(shape_name_arr):
     ax.yaxis.set_ticklabels([])
     ax.zaxis.set_ticklabels([])
     plt.gca().view_init(68, -14)
-    ax.set_title(shape_name)
+    ax.set_title(shape_name, fontsize=20)
+    ax.grid(False)
 
 plt.show()

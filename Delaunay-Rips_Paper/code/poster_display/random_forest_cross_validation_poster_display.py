@@ -65,15 +65,16 @@ rips_accuracy *= 100
 
 # Plotting both the curves simultaneously
 # print(bott_dist_arr_A, bott_dist_arr_R, bott_dist_arr_DR)
+plt.figure(figsize=(15,5))
 plt.plot(noise_arr, alpha_accuracy, color='g', label='Alpha', linewidth=5, solid_capstyle='round')
 plt.plot(noise_arr, del_rips_accuracy, color='b', label='Del-Rips', linewidth=5, solid_capstyle='round')
 plt.plot(noise_arr, rips_accuracy, color='r', label='Rips', linewidth=5, solid_capstyle='round')
 
 # Naming the x-axis, y-axis and the whole graph
 plt.xlabel("Noise", fontsize=16)
-plt.ylabel("Model Accuracy (%)", fontsize=16)
+plt.ylabel("Median Model Accuracy (%)", fontsize=16)
 plt.xticks(fontsize=14, ticks=[0.05, 0.4, 0.75])
-plt.yticks(fontsize=14)
+plt.yticks(fontsize=14, ticks=[60,70,80,90,100])
 plt.xlim([min(noise_arr)-0.05, max(noise_arr)+0.05])
 
 # plt.title("Classifying 6 shape classes using Random Forest:\n"+

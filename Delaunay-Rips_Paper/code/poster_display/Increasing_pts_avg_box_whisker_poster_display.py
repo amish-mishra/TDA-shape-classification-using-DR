@@ -24,11 +24,11 @@ from persim import plot_diagrams
 
 if __name__ == '__main__':
     # Initialize variables
-    trials = 10
+    trials = 1
     radius = 1
     noise = 0.1
     start_pts = 50
-    max_pts = 250   #1550
+    max_pts = 550   #1550
     increment = 50  #100
     fixed_dim = 1   #2
     max_run_time = 7
@@ -113,8 +113,8 @@ if __name__ == '__main__':
     #           ", radius=" + str(radius) + ", noise=" + str(noise)+ "\n(Plot of medians of "+str(trials)+" trials)", fontsize=16)
 
     plt.xticks(fontsize=14, ticks=np.linspace(start_pts, max_pts, 5))
-    plt.yticks(fontsize=14, ticks=np.linspace(min(np.concatenate([rips_time_array, del_rips_time_array, alpha_time_array])),
-                                              max(np.concatenate([rips_time_array, del_rips_time_array, alpha_time_array])), 5))
+    plt.yticks(fontsize=14)#, ticks=np.linspace(min(np.concatenate([rips_time_array, del_rips_time_array, alpha_time_array])),
+                           #                   max(np.concatenate([rips_time_array, del_rips_time_array, alpha_time_array])), 5))
 
     # Adding legend, which helps us recognize the curve according to it's color
     plt.legend(fontsize=14)
