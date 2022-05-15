@@ -24,14 +24,14 @@ from persim import plot_diagrams
 
 if __name__ == '__main__':
     # Initialize variables
-    trials = 1
+    trials = 10
     radius = 1
     noise = 0.1
-    start_pts = 50
-    max_pts = 550   #1550
-    increment = 50  #100
-    fixed_dim = 1   #2
-    max_run_time = 7
+    start_pts = 100
+    max_pts = 1000
+    increment = 100
+    fixed_dim = 2
+    max_run_time = 10
     rips_time_array = [None] * (int((max_pts - start_pts) / increment))
     alpha_time_array = [None] * (int((max_pts - start_pts) / increment))
     del_rips_time_array = [None] * (int((max_pts - start_pts) / increment))
