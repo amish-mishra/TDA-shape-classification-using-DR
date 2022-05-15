@@ -46,19 +46,20 @@ def x_shape(pts, noise):
 
 
 
-datalst = [None]*6
+datalst = [None]*7
 datalst[0] = tadasets.dsphere(n=100, d=1, noise=0.05)
 datalst[1] = clusters_data(100, 0.2)
 datalst[2] = np.random.rand(100,2)
 datalst[3] = tadasets.swiss_roll(n=100, noise=0.5)
 datalst[4] = np.concatenate((tadasets.dsphere(n=50, d=1, noise = 0.05),np.array([0,2])+tadasets.dsphere(n=50, d=1, noise = 0.05)), axis=0)
 datalst[5]= x_shape(100, 0.5)
+datalst[6] = tadasets.dsphere(n=250, d=2, noise=0.05)
 
 
-fig = plt.figure(figsize=(12,2))
+fig = plt.figure(figsize=(14,2))
 for i in range(6):
     X = datalst[i]
-    ax = fig.add_subplot(1, 6, i+1)
+    ax = fig.add_subplot(1, 7, i+1)
     xs = X[:,0]
     ys = X[:,1]
     ax.scatter(xs, ys, marker='.')
@@ -66,6 +67,19 @@ for i in range(6):
     ax.yaxis.set_ticklabels([])
     ax.set_aspect('equal', adjustable='box')
     ax.set_axis_off()
+
+X = datalst[6]
+xs = X[:,0]
+ys = X[:,1]
+zs = X[:,2]
+ax = fig.add_subplot(1, 7, 7, projection='3d')
+ax.scatter(xs, ys, zs, marker='.')
+ax.xaxis.set_ticklabels([])
+ax.yaxis.set_ticklabels([])
+ax.zaxis.set_ticklabels([])
+# plt.gca().view_init(68, -14)
+# ax.set_axis_off()
+ax.grid(False)
 
 
 plt.show()
