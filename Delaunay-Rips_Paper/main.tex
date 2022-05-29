@@ -442,7 +442,7 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
 
     Although we have special cases where instability in the PD may arise (as shown in section \ref{instability_section}), we show here that this instability does not manifest itself when working with actual data sets. Our comparison is made in the following graphs. We compute the PD for a data set with 0.0001 noise (that is, the points are within a distance of 0.0001 of being exactly on the surface of the underlying shape). The tiny amount of noise makes it highly probable that our data set will be in general position. Then, we perturb the data set for increasing levels of noise and compute the PD for the perturbed data set using Delaunay-Rips, Rips, and Alpha. We plot the bottleneck distance between the PD of the perturbed data set with the PD of the original data set for each method. This captures how the PD evolves for increasing levels of noise in the data. The perturbation is made by moving each point in a random direction within a given magnitude (which is the noise level).
 
-\subsection{Machine Learning Classification}
+\subsection{Machine Learning Classification of Synthetic Data}
     To test the robustness of Delaunay-Rips, we develop some ML classification models using Rips, Alpha, and Delaunay-Rips. Although the Persistence Diagrams produced using the Delaunay-Rips Filtration enjoy stability in a neighborhood (see Section \ref{stability}), in reality, the underlying Delaunay Triangulation of the point cloud should be expected to change with varying levels of noise. The purpose of this section is to demonstrate how the instability of the Persistence Diagrams does not manifest itself in practical application. Here is the experiment:
     \begin{enumerate}
         \item Choose 6 shape classes of synthetic data: circle, sphere, torus, random, three clusters, and three clusters within three clusters.
@@ -501,6 +501,8 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
         \label{fig:4_models}
     \end{figure}
 
+
+
     % Focus is two things: Accuracy and Speed. Demonstrating accuracy (by comparing with Rips and Alpha) builds trust in Del-Rips. Demonstrating speed encourages using Del-Rips over Rips or Alpha.
 
     % Comparing Ripser, Cechmate's Alpha, and our Del-Rips implementation.
@@ -534,8 +536,11 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
     
     Highlight separately the speed up in the filtration step and then the PD step (since you have less simplices).
 
+\subsection{Machine Learning Classification on Real Data}
+    We investigate the applicability of Delaunay-Rips to real life datasets. Our application is based on the data and methodology employed in \cite{frontiers}. The problem context is that we would like to classify sleep stages of a patient solely based on their observed Instantaneous Heart Rate (IHR) time series. 
+
 \section{Conclusion}
-In this paper, we have defined the Delaunay-Rips complex and demonstrated its usage on some synthetic data. We compared the runtime of running the Delaunay-Rips method against Rips and Alpha on some synthetic data sets and showed the notable speed-up of Delaunay-Rips. We characterized the instability of this method by showing a 4 point example and carefully proving the instability in the corresponding persistence diagram for a small perturbation of the 4 points. We salvaged stability by imposing conditions on the data that would ensure the underlying Delaunay Triangulation would not change. This allowed us to leverage the stability theorem for Vietoris-Rips for Delaunay-Rips to guarantee stability in a neighborhood. We showed that practically, this instability is not a serious problem on data sets with sufficiently large number of points.
+    In this paper, we have defined the Delaunay-Rips complex and demonstrated its usage on some synthetic data. We compared the runtime of running the Delaunay-Rips method against Rips and Alpha on some synthetic data sets and showed the notable speed-up of Delaunay-Rips. We characterized the instability of this method by showing a 4 point example and carefully proving the instability in the corresponding persistence diagram for a small perturbation of the 4 points. We salvaged stability by imposing conditions on the data that would ensure the underlying Delaunay Triangulation would not change. This allowed us to leverage the stability theorem for Vietoris-Rips for Delaunay-Rips to guarantee stability in a neighborhood. We showed that practically, this instability is not a serious problem on data sets with sufficiently large number of points.
 
 
 \subsection{Further Questions}
