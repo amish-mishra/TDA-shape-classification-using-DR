@@ -432,11 +432,6 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
 
     
 \section{Application of Delaunay-Rips}
-\begin{enumerate}
-    \item Demonstrate value by talking about as dimensions change and number of points change.
-    \item Particular examples of how using special data sets affect the run-time of Rips/Alpha drastically but maybe not Del-Rips.
-    \item Performance: accuracy in ML algorithm, or classification. Instability may cause performance to go down even though run-time is unaffected.
-\end{enumerate}
 
 \subsection{Synthetic Data}
 
@@ -537,7 +532,20 @@ Hence, our map $Pers_1$ is discontinuous at $P$. This gives us insight into when
     Highlight separately the speed up in the filtration step and then the PD step (since you have less simplices).
 
 \subsection{Machine Learning Classification on Real Data}
-    We investigate the applicability of Delaunay-Rips to real life datasets. Our application is based on the data and methodology employed in \cite{frontiers}. The problem context is that we would like to classify sleep stages of a patient solely based on their observed Instantaneous Heart Rate (IHR) time series. 
+    We investigate the applicability of Delaunay-Rips to real life datasets. Our application is based on the data and methodology employed in \cite{frontiers}. The problem context is that we would like to classify sleep stages of a patient solely based on their observed Instantaneous Heart Rate (IHR) time series. The steps we take are as follow:
+    \begin{enumerate}
+        \item Obtain 90 ECG recordings from the CGMH-training database (sampled at 200 Hz with each 30s epoch classified into a sleep stage).
+        \item Apply a standard R-peak detection algorithm with a 5-beat median filter to remove artifacts.
+        \item Compute the IHR time series at 4 Hz and divide the data into 30s epochs with each epoch labeled with its assigned sleep stage.
+        \item Use a delay embedding to embed each epoch into $\R^3$. We set the delay $(\tau)$ set to 5 (taking every 5th point in the time series as the coordinate for our embedded points) and stride set to the default 1 (slide the window over by 1 time unit).
+        \item Compute the persistence diagram using the Delaunay-Rips filtration of the embedded point clouds. Each PD will be labeled with the sleep stage of the corresponding epoch. (We drop all epochs that Delaunay-Rips was unable to be run on because of issues computing the Delaunay Triangulation).
+        \item Compute persistence statistics based on the PDs.
+        \item Construct a pandas data frame with each row containing the sleep stage and persistence statistics corresponding to each epoch for all 90 patients.
+        \item Relabel data frame sleep stage column entries with 1 for ``wake'' and 2 for ``sleep'' (``sleep" includes stage 1, stage 2, stage 3, stage 4, and REM).
+        \item Down-sample the number of sleep epochs based on the number of wake epochs for the data frame (since there are far less wake epochs, the number of sleep epochs will be far greater and thus cause an imbalanced data issue).
+        \item Train a support vector machine with linear kernel.
+        \item Validate model on CGMH-validation one patient at a time (that is, classify the sleep stage of the epochs for each patient).
+    \end{enumerate}
 
 \section{Conclusion}
     In this paper, we have defined the Delaunay-Rips complex and demonstrated its usage on some synthetic data. We compared the runtime of running the Delaunay-Rips method against Rips and Alpha on some synthetic data sets and showed the notable speed-up of Delaunay-Rips. We characterized the instability of this method by showing a 4 point example and carefully proving the instability in the corresponding persistence diagram for a small perturbation of the 4 points. We salvaged stability by imposing conditions on the data that would ensure the underlying Delaunay Triangulation would not change. This allowed us to leverage the stability theorem for Vietoris-Rips for Delaunay-Rips to guarantee stability in a neighborhood. We showed that practically, this instability is not a serious problem on data sets with sufficiently large number of points.
