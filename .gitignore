@@ -275,5 +275,5 @@ TSWLatexianTemp*
 # Makeindex log files
 *.lpz
 
-Delaunay-Rips_paper/code/__pycache__
-Delaunay-Rips_Paper/.idea
+code/__pycache__
+.idea
